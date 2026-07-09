@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bnfgobdt855hs"
+path="res://.godot/imported/NitronicIdleAnim.skel-fe26a4e1fa6e74fcf6c64b8044dfd0ff.spskel"
+
+[deps]
+
+source_file="res://assets/spine-test/NitronicIdleAnim.skel"
+dest_files=["res://.godot/imported/NitronicIdleAnim.skel-fe26a4e1fa6e74fcf6c64b8044dfd0ff.spskel"]
+
+[params]
+

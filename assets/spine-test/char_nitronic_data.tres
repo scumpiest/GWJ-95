@@ -1,0 +1,18 @@
+[gd_resource type="SpineSkeletonDataResource" format=3 uid="uid://dj6kj2tmv4ftx"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cqsd0jxnj7gl6" path="res://assets/spine-test/char_nitronic new ver.atlas" id="1_2occn"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bnfgobdt855hs" path="res://assets/spine-test/NitronicIdleAnim.skel" id="2_7y0c1"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_2occn"]
+from = "Demo/dashdemo"
+to = "Demo/dashdemo"
+mix = 1.0
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_7y0c1"]
+from = "Demo/atktest"
+to = "Demo/atktest"
+
+[resource]
+atlas_res = ExtResource("1_2occn")
+skeleton_file_res = ExtResource("2_7y0c1")
+animation_mixes = [SubResource("SpineAnimationMix_2occn"), SubResource("SpineAnimationMix_7y0c1")]
