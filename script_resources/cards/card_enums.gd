@@ -1,0 +1,15 @@
+class_name CardEnums
+extends RefCounted
+
+enum CardColor { RED, BLUE, PURPLE }
+
+enum EffectType {
+     DAMAGE, BLOCK, APPLY_STATUS, REPEAT, AURA, SELF_DAMAGE, MUTATE 
+     }
+
+enum ConditionType { 
+    NONE, EVEN_TURN, ODD_TURN, PREV_WAS_ATTACK, FIRST_IN_CHAIN,
+    LAST_IN_CHAIN, EVERY_COLOR_IN_CHAIN, ADJACENT_CARD
+    }
+
+enum StatusType { VULNERABLE, WEAKNESS, PROTECTION, STRENGTH, BLOCK }

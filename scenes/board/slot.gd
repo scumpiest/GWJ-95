@@ -3,7 +3,7 @@ extends PanelContainer
 
 signal card_changed(card: CardVisual)
 
-@export var highlight_color: Color = Color(1.0, 1.0, 1.0, 0.15)
+@export var highlight_color: Color = Color(1.0, 0.5, 0.0, 1.0)
 
 @onready var _anchor: CenterContainer = $CardAnchor
 
