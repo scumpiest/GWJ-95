@@ -1,13 +1,8 @@
 [gd_scene format=3 uid="uid://bffu630jddaqf"]
 
-[ext_resource type="SpineSkeletonDataResource" uid="uid://dj6kj2tmv4ftx" path="res://assets/spine-test/char_nitronic_data.tres" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bfj8i20foe138" path="res://scenes/card/card.tscn" id="1_ig7tw"]
 
-[node name="Node2D" type="Node2D" unique_id=342032711]
+[node name="Main" type="Node2D" unique_id=1292294023]
 
-[node name="SpineSprite" type="SpineSprite" parent="." unique_id=1424328681]
-skeleton_data_res = ExtResource("1_ig7tw")
-preview_skin = "Default"
-preview_animation = "Demo/atktest"
-preview_frame = false
-preview_time = 0.0
-position = Vector2(714, 629)
+[node name="Card" parent="." unique_id=1328783298 instance=ExtResource("1_ig7tw")]
+position = Vector2(539, 408)

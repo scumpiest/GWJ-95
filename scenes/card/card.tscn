@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bfj8i20foe138"]
+
+[ext_resource type="Script" uid="uid://djy7dud556iek" path="res://scenes/card/card.gd" id="1_qnn7r"]
+[ext_resource type="Texture2D" uid="uid://baj1drtjlgf8v" path="res://icon.svg" id="2_imta7"]
+[ext_resource type="Script" uid="uid://xr25q10uddbs" path="res://components/drag_and_drop.gd" id="2_vtcvk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
+size = Vector2(128, 128)
+
+[node name="Card" type="Area2D" unique_id=1550957993]
+script = ExtResource("1_qnn7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=932718653]
+texture = ExtResource("2_imta7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1394070957]
+shape = SubResource("RectangleShape2D_bhunq")
+
+[node name="DragAndDrop" type="Node" parent="." unique_id=1807922568 node_paths=PackedStringArray("target")]
+script = ExtResource("2_vtcvk")
+target = NodePath("..")
+metadata/_custom_type_script = "uid://xr25q10uddbs"
