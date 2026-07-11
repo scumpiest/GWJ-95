@@ -1,22 +1,65 @@
-[gd_scene format=3 uid="uid://bfj8i20foe138"]
+[gd_scene format=3 uid="uid://tn41fl850ub5"]
 
-[ext_resource type="Script" uid="uid://djy7dud556iek" path="res://scenes/card/card.gd" id="1_qnn7r"]
-[ext_resource type="Texture2D" uid="uid://baj1drtjlgf8v" path="res://icon.svg" id="2_imta7"]
-[ext_resource type="Script" uid="uid://xr25q10uddbs" path="res://components/drag_and_drop.gd" id="2_vtcvk"]
+[ext_resource type="Script" uid="uid://dimb7jqw6yrdx" path="res://scenes/card/card.gd" id="1_visual"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
-size = Vector2(128, 128)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_border"]
+bg_color = Color(0.12, 0.12, 0.14, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.752941, 0.223529, 0.168627, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
-[node name="Card" type="Area2D" unique_id=1550957993]
-script = ExtResource("1_qnn7r")
+[node name="Card" type="Control" unique_id=1442896117]
+custom_minimum_size = Vector2(128, 180)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_visual")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=932718653]
-texture = ExtResource("2_imta7")
+[node name="Border" type="Panel" parent="." unique_id=131420187]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_border")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1394070957]
-shape = SubResource("RectangleShape2D_bhunq")
+[node name="MarginContainer" type="MarginContainer" parent="Border" unique_id=1325048804]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="DragAndDrop" type="Node" parent="." unique_id=1807922568 node_paths=PackedStringArray("target")]
-script = ExtResource("2_vtcvk")
-target = NodePath("..")
-metadata/_custom_type_script = "uid://xr25q10uddbs"
+[node name="VBox" type="VBoxContainer" parent="Border/MarginContainer" unique_id=35061396]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="CostLabel" type="Label" parent="Border/MarginContainer/VBox" unique_id=59657734]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.35, 1)
+theme_override_font_sizes/font_size = 18
+text = "1"
+horizontal_alignment = 2
+
+[node name="NameLabel" type="Label" parent="Border/MarginContainer/VBox" unique_id=208836488]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 14
+text = "Card"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
