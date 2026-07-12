@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CardEffect" format=3 uid="uid://ccfvg4pjlqbxb"]
+
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_hhdn8"]
+
+[resource]
+script = ExtResource("1_hhdn8")
+base_value = 1
+condition = 7
+metadata/_custom_type_script = "uid://dlux45kkxncst"

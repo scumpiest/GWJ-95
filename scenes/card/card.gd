@@ -1,17 +1,18 @@
 class_name CardVisual
 extends Control
 
-@export var display_name: String = "Card"
+@export var card_data: CardData
 
 var owner_slot: Slot
 
 
 @onready var name_label: Label = $Border/MarginContainer/VBox/NameLabel
-
+@onready var description_label: RichTextLabel = $Border/MarginContainer/VBox/DescriptionLabel
 
 func _ready() -> void:
 	add_to_group("cards")
-	name_label.text = display_name
+	name_label.text = card_data.display_name
+	description_label.text = card_data.description
 	custom_minimum_size = Vector2(128, 180)
 
 

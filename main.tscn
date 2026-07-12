@@ -68,12 +68,9 @@ theme_override_constants/separation = 12
 
 [node name="Card1" parent="MarginContainer/VBox/Hand" unique_id=2067866969 instance=ExtResource("1_card_visual")]
 layout_mode = 2
-display_name = "Red"
 
 [node name="Card2" parent="MarginContainer/VBox/Hand" unique_id=1469510737 instance=ExtResource("1_card_visual")]
 layout_mode = 2
-display_name = "Blue"
 
 [node name="Card3" parent="MarginContainer/VBox/Hand" unique_id=397346843 instance=ExtResource("1_card_visual")]
 layout_mode = 2
-display_name = "Purple"

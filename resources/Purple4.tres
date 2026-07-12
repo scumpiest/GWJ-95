@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://sn02svbvypvs"]
+
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_trkfr"]
+[ext_resource type="Resource" uid="uid://btbfsblguuqwh" path="res://resources/P4.1.tres" id="2_drgs7"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_jdumm"]
+[ext_resource type="Resource" uid="uid://bvbcrdravbl0f" path="res://resources/P4.2.tres" id="3_mp1cg"]
+
+[resource]
+script = ExtResource("2_jdumm")
+id = &"P4"
+display_name = "Purple4"
+description = "Nearby cards become Purple and gain +1 power while this card exists"
+card_color = 2
+effects = Array[ExtResource("1_trkfr")]([ExtResource("2_drgs7"), ExtResource("3_mp1cg")])
+metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

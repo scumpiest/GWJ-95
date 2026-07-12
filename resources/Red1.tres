@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://0pr1g0rl1wwk"]
+
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_dvg4x"]
+[ext_resource type="Resource" uid="uid://rrq6yseyupfl" path="res://resources/R2.1.tres" id="2_1nsgb"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_eg67u"]
+[ext_resource type="Resource" uid="uid://ccfvg4pjlqbxb" path="res://resources/R2.2.tres" id="3_bmpjm"]
+
+[resource]
+script = ExtResource("2_eg67u")
+id = &"R2"
+display_name = "Red2"
+description = "Deals 1 damage at turn’s end. Activates 1 more time for every Red card next to it"
+effects = Array[ExtResource("1_dvg4x")]([ExtResource("2_1nsgb"), ExtResource("3_bmpjm")])
+metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://batsj87cryt0m"]
+
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_anosy"]
+[ext_resource type="Resource" uid="uid://bopdyvme5g8sp" path="res://resources/B2.1.tres" id="2_anosy"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="3_5gbl8"]
+
+[resource]
+script = ExtResource("3_5gbl8")
+id = &"B2"
+display_name = "Blue2"
+description = "Activates the card before it at turn’s end"
+card_color = 1
+effects = Array[ExtResource("1_anosy")]([ExtResource("2_anosy")])
+metadata/_custom_type_script = "uid://c2wkbyfqqevnx"
