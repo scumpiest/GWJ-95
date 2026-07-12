@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bwvbujy4ysgvu"]
+
+[ext_resource type="Texture2D" uid="uid://crw3tsbwaug7y" path="res://assets/sprites/cards/cassette/cassette.png" id="1_ybhut"]
+[ext_resource type="Texture2D" uid="uid://ds17y82d234jn" path="res://assets/sprites/cards/stickers/sticker_red_kick.png" id="2_0jlll"]
+
+[node name="Casette" type="Control" unique_id=1921422628]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="CasetteVisual" type="TextureRect" parent="." unique_id=845348589]
+layout_mode = 0
+offset_right = 488.0
+offset_bottom = 316.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_ybhut")
+
+[node name="Sticker" type="TextureRect" parent="." unique_id=105629654]
+layout_mode = 0
+offset_right = 488.0
+offset_bottom = 316.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_0jlll")
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=994310190]
+layout_mode = 0
+offset_left = 43.0
+offset_top = -1.0
+offset_right = 83.0
+offset_bottom = 39.0
+
+[node name="CardName" type="Label" parent="MarginContainer2" unique_id=1786694688]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.17378175, 0.10101158, 0.045212395, 1)
+theme_override_font_sizes/font_size = 14
+text = "Card"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

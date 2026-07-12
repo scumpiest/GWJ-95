@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://k0msilr74cgg"]
+[gd_scene format=3 uid="uid://k0msilr74cgg"]
 
-[ext_resource type="Script" path="res://scenes/board/slot.gd" id="1_slot"]
+[ext_resource type="Script" uid="uid://balovkd1t78px" path="res://scenes/board/slot.gd" id="1_slot"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot"]
 bg_color = Color(0.08, 0.08, 0.1, 0.6)
@@ -14,11 +14,11 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[node name="Slot" type="PanelContainer"]
-custom_minimum_size = Vector2(140, 196)
+[node name="Slot" type="PanelContainer" unique_id=558153514]
+custom_minimum_size = Vector2(112, 79)
 theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
 script = ExtResource("1_slot")
 
-[node name="CardAnchor" type="CenterContainer" parent="."]
+[node name="CardAnchor" type="CenterContainer" parent="." unique_id=1156093911]
 layout_mode = 2
 mouse_filter = 2
