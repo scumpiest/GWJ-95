@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b5ar2ossl3svv"]
+
+[ext_resource type="Texture2D" uid="uid://bcihhr2tjiyej" path="res://assets/sprites/cards/cassette/Paper.png" id="1_y7wyl"]
+
+[node name="Paper" type="Control" unique_id=1589460870]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1984509806]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 81.0
+offset_right = 449.0
+offset_bottom = 485.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_y7wyl")
+
+[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=891147146]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 85.0
+offset_right = 113.0
+offset_bottom = 125.0
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="MarginContainer3" unique_id=1988419684]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.17378175, 0.10101158, 0.045212395, 1)
+theme_override_font_sizes/normal_font_size = 12
+fit_content = true
