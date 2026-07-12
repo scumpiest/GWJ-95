@@ -2,73 +2,74 @@
 
 [ext_resource type="Script" uid="uid://dimb7jqw6yrdx" path="res://scenes/card/card.gd" id="1_visual"]
 [ext_resource type="Resource" uid="uid://0pr1g0rl1wwk" path="res://resources/Red1.tres" id="2_imta7"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_border"]
-bg_color = Color(0.12, 0.12, 0.14, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.752941, 0.223529, 0.168627, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[ext_resource type="Texture2D" uid="uid://bcihhr2tjiyej" path="res://assets/sprites/cards/cassette/Paper.png" id="3_g65cd"]
+[ext_resource type="Texture2D" uid="uid://crw3tsbwaug7y" path="res://assets/sprites/cards/cassette/cassette.png" id="4_2ufkr"]
+[ext_resource type="Texture2D" uid="uid://ds17y82d234jn" path="res://assets/sprites/cards/stickers/sticker_red_kick.png" id="5_2ufkr"]
 
 [node name="Card" type="Control" unique_id=1442896117]
 custom_minimum_size = Vector2(128, 180)
 layout_mode = 3
 anchors_preset = 0
+scale = Vector2(1.2, 1.2)
 script = ExtResource("1_visual")
 card_data = ExtResource("2_imta7")
 
-[node name="Border" type="Panel" parent="." unique_id=131420187]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_border")
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1368045287]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 81.0
+offset_right = 449.0
+offset_bottom = 485.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_g65cd")
 
-[node name="MarginContainer" type="MarginContainer" parent="Border" unique_id=1325048804]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1388113227]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 491.0
+offset_bottom = 319.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_2ufkr")
 
-[node name="VBox" type="VBoxContainer" parent="Border/MarginContainer" unique_id=35061396]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 4
+[node name="Sticker" type="TextureRect" parent="." unique_id=1154756004]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 491.0
+offset_bottom = 319.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_2ufkr")
 
-[node name="CostLabel" type="Label" parent="Border/MarginContainer/VBox" unique_id=59657734]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.95, 0.85, 0.35, 1)
-theme_override_font_sizes/font_size = 18
-text = "1"
-horizontal_alignment = 2
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1305539977]
+layout_mode = 0
+offset_left = 43.0
+offset_top = -1.0
+offset_right = 83.0
+offset_bottom = 39.0
 
-[node name="NameLabel" type="Label" parent="Border/MarginContainer/VBox" unique_id=208836488]
+[node name="NameLabel" type="Label" parent="MarginContainer2" unique_id=208836488]
 layout_mode = 2
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.17378175, 0.10101158, 0.045212395, 1)
 theme_override_font_sizes/font_size = 14
 text = "Card"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="Border/MarginContainer/VBox" unique_id=86599466]
+[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=614499798]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 85.0
+offset_right = 53.0
+offset_bottom = 125.0
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="MarginContainer3" unique_id=86599466]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
+theme_override_colors/default_color = Color(0.17378175, 0.10101158, 0.045212395, 1)
 theme_override_font_sizes/normal_font_size = 12
 fit_content = true

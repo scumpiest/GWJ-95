@@ -5,14 +5,15 @@ extends Control
 
 var owner_slot: Slot
 
-
-@onready var name_label: Label = $Border/MarginContainer/VBox/NameLabel
-@onready var description_label: RichTextLabel = $Border/MarginContainer/VBox/DescriptionLabel
+@onready var sticker: TextureRect = $Sticker
+@onready var name_label: Label = $MarginContainer2/NameLabel
+@onready var description_label: RichTextLabel = $MarginContainer3/DescriptionLabel
 
 func _ready() -> void:
 	add_to_group("cards")
 	name_label.text = card_data.display_name
 	description_label.text = card_data.description
+	sticker.texture = card_data.art
 	custom_minimum_size = Vector2(128, 180)
 
 
