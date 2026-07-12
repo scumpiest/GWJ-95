@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://bffu630jddaqf"]
 
 [ext_resource type="PackedScene" uid="uid://tn41fl850ub5" path="res://scenes/card/card.tscn" id="1_card_visual"]
+[ext_resource type="Script" uid="uid://be4wr1kwj333s" path="res://main.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://k0msilr74cgg" path="res://scenes/board/slot.tscn" id="2_slot"]
+[ext_resource type="Texture2D" uid="uid://baj1drtjlgf8v" path="res://icon.svg" id="3_deck_tex"]
+[ext_resource type="Resource" uid="uid://lli1fjyggvmk" path="res://resources/starter_deck.tres" id="4_deck"]
 
 [node name="Main" type="Control" unique_id=558398176]
 layout_mode = 3
@@ -10,6 +13,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_main")
+deck = ExtResource("4_deck")
+card_scene = ExtResource("1_card_visual")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=335792737]
 layout_mode = 1
@@ -63,14 +69,55 @@ theme_override_font_sizes/font_size = 16
 text = "Hand"
 
 [node name="Hand" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1180998]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Card1" parent="MarginContainer/VBox/Hand" unique_id=2067866969 instance=ExtResource("1_card_visual")]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1946937927]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Deck" type="TextureButton" parent="MarginContainer/VBox/HBoxContainer" unique_id=1847293650]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 112)
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("3_deck_tex")
+stretch_mode = 5
+
+[node name="Data" type="PanelContainer" parent="MarginContainer/VBox/HBoxContainer" unique_id=1719025368]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="Card2" parent="MarginContainer/VBox/Hand" unique_id=1469510737 instance=ExtResource("1_card_visual")]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBox/HBoxContainer/Data" unique_id=1307539143]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="Card3" parent="MarginContainer/VBox/Hand" unique_id=397346843 instance=ExtResource("1_card_visual")]
+[node name="DeckCard" type="Label" parent="MarginContainer/VBox/HBoxContainer/Data/VBoxContainer" unique_id=1776460501]
 layout_mode = 2
+text = "Card in Deck:"
+horizontal_alignment = 1
+
+[node name="DeckCardLabel" type="Label" parent="MarginContainer/VBox/HBoxContainer/Data/VBoxContainer" unique_id=623307187]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="DiscardCard" type="Label" parent="MarginContainer/VBox/HBoxContainer/Data/VBoxContainer" unique_id=2114502966]
+layout_mode = 2
+text = "Card discarded:"
+horizontal_alignment = 1
+
+[node name="DiscardPileLabel" type="Label" parent="MarginContainer/VBox/HBoxContainer/Data/VBoxContainer" unique_id=1456915633]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="EndTurnButton" type="Button" parent="MarginContainer/VBox/HBoxContainer" unique_id=1296551166]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "END TURN"

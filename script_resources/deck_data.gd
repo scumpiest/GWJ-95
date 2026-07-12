@@ -2,6 +2,7 @@ class_name DeckData
 extends Resource
 
 @export var cards: Array[CardData] = []
+@export var discard_pile: Array[CardData] = []
 
 
 func shuffle() -> void:
@@ -17,5 +18,7 @@ func draw(count: int) -> Array[CardData]:
 
 	for i in range(to_draw):
 		drawn.append(cards.pop_front())
-
 	return drawn
+
+func add_to_discard_pile(card: CardData) -> void:
+	discard_pile.append(card)

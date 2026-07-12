@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DeckData" format=3 uid="uid://lli1fjyggvmk"]
+
+[ext_resource type="Script" uid="uid://bew3ln1xrl2i7" path="res://script_resources/deck_data.gd" id="1_deck"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="1_mnwso"]
+[ext_resource type="Resource" uid="uid://c57d4osifuylx" path="res://resources/Red2.tres" id="3_c1"]
+[ext_resource type="Resource" uid="uid://0pr1g0rl1wwk" path="res://resources/Red1.tres" id="4_c2"]
+[ext_resource type="Resource" uid="uid://bt0w588peu2j7" path="res://resources/Red3.tres" id="5_c3"]
+[ext_resource type="Resource" uid="uid://batsj87cryt0m" path="res://resources/Blue2.tres" id="6_24wpu"]
+[ext_resource type="Resource" uid="uid://byibjih7yhhg3" path="res://resources/Red4.tres" id="6_c4"]
+[ext_resource type="Resource" uid="uid://c82m0jpt83de0" path="res://resources/Blue1.tres" id="7_c5"]
+[ext_resource type="Resource" uid="uid://cpjo7uksxa8uo" path="res://resources/Blue3.tres" id="7_mnwso"]
+[ext_resource type="Resource" uid="uid://c83diw73acarc" path="res://resources/Blue4.tres" id="8_f84pq"]
+[ext_resource type="Resource" uid="uid://cnlfkhyfuxm4n" path="res://resources/Purple1.tres" id="9_v37b1"]
+[ext_resource type="Resource" uid="uid://dmdv6x5mjcwef" path="res://resources/Purple2.tres" id="10_rkxwe"]
+[ext_resource type="Resource" uid="uid://cm3cfdpofhp36" path="res://resources/Purple3.tres" id="11_8k7su"]
+[ext_resource type="Resource" uid="uid://sn02svbvypvs" path="res://resources/Purple4.tres" id="12_gmqos"]
+
+[resource]
+script = ExtResource("1_deck")
+cards = Array[ExtResource("1_mnwso")]([ExtResource("3_c1"), ExtResource("4_c2"), ExtResource("5_c3"), ExtResource("6_c4"), ExtResource("7_c5"), ExtResource("6_24wpu"), ExtResource("7_mnwso"), ExtResource("8_f84pq"), ExtResource("9_v37b1"), ExtResource("10_rkxwe"), ExtResource("11_8k7su"), ExtResource("12_gmqos")])
