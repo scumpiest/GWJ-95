@@ -13,7 +13,9 @@ func shuffle() -> void:
 
 func draw(count: int) -> Array[CardData]:
 	var drawn: Array[CardData] = []
-	for i in range(min(count, cards.size())):
-		drawn.append(cards[i])
-		cards.remove_at(i)
+	var to_draw := mini(count, cards.size())
+
+	for i in range(to_draw):
+		drawn.append(cards.pop_front())
+
 	return drawn
