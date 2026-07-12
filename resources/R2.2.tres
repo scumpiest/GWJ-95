@@ -4,6 +4,8 @@
 
 [resource]
 script = ExtResource("1_hhdn8")
+effect_type = 3
 base_value = 1
 condition = 7
+status_type = 0
 metadata/_custom_type_script = "uid://dlux45kkxncst"
