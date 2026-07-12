@@ -5,6 +5,8 @@ extends Control
 @export var initial_hand_size: int = 3
 @export var card_scene: PackedScene
 
+var max_handsize: int = 7
+
 @onready var deck_button: TextureButton = %Deck
 @onready var hand: HBoxContainer = %Hand
 @onready var end_turn: Button = %EndTurnButton
@@ -28,10 +30,11 @@ func _draw_cards(count: int) -> void:
 
 
 func _on_deck_pressed() -> void:
-	if deck.cards.is_empty():
-		return
+	if hand.get_children().size() < max_handsize:
+		if deck.cards.is_empty():
+			return
 
-	_draw_cards(cards_per_draw)
+		_draw_cards(cards_per_draw)
 
 
 func _on_end_turn_button_pressed() -> void:
