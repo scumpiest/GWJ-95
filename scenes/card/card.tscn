@@ -10,7 +10,6 @@
 custom_minimum_size = Vector2(128, 180)
 layout_mode = 3
 anchors_preset = 0
-scale = Vector2(1.2, 1.2)
 script = ExtResource("1_visual")
 card_data = ExtResource("2_imta7")
 
