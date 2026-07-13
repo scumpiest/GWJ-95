@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://k0msilr74cgg" path="res://scenes/board/slot.tscn" id="2_slot"]
 [ext_resource type="Texture2D" uid="uid://baj1drtjlgf8v" path="res://icon.svg" id="3_deck_tex"]
 [ext_resource type="Resource" uid="uid://lli1fjyggvmk" path="res://resources/starter_deck.tres" id="4_deck"]
+[ext_resource type="PackedScene" uid="uid://cx6g6j2lx7aow" path="res://scenes/character/main_character.tscn" id="6_7mycd"]
 
 [node name="Main" type="Control" unique_id=558398176]
 layout_mode = 3
@@ -39,6 +40,7 @@ theme_override_font_sizes/font_size = 16
 text = "Chain"
 
 [node name="Chain" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1518842042]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -63,6 +65,15 @@ layout_mode = 2
 [node name="Slot6" parent="MarginContainer/VBox/Chain" unique_id=935543401 instance=ExtResource("2_slot")]
 layout_mode = 2
 
+[node name="Container" type="PanelContainer" parent="MarginContainer/VBox" unique_id=2066776690]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+
+[node name="MainCharacter" parent="MarginContainer/VBox/Container" unique_id=1761150887 instance=ExtResource("6_7mycd")]
+unique_name_in_owner = true
+position = Vector2(146, 134.5)
+scale = Vector2(0.3, 0.3)
+
 [node name="HandLabel" type="Label" parent="MarginContainer/VBox" unique_id=2092549864]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
@@ -70,6 +81,7 @@ text = "Hand"
 
 [node name="Hand" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1180998]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 180)
 layout_mode = 2
 theme_override_constants/separation = 12
 
