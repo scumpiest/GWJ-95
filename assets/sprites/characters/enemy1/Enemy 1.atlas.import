@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://05rmyr8gqm5q"
+path="res://.godot/imported/Enemy 1.atlas-391de6a493fcc1b96e16f4d6e3276789.spatlas"
+
+[deps]
+
+source_file="res://assets/sprites/characters/enemy1/Enemy 1.atlas"
+dest_files=["res://.godot/imported/Enemy 1.atlas-391de6a493fcc1b96e16f4d6e3276789.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

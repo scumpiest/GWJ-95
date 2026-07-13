@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dcre6b1jwfljh"
+path="res://.godot/imported/Char.skel-e8a1b5dd2f800600a3c5e7ff8a12b0da.spskel"
+
+[deps]
+
+source_file="res://assets/sprites/characters/main_character/Char.skel"
+dest_files=["res://.godot/imported/Char.skel-e8a1b5dd2f800600a3c5e7ff8a12b0da.spskel"]
+
+[params]
+

@@ -70,7 +70,6 @@ text = "Hand"
 
 [node name="Hand" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1180998]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 180)
 layout_mode = 2
 theme_override_constants/separation = 12
 
