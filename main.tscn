@@ -70,7 +70,8 @@ custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 
 [node name="MainCharacter" parent="MarginContainer/VBox/Container" unique_id=1761150887 instance=ExtResource("6_7mycd")]
-position = Vector2(131, 125.5)
+unique_name_in_owner = true
+position = Vector2(146, 134.5)
 scale = Vector2(0.3, 0.3)
 
 [node name="HandLabel" type="Label" parent="MarginContainer/VBox" unique_id=2092549864]
