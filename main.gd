@@ -9,6 +9,7 @@ var max_handsize: int = 7
 
 @onready var deck_button: TextureButton = %Deck
 @onready var hand: HBoxContainer = %Hand
+@onready var chain: HBoxContainer = %Chain
 @onready var end_turn: Button = %EndTurnButton
 @onready var discard_pile_label: Label = %DiscardPileLabel
 @onready var deck_card_label: Label = %DeckCardLabel
@@ -37,7 +38,24 @@ func _on_deck_pressed() -> void:
 		_draw_cards(cards_per_draw)
 
 
+func _trigger_chain_sequentially() -> void:
+	for slot_node in chain.get_children():
+		if slot_node is not Slot:
+			continue
+
+		var card := (slot_node as Slot).get_card()
+		if card == null:
+			continue
+
+		await card.activate()
+
+
 func _on_end_turn_button_pressed() -> void:
+	end_turn.disabled = true
+	deck_button.disabled = true
+
+	await _trigger_chain_sequentially()
+
 	for card in hand.get_children():
 		deck.add_to_discard_pile(card.card_data)
 		card.queue_free()
@@ -50,3 +68,6 @@ func _on_end_turn_button_pressed() -> void:
 	discard_pile_label.text = str(deck.discard_pile.size())
 	deck.shuffle()
 	_draw_cards(cards_per_draw)
+
+	end_turn.disabled = false
+	deck_button.disabled = false

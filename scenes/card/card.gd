@@ -3,6 +3,8 @@ extends Control
 
 const HAND_SIZE := Vector2(128, 180)
 const CHAIN_SIZE := Vector2(122, 79)
+const ACTIVATION_DURATION := 0.35
+const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 
 @export var card_data: CardData
 
@@ -64,6 +66,14 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	owner_slot._drop_data(_at_position, data)
 
+func activate() -> void:
+	if owner_slot != null:
+		owner_slot.set_activation_highlighted(true)
+	set_activation_highlighted(true)
+	await get_tree().create_timer(ACTIVATION_DURATION).timeout
+	set_activation_highlighted(false)
+	if owner_slot != null:
+		owner_slot.set_activation_highlighted(false)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
@@ -75,11 +85,24 @@ func _set_slots_highlighted(active: bool) -> void:
 		if slot is Slot:
 			slot.set_highlighted(active)
 
+func set_casette_highlighted(active: bool) -> void:
+	var tint := Color(1.2, 1.15, 1.0) if active else Color.WHITE
+	casette.modulate = tint
+	_sticker.modulate = tint
+
+
+func set_activation_highlighted(active: bool) -> void:
+	var tint := ACTIVATION_HIGHLIGHT if active else Color.WHITE
+	casette.modulate = tint
+	_sticker.modulate = tint
+	modulate = Color(1.08, 1.08, 1.02) if active else Color.WHITE
 
 func _on_casette_mouse_entered() -> void:
 	if owner_slot != null:
 		paper.visible = true
+	set_casette_highlighted(true)
 
 func _on_casette_mouse_exited() -> void:
 	if owner_slot != null:
 		paper.visible = false
+	set_casette_highlighted(false)

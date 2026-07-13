@@ -3,15 +3,31 @@ extends PanelContainer
 
 signal card_changed(card: CardVisual)
 
-@export var highlight_color: Color = Color(1.0, 0.5, 0.0, 1.0)
+@export var highlight_color: Color = Color.WHITE
 
 @onready var _anchor: CenterContainer = $CardAnchor
+
+var _outline_material: ShaderMaterial
+var _base_panel_style: StyleBoxFlat
+var _activation_panel_style: StyleBoxFlat
 
 
 func _ready() -> void:
 	add_to_group("card_slots")
 	mouse_filter = Control.MOUSE_FILTER_STOP
+	if material is ShaderMaterial:
+		_outline_material = (material as ShaderMaterial).duplicate()
+	material = null
 
+	var panel_style := get_theme_stylebox("panel")
+	if panel_style is StyleBoxFlat:
+		_base_panel_style = (panel_style as StyleBoxFlat).duplicate()
+		_activation_panel_style = _base_panel_style.duplicate()
+		_activation_panel_style.border_color = Color(1.0, 0.85, 0.35, 1)
+		_activation_panel_style.border_width_left = 3
+		_activation_panel_style.border_width_top = 3
+		_activation_panel_style.border_width_right = 3
+		_activation_panel_style.border_width_bottom = 3
 
 func get_card() -> CardVisual:
 	for child in _anchor.get_children():
@@ -73,8 +89,21 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 		from_container.add_child(displaced)
 		displaced.set_owner_slot(null)
 
-	set_highlighted(false)
+	set_highlighted(true)
 
 
 func set_highlighted(active: bool) -> void:
-	self_modulate = highlight_color if active else Color.WHITE
+	if _outline_material == null:
+		return
+	if active:
+		_outline_material.set_shader_parameter("line_color", highlight_color)
+		_outline_material.set_shader_parameter("line_thickness", 2)
+		material = _outline_material
+	else:
+		material = null
+
+
+func set_activation_highlighted(active: bool) -> void:
+	if _base_panel_style == null:
+		return
+	add_theme_stylebox_override("panel", _activation_panel_style if active else _base_panel_style)
