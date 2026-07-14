@@ -2,7 +2,7 @@ extends Control
 
 @export var deck: DeckData
 @export var cards_per_draw: int = 1
-@export var initial_hand_size: int = 3
+@export var initial_hand_size: int = 5
 @export var card_scene: PackedScene
 
 var max_handsize: int = 7
@@ -45,11 +45,12 @@ func _trigger_chain_sequentially() -> void:
 		if slot_node is not Slot:
 			continue
 
-		var card := (slot_node as Slot).get_card()
+		var card = slot_node.get_card()
 		if card == null:
 			continue
 
 		player.play_next_pose()
+		print("Activating card: ", slot_node.color)
 		await card.activate()
 	player.play_idle_pose()
 

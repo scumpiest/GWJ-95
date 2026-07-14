@@ -7,6 +7,8 @@ signal card_changed(card: CardVisual)
 
 @onready var _anchor: CenterContainer = $CardAnchor
 
+var color: CardEnums.CardColor
+
 var _outline_material: ShaderMaterial
 var _base_panel_style: StyleBoxFlat
 var _activation_panel_style: StyleBoxFlat
@@ -28,6 +30,7 @@ func _ready() -> void:
 		_activation_panel_style.border_width_top = 3
 		_activation_panel_style.border_width_right = 3
 		_activation_panel_style.border_width_bottom = 3
+
 
 func get_card() -> CardVisual:
 	for child in _anchor.get_children():
@@ -64,6 +67,7 @@ func set_card(card: CardVisual) -> void:
 
 	_anchor.add_child(card)
 	card.set_owner_slot(self)
+	color = card.card_data.card_color
 	card_changed.emit(card)
 
 
