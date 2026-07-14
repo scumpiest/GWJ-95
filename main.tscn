@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://lli1fjyggvmk" path="res://resources/starter_deck.tres" id="4_deck"]
 [ext_resource type="PackedScene" uid="uid://cx6g6j2lx7aow" path="res://scenes/character/player.tscn" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://bik66s0yv6dts" path="res://assets/sounds/Rythm Gamejam 2.mp3" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://b2k5n8m3p7q4r" path="res://scenes/character/enemy1.tscn" id="8_enemy1"]
 
 [node name="Main" type="Control" unique_id=558398176]
 layout_mode = 3
@@ -60,12 +61,6 @@ layout_mode = 2
 [node name="Slot4" parent="MarginContainer/VBox/Chain" unique_id=860462925 instance=ExtResource("2_slot")]
 layout_mode = 2
 
-[node name="Slot5" parent="MarginContainer/VBox/Chain" unique_id=635136349 instance=ExtResource("2_slot")]
-layout_mode = 2
-
-[node name="Slot6" parent="MarginContainer/VBox/Chain" unique_id=935543401 instance=ExtResource("2_slot")]
-layout_mode = 2
-
 [node name="Container" type="PanelContainer" parent="MarginContainer/VBox" unique_id=2066776690]
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
@@ -73,6 +68,11 @@ layout_mode = 2
 [node name="Player" parent="MarginContainer/VBox/Container" unique_id=1761150887 instance=ExtResource("6_7mycd")]
 unique_name_in_owner = true
 position = Vector2(146, 134.5)
+scale = Vector2(0.3, 0.3)
+
+[node name="Enemy1" parent="MarginContainer/VBox/Container" unique_id=-1447774240 instance=ExtResource("8_enemy1")]
+unique_name_in_owner = true
+position = Vector2(450, 134.5)
 scale = Vector2(0.3, 0.3)
 
 [node name="HandLabel" type="Label" parent="MarginContainer/VBox" unique_id=2092549864]

@@ -10,7 +10,7 @@
 script = ExtResource("4_m5e6u")
 id = &"R1"
 display_name = "DMG"
-description = "Deals 3 damage at turn’s end. Deals 1 more damage for every red card in the chain."
+description = "Deals 3 [img ]res://icons/damage.png[/img] at turn’s end. Deals 1 more damage for every red card in the chain."
 art = ExtResource("1_n5gwf")
 effects = Array[ExtResource("1_adsu2")]([ExtResource("2_n5gwf"), ExtResource("3_ifohc")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"
