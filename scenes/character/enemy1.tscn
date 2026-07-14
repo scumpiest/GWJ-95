@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b2k5n8m3p7q4r"]
+
+[ext_resource type="Script" path="res://scenes/character/enemy.gd" id="1_enemy"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dh3xq8w2n5k1p" path="res://assets/sprites/characters/enemy1/enemy_data_res.tres" id="2_data"]
+
+[node name="Enemy1" type="Node2D" unique_id=2847193056]
+script = ExtResource("1_enemy")
+
+[node name="SpineSprite" type="SpineSprite" parent="." unique_id=9182736450]
+skeleton_data_res = ExtResource("2_data")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
