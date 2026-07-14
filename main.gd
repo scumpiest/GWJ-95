@@ -13,7 +13,7 @@ var max_handsize: int = 7
 @onready var end_turn: Button = %EndTurnButton
 @onready var discard_pile_label: Label = %DiscardPileLabel
 @onready var deck_card_label: Label = %DeckCardLabel
-@onready var character: MainCharacter = %MainCharacter
+@onready var player: Player = %Player
 
 
 func _ready() -> void:
@@ -48,9 +48,9 @@ func _trigger_chain_sequentially() -> void:
 		if card == null:
 			continue
 
-		character.play_next_pose()
+		player.play_next_pose()
 		await card.activate()
-	character.play_idle_pose()
+	player.play_idle_pose()
 
 
 func _on_end_turn_button_pressed() -> void:

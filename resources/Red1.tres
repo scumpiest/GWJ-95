@@ -10,7 +10,7 @@
 script = ExtResource("2_eg67u")
 id = &"R2"
 display_name = "Red2"
-description = "Deals 1 damage at turn’s end. Activates 1 more time for every Red card next to it"
+description = "Deals 1 [img width=16 height=16]res://icon.svg[/img] at turn’s end. Activates 1 more time for every Red card next to it"
 art = ExtResource("1_bmpjm")
 effects = Array[ExtResource("1_dvg4x")]([ExtResource("2_1nsgb"), ExtResource("3_bmpjm")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"
