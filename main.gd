@@ -1,11 +1,9 @@
 extends Control
 
 @export var deck: DeckData
-@export var cards_per_draw: int = 1
+@export var cards_per_draw: int = 5
 @export var initial_hand_size: int = 5
 @export var card_scene: PackedScene
-
-var max_handsize: int = 7
 
 @onready var deck_button: TextureButton = %Deck
 @onready var hand: HBoxContainer = %Hand
@@ -18,26 +16,40 @@ var max_handsize: int = 7
 
 
 func _ready() -> void:
-	deck.shuffle()
-	_draw_cards(initial_hand_size)
-	deck_button.pressed.connect(_on_deck_pressed)
+	var battle_context := BattleContext.new(
+		player.unit,
+		enemy.unit,
+		deck,
+		chain.get_child_count(),
+	)
+	GameManager.start_battle(battle_context)
+	GameManager.deck_count_changed.connect(_on_deck_count_changed)
+	GameManager.discard_count_changed.connect(_on_discard_count_changed)
+
+	_spawn_cards(GameManager.draw_cards(initial_hand_size))
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
 
 
-func _draw_cards(count: int) -> void:
-	for card_data in deck.draw(count):
+func _spawn_cards(cards: Array[CardData]) -> void:
+	for card_data in cards:
 		var card_visual := card_scene.instantiate() as CardVisual
 		card_visual.card_data = card_data
 		hand.add_child(card_visual)
-	deck_card_label.text = str(deck.cards.size())
 
 
-func _on_deck_pressed() -> void:
-	if hand.get_children().size() < max_handsize:
-		if deck.cards.is_empty():
-			return
+func _on_end_turn_button_pressed() -> void:
+	end_turn.disabled = true
 
-		_draw_cards(cards_per_draw)
+	await _trigger_chain_sequentially()
+
+	var hand_cards: Array[CardData] = []
+	for card in hand.get_children():
+		hand_cards.append(card.card_data)
+		card.queue_free()
+
+	_spawn_cards(GameManager.end_player_turn(hand_cards, cards_per_draw))
+
+	end_turn.disabled = false
 
 
 func _trigger_chain_sequentially() -> void:
@@ -55,24 +67,9 @@ func _trigger_chain_sequentially() -> void:
 	player.play_idle_pose()
 
 
-func _on_end_turn_button_pressed() -> void:
-	end_turn.disabled = true
-	deck_button.disabled = true
+func _on_deck_count_changed(count: int) -> void:
+	deck_card_label.text = str(count)
 
-	await _trigger_chain_sequentially()
 
-	for card in hand.get_children():
-		deck.add_to_discard_pile(card.card_data)
-		card.queue_free()
-
-	if deck.cards.size() == 0:
-		deck.cards.assign(deck.discard_pile)
-		deck.discard_pile.clear()
-		deck_card_label.text = str(deck.cards.size())
-
-	discard_pile_label.text = str(deck.discard_pile.size())
-	deck.shuffle()
-	_draw_cards(cards_per_draw)
-
-	end_turn.disabled = false
-	deck_button.disabled = false
+func _on_discard_count_changed(count: int) -> void:
+	discard_pile_label.text = str(count)
