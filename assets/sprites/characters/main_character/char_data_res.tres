@@ -12,7 +12,11 @@ mix = 0.2
 from = "demo"
 to = "demo"
 
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_koeia"]
+from = "demo"
+to = "demo"
+
 [resource]
 atlas_res = ExtResource("1_0mi35")
 skeleton_file_res = ExtResource("2_va4fd")
-animation_mixes = [SubResource("SpineAnimationMix_0mi35"), SubResource("SpineAnimationMix_va4fd")]
+animation_mixes = [SubResource("SpineAnimationMix_0mi35"), SubResource("SpineAnimationMix_va4fd"), SubResource("SpineAnimationMix_koeia")]
