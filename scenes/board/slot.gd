@@ -14,6 +14,18 @@ var _base_panel_style: StyleBoxFlat
 var _activation_panel_style: StyleBoxFlat
 
 
+#tweens
+var tween: Tween
+var scale_x_range: float = 1.5 #range?
+var scale_x_duration: float = 0.2 #seconds?
+var scale_y_range: float = 1.5 #range?
+var scale_y_duration: float = 0.2 #seconds?
+var rotation_degrees_1: float = 5.0 #degrees
+var rotation_degrees_2: float = 1.0 #degrees
+var rotation_duration: float = 0.2 #seconds?
+var rotation_back_delay: float = 0.3 #seconds
+
+
 func _ready() -> void:
 	add_to_group("card_slots")
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -111,3 +123,40 @@ func set_activation_highlighted(active: bool) -> void:
 	if _base_panel_style == null:
 		return
 	add_theme_stylebox_override("panel", _activation_panel_style if active else _base_panel_style)
+
+func _process(delta: float) -> void:
+	
+	if  Input.is_action_just_pressed("tweens_in"):
+		make_slot_jiggle()
+		
+	if  Input.is_action_just_pressed("tweens_out"):
+		stop_slot_jiggle()
+	
+
+func make_slot_jiggle():
+	if tween and tween.is_running():
+		tween.kill()
+		
+		
+	tween = create_tween()
+	
+	print("yay")
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(self, "scale:x", scale_x_range, scale_x_duration)
+	tween.parallel().tween_property(self, "scale:y", scale_y_range, scale_y_duration)
+	tween.parallel().tween_property(self, "rotation_degrees", rotation_degrees_1 * rotation_degrees_2 * [-1,0, 1.0].pick_random(), rotation_duration)
+	tween.set_ease(Tween.EASE_IN)
+	tween.parallel().tween_property(self, "rotation_degrees", 0.0, rotation_duration).set_delay(rotation_back_delay)
+	
+	
+func stop_slot_jiggle():
+	if tween and tween.is_running():
+		tween.kill()
+	
+	tween = create_tween()
+	
+	print("nope")
+	tween.tween_property(self, "scale:x", 1.0, scale_x_duration)
+	tween.parallel().tween_property(self, "scale:y", 1.0, scale_y_duration)
+	tween.parallel().tween_property(self, "rotation_degrees", 0.0, rotation_duration)
