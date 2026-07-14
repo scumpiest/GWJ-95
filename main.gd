@@ -49,7 +49,9 @@ func _trigger_chain_sequentially() -> void:
 			continue
 
 		player.play_next_pose()
+		slot_node.make_slot_jiggle()
 		await card.activate()
+		slot_node.stop_slot_jiggle()
 	player.play_idle_pose()
 
 
