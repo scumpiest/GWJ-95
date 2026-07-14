@@ -14,6 +14,7 @@ var max_handsize: int = 7
 @onready var discard_pile_label: Label = %DiscardPileLabel
 @onready var deck_card_label: Label = %DeckCardLabel
 @onready var player: Player = %Player
+@onready var enemy: Enemy = %Enemy1
 
 
 func _ready() -> void:
