@@ -2,6 +2,10 @@ class_name Enemy
 extends Node2D
 
 @export var starting_health: int = 30
+@export var move_list: Dictionary = { "damage": 10,"block": 3 }
+@export var move_chance: Dictionary = {
+	 "damage": 0.75, "block": 0.25 
+	 }
 
 @onready var _sprite: SpineSprite = $SpineSprite
 

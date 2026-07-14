@@ -16,6 +16,9 @@ corner_radius_bottom_left = 6
 
 [node name="Slot" type="PanelContainer" unique_id=558153514]
 custom_minimum_size = Vector2(112, 79)
+offset_right = 112.0
+offset_bottom = 79.0
+pivot_offset = Vector2(56, 40)
 theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
 script = ExtResource("1_slot")
 

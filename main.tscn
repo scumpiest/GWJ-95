@@ -61,12 +61,6 @@ layout_mode = 2
 [node name="Slot4" parent="MarginContainer/VBox/Chain" unique_id=860462925 instance=ExtResource("2_slot")]
 layout_mode = 2
 
-[node name="Slot5" parent="MarginContainer/VBox/Chain" unique_id=635136349 instance=ExtResource("2_slot")]
-layout_mode = 2
-
-[node name="Slot6" parent="MarginContainer/VBox/Chain" unique_id=935543401 instance=ExtResource("2_slot")]
-layout_mode = 2
-
 [node name="Container" type="PanelContainer" parent="MarginContainer/VBox" unique_id=2066776690]
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
