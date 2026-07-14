@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://cbjhhlo1by5tx"]
+
+[ext_resource type="Script" uid="uid://dvs4raibbhy4n" path="res://scenes/shop/shop.gd" id="1_100s2"]
+[ext_resource type="PackedScene" uid="uid://tn41fl850ub5" path="res://scenes/card/card.tscn" id="2_7lxhl"]
+[ext_resource type="Resource" uid="uid://b5owg30f4mevw" path="res://resources/card_db.tres" id="3_7lxhl"]
+
+[node name="Shop" type="MarginContainer" unique_id=827335244 node_paths=PackedStringArray("card_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -21.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+script = ExtResource("1_100s2")
+card_scene = ExtResource("2_7lxhl")
+card_container = NodePath("HBoxContainer2/ShopCards")
+cards_db = ExtResource("3_7lxhl")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1221489427]
+layout_mode = 2
+
+[node name="ShopCards" type="HFlowContainer" parent="HBoxContainer2" unique_id=1486777301]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 207
+theme_override_constants/v_separation = 15
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer2" unique_id=1690061262]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/VBoxContainer2" unique_id=1114831843]
+layout_mode = 2
+
+[node name="BuyButton" type="Button" parent="HBoxContainer2/VBoxContainer2/HBoxContainer" unique_id=1247772807]
+layout_mode = 2
+text = "Buy"
+
+[node name="LeaveButton" type="Button" parent="HBoxContainer2/VBoxContainer2/HBoxContainer" unique_id=445792254]
+layout_mode = 2
+text = "Leave shop"
+
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer2/HBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer2/HBoxContainer/LeaveButton" to="." method="_on_leave_button_pressed"]

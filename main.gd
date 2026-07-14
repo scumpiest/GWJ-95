@@ -6,6 +6,7 @@ extends Control
 @export var card_scene: PackedScene
 
 @onready var deck_button: TextureButton = %Deck
+@onready var shop_button: Button = %Shop
 @onready var hand: HBoxContainer = %Hand
 @onready var chain: HBoxContainer = %Chain
 @onready var end_turn: Button = %EndTurnButton
@@ -13,6 +14,8 @@ extends Control
 @onready var deck_card_label: Label = %DeckCardLabel
 @onready var player: Player = %Player
 @onready var enemy: Enemy = %Enemy1
+@onready var shopContainer: MarginContainer = self.get_node("Shop");
+@onready var mainContainer: MarginContainer = self.get_node("MarginContainer");
 
 
 func _ready() -> void:
@@ -25,6 +28,9 @@ func _ready() -> void:
 	GameManager.start_battle(battle_context)
 	GameManager.deck_count_changed.connect(_on_deck_count_changed)
 	GameManager.discard_count_changed.connect(_on_discard_count_changed)
+
+	shop_button.pressed.connect(func(): shopContainer.visible = true)
+	shopContainer.visibility_changed.connect(func(): mainContainer.visible = !shopContainer.visible)
 
 	_spawn_cards(GameManager.draw_cards(initial_hand_size))
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
