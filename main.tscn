@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cx6g6j2lx7aow" path="res://scenes/character/player.tscn" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://bik66s0yv6dts" path="res://assets/sounds/Rythm Gamejam 2.mp3" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://b2k5n8m3p7q4r" path="res://scenes/character/enemy1.tscn" id="8_enemy1"]
+[ext_resource type="PackedScene" uid="uid://cbjhhlo1by5tx" path="res://scenes/shop/shop.tscn" id="8_kek77"]
 
 [node name="Main" type="Control" unique_id=558398176]
 layout_mode = 3
@@ -25,6 +26,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -21.5
+offset_bottom = 21.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 24
@@ -90,6 +93,11 @@ theme_override_constants/separation = 12
 layout_mode = 2
 size_flags_horizontal = 8
 
+[node name="Shop" type="Button" parent="MarginContainer/VBox/HBoxContainer" unique_id=1940703265]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Shop"
+
 [node name="Deck" type="TextureButton" parent="MarginContainer/VBox/HBoxContainer" unique_id=1847293650]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 112)
@@ -135,7 +143,23 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "END TURN"
 
+[node name="Shop" parent="." unique_id=827335244 node_paths=PackedStringArray("player_hand") instance=ExtResource("8_kek77")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 24.0
+offset_top = 2.5
+offset_right = 1128.0
+offset_bottom = 645.5
+grow_horizontal = 1
+grow_vertical = 1
+player_hand = NodePath("../MarginContainer/VBox/Hand")
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=279445689]
 stream = ExtResource("7_272bh")
 volume_db = 10.0
 autoplay = true
+
+[connection signal="focus_entered" from="." to="Shop" method="_on_main_focus_entered"]

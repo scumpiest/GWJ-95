@@ -2,8 +2,8 @@ class_name DeckData
 extends Resource
 
 @export var cards: Array[CardData] = []
+@export var shop_cards: Array[CardData] = []
 @export var discard_pile: Array[CardData] = []
-
 
 func shuffle() -> void:
 	for i in range(cards.size() - 1, 0, -1):

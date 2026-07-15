@@ -15,7 +15,10 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 @onready var _name_label: Label = $Casette/MarginContainer2/CardName
 
 var owner_slot: Slot
+var shop_card: bool = false
+var selected_shop_card: CardVisual
 
+signal clicked_card(CardVisual)
 
 func _ready() -> void:
 	add_to_group("cards")
@@ -24,6 +27,10 @@ func _ready() -> void:
 	casette.mouse_entered.connect(_on_casette_mouse_entered)
 	casette.mouse_exited.connect(_on_casette_mouse_exited)
 
+func _gui_input(event):
+	if shop_card and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			clicked_card.emit(self)
+			set_casette_highlighted(true)
 
 func _bind_card_data() -> void:
 	if card_data == null:
@@ -44,6 +51,8 @@ func _apply_display_mode(in_chain: bool) -> void:
 
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
+	if(shop_card):
+		return
 	var preview := duplicate() as CardVisual
 	preview.modulate.a = 0.75
 	preview.set_owner_slot(owner_slot)
@@ -108,6 +117,8 @@ func _on_casette_mouse_entered() -> void:
 
 
 func _on_casette_mouse_exited() -> void:
+	if selected_shop_card == self:
+		return
 	if owner_slot != null:
 		paper.visible = false
 	set_casette_highlighted(false)
