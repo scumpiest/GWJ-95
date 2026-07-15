@@ -71,12 +71,12 @@ layout_mode = 2
 
 [node name="Player" parent="MarginContainer/VBox/Container" unique_id=1761150887 instance=ExtResource("6_7mycd")]
 unique_name_in_owner = true
-position = Vector2(201, 241.5)
+position = Vector2(200, 311.5)
 scale = Vector2(0.5, 0.5)
 
 [node name="Enemy1" parent="MarginContainer/VBox/Container" unique_id=-1447774240 instance=ExtResource("8_enemy1")]
 unique_name_in_owner = true
-position = Vector2(912, 247.5)
+position = Vector2(912, 311.5)
 scale = Vector2(0.5, 0.5)
 
 [node name="HandLabel" type="Label" parent="MarginContainer/VBox" unique_id=2092549864]
@@ -162,6 +162,7 @@ player_hand = NodePath("../MarginContainer/VBox/HBoxContainer/Hand")
 stream = ExtResource("7_272bh")
 volume_db = 10.0
 autoplay = true
+parameters/looping = true
 
 [node name="Stage" parent="." unique_id=1598227722 instance=ExtResource("10_4c57u")]
 z_index = -99
