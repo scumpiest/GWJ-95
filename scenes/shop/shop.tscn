@@ -20,53 +20,56 @@ theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 script = ExtResource("1_100s2")
 card_scene = ExtResource("2_7lxhl")
-card_container = NodePath("HBoxContainer2/VBoxContainer/ShopCards")
+card_container = NodePath("MainContainer/LeftContainer/ShopCards")
 cards_db = ExtResource("3_7lxhl")
-currency_label = NodePath("HBoxContainer2/VBoxContainer/HBoxContainer/BalanceAmount")
+currency_label = NodePath("MainContainer/LeftContainer/BalanceContainer/BalanceAmount")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1221489427]
+[node name="MainContainer" type="HBoxContainer" parent="." unique_id=1221489427]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2" unique_id=168333534]
+[node name="LeftContainer" type="VBoxContainer" parent="MainContainer" unique_id=168333534]
+propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/VBoxContainer" unique_id=897653487]
+[node name="BalanceContainer" type="HBoxContainer" parent="MainContainer/LeftContainer" unique_id=897653487]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Balance" type="Label" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1531957841]
+[node name="Balance" type="Label" parent="MainContainer/LeftContainer/BalanceContainer" unique_id=1531957841]
 layout_mode = 2
 text = "Balance: "
 
-[node name="BalanceAmount" type="Label" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=70553387]
+[node name="BalanceAmount" type="Label" parent="MainContainer/LeftContainer/BalanceContainer" unique_id=70553387]
 layout_mode = 2
 
-[node name="DollarSign" type="Label" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=293102408]
+[node name="DollarSign" type="Label" parent="MainContainer/LeftContainer/BalanceContainer" unique_id=293102408]
 layout_mode = 2
 text = "$"
 
-[node name="ShopCards" type="HFlowContainer" parent="HBoxContainer2/VBoxContainer" unique_id=1486777301]
+[node name="ShopCards" type="HFlowContainer" parent="MainContainer/LeftContainer" unique_id=1486777301]
+custom_minimum_size = Vector2(604, 438)
+propagate_maximum_size = false
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/h_separation = 207
-theme_override_constants/v_separation = 15
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/h_separation = 110
+theme_override_constants/v_separation = 77
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer2" unique_id=1690061262]
+[node name="RightContainer" type="VBoxContainer" parent="MainContainer" unique_id=1690061262]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/VBoxContainer2" unique_id=1114831843]
+[node name="ButtonContainer" type="HBoxContainer" parent="MainContainer/RightContainer" unique_id=1114831843]
 layout_mode = 2
 
-[node name="BuyButton" type="Button" parent="HBoxContainer2/VBoxContainer2/HBoxContainer" unique_id=1247772807]
+[node name="BuyButton" type="Button" parent="MainContainer/RightContainer/ButtonContainer" unique_id=1247772807]
 layout_mode = 2
 text = "Buy"
 
-[node name="LeaveButton" type="Button" parent="HBoxContainer2/VBoxContainer2/HBoxContainer" unique_id=445792254]
+[node name="LeaveButton" type="Button" parent="MainContainer/RightContainer/ButtonContainer" unique_id=445792254]
 layout_mode = 2
 text = "Leave shop"
 
-[connection signal="pressed" from="HBoxContainer2/VBoxContainer2/HBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
-[connection signal="pressed" from="HBoxContainer2/VBoxContainer2/HBoxContainer/LeaveButton" to="." method="_on_leave_button_pressed"]
+[connection signal="pressed" from="MainContainer/RightContainer/ButtonContainer/BuyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="MainContainer/RightContainer/ButtonContainer/LeaveButton" to="." method="_on_leave_button_pressed"]

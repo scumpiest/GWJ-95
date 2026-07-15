@@ -18,7 +18,7 @@ func _money_changed(count: int) -> void:
 	pass
 
 func _draw_cards() -> void:
-	for n in 9:
+	for n in 6:
 		var card_visual := card_scene.instantiate() as CardVisual
 		card_visual.shop_card = true
 		card_visual.clicked_card.connect(on_card_clicked)
@@ -27,7 +27,6 @@ func _draw_cards() -> void:
 	pass
 
 func on_card_clicked(card: CardVisual) -> void:
-	print(card)
 	for otherCard: CardVisual in get_shop_cards():
 		otherCard.selected_shop_card = card
 		if otherCard == card:
@@ -49,5 +48,6 @@ func _on_buy_button_pressed() -> void:
 				card.set_shop_card(false)
 				card.set_casette_highlighted(false)
 				card.selected_shop_card = null
+				card.clicked_card.disconnect(on_card_clicked)
 				card.reparent(player_hand)
 
