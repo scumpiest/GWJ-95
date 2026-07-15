@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://k0msilr74cgg" path="res://scenes/board/slot.tscn" id="2_slot"]
 [ext_resource type="Texture2D" uid="uid://baj1drtjlgf8v" path="res://icon.svg" id="3_deck_tex"]
 [ext_resource type="Resource" uid="uid://lli1fjyggvmk" path="res://resources/starter_deck.tres" id="4_deck"]
+[ext_resource type="PackedScene" uid="uid://bvy8ua03rmgwl" path="res://scenes/balance/balance.tscn" id="5_efxa6"]
 [ext_resource type="PackedScene" uid="uid://cx6g6j2lx7aow" path="res://scenes/character/player.tscn" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://bik66s0yv6dts" path="res://assets/sounds/Rythm Gamejam 2.mp3" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://b2k5n8m3p7q4r" path="res://scenes/character/enemy1.tscn" id="8_enemy1"]
@@ -45,25 +46,33 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Chain"
 
-[node name="Chain" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1518842042]
+[node name="HeaderContainer" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1161162445]
+layout_mode = 2
+theme_override_constants/separation = 400
+
+[node name="Chain" type="HBoxContainer" parent="MarginContainer/VBox/HeaderContainer" unique_id=1518842042]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Slot0" parent="MarginContainer/VBox/Chain" unique_id=336822404 instance=ExtResource("2_slot")]
+[node name="Slot0" parent="MarginContainer/VBox/HeaderContainer/Chain" unique_id=336822404 instance=ExtResource("2_slot")]
 layout_mode = 2
 
-[node name="Slot1" parent="MarginContainer/VBox/Chain" unique_id=1970093744 instance=ExtResource("2_slot")]
+[node name="Slot1" parent="MarginContainer/VBox/HeaderContainer/Chain" unique_id=1970093744 instance=ExtResource("2_slot")]
 layout_mode = 2
 
-[node name="Slot2" parent="MarginContainer/VBox/Chain" unique_id=2119800894 instance=ExtResource("2_slot")]
+[node name="Slot2" parent="MarginContainer/VBox/HeaderContainer/Chain" unique_id=2119800894 instance=ExtResource("2_slot")]
 layout_mode = 2
 
-[node name="Slot3" parent="MarginContainer/VBox/Chain" unique_id=1390401898 instance=ExtResource("2_slot")]
+[node name="Slot3" parent="MarginContainer/VBox/HeaderContainer/Chain" unique_id=1390401898 instance=ExtResource("2_slot")]
 layout_mode = 2
 
-[node name="Slot4" parent="MarginContainer/VBox/Chain" unique_id=860462925 instance=ExtResource("2_slot")]
+[node name="Slot4" parent="MarginContainer/VBox/HeaderContainer/Chain" unique_id=860462925 instance=ExtResource("2_slot")]
 layout_mode = 2
+
+[node name="Balance" parent="MarginContainer/VBox/HeaderContainer" unique_id=1899342113 instance=ExtResource("5_efxa6")]
+layout_mode = 2
+offset_transform_enabled = true
 
 [node name="Container" type="PanelContainer" parent="MarginContainer/VBox" unique_id=2066776690]
 custom_minimum_size = Vector2(0, 260)
