@@ -1,7 +1,5 @@
 extends Node
 
-signal purchase_card(card: CardData)
-
 @export var player_hand: Node
 
 @export var card_scene: PackedScene
@@ -12,7 +10,7 @@ func _ready() -> void:
 	_draw_cards()
 
 func _draw_cards() -> void:
-	for n in 9:
+	for n in 6:
 		var card_visual := card_scene.instantiate() as CardVisual
 		card_visual.shop_card = true
 		card_visual.clicked_card.connect(on_card_clicked)
@@ -21,7 +19,6 @@ func _draw_cards() -> void:
 	pass
 
 func on_card_clicked(card: CardVisual) -> void:
-	print(card)
 	for otherCard: CardVisual in get_shop_cards():
 		otherCard.selected_shop_card = card
 		if otherCard == card:
@@ -35,8 +32,14 @@ func get_shop_cards() -> Array[CardVisual]:
 func _on_leave_button_pressed() -> void:
 	self.visible = false
 
-# TODO: add currency and subtract money amount from 'bought' card
 func _on_buy_button_pressed() -> void:
 	for card in get_shop_cards():
 		if card.selected_shop_card == card:
-			card.reparent(player_hand)
+			if CurrencyManager.subtract_money(card.card_data.cost):
+				# Set shop card to false, reset selected states
+				card.set_shop_card(false)
+				card.set_casette_highlighted(false)
+				card.selected_shop_card = null
+				card.clicked_card.disconnect(on_card_clicked)
+				card.reparent(player_hand)
+

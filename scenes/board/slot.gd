@@ -26,8 +26,19 @@ var rotation_duration: float = 0.2 #seconds?
 var rotation_back_delay: float = 0.3 #seconds
 
 
+var previous_card_slot: Slot
+var next_card_slot: Slot
+
+
 func _ready() -> void:
 	add_to_group("card_slots")
+	var parent = get_parent()
+	var cardIndex = parent.get_children().find(self);
+
+	previous_card_slot = parent.get_child(cardIndex-1)
+	next_card_slot = parent.get_child(cardIndex+1)
+
+
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	if material is ShaderMaterial:
 		_outline_material = (material as ShaderMaterial).duplicate()
@@ -43,11 +54,22 @@ func _ready() -> void:
 		_activation_panel_style.border_width_right = 3
 		_activation_panel_style.border_width_bottom = 3
 
-
 func get_card() -> CardVisual:
 	for child in _anchor.get_children():
 		if child is CardVisual:
 			return child as CardVisual
+	return null
+
+func next_card() -> CardData:
+	var cardVisual = next_card_slot.get_card()
+	if cardVisual:
+		return cardVisual.card_data
+	return null
+
+func prev_card() -> CardData:
+	var cardVisual = previous_card_slot.get_card()
+	if cardVisual:
+		return cardVisual.card_data
 	return null
 
 
@@ -74,10 +96,7 @@ func set_card(card: CardVisual) -> void:
 		_anchor.remove_child(existing)
 		existing.set_owner_slot(null)
 
-	if card.get_parent():
-		card.get_parent().remove_child(card)
-
-	_anchor.add_child(card)
+	card.reparent(_anchor)
 	card.set_owner_slot(self)
 	color = card.card_data.card_color
 	card_changed.emit(card)
