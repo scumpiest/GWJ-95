@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://ccmltyegctu2o"
+path="res://.godot/imported/Stage.atlas-ac789c402f733b495391faaa1ee36650.spatlas"
+
+[deps]
+
+source_file="res://assets/sprites/Stage/Stage.atlas"
+dest_files=["res://.godot/imported/Stage.atlas-ac789c402f733b495391faaa1ee36650.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

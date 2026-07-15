@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://dphlrdcd6vde7"
+path="res://.godot/imported/Stage.skel-6b66714c96420cff705fa3e4f2d7a2e6.spskel"
+
+[deps]
+
+source_file="res://assets/sprites/Stage/Stage.skel"
+dest_files=["res://.godot/imported/Stage.skel-6b66714c96420cff705fa3e4f2d7a2e6.spskel"]
+
+[params]
+
