@@ -1,15 +1,21 @@
 extends Node
 
-signal purchase_card(card: CardData)
-
 @export var player_hand: Node
 
 @export var card_scene: PackedScene
 @export var card_container: HFlowContainer;
 @export var cards_db: CardDB
 
+@export var currency_label: Label;
+
 func _ready() -> void:
+	_money_changed(CurrencyManager.player_money)
+	CurrencyManager.money_change.connect(_money_changed)
 	_draw_cards()
+
+func _money_changed(count: int) -> void:
+	currency_label.text = str(count)
+	pass
 
 func _draw_cards() -> void:
 	for n in 9:
@@ -35,8 +41,13 @@ func get_shop_cards() -> Array[CardVisual]:
 func _on_leave_button_pressed() -> void:
 	self.visible = false
 
-# TODO: add currency and subtract money amount from 'bought' card
 func _on_buy_button_pressed() -> void:
 	for card in get_shop_cards():
 		if card.selected_shop_card == card:
-			card.reparent(player_hand)
+			if CurrencyManager.subtract_money(card.card_data.cost):
+				# Set shop card to false, reset selected states
+				card.set_shop_card(false)
+				card.set_casette_highlighted(false)
+				card.selected_shop_card = null
+				card.reparent(player_hand)
+

@@ -17,15 +17,30 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 var owner_slot: Slot
 var shop_card: bool = false
 var selected_shop_card: CardVisual
+var CostLabel: Label
 
 signal clicked_card(CardVisual)
 
 func _ready() -> void:
+	CostLabel = get_node("CostLabel")
+	if shop_card:
+		CostLabel.text = str(card_data.cost) + "$"
+	else:
+		set_shop_card(false)
+
 	add_to_group("cards")
 	_bind_card_data()
 	_apply_display_mode(false)
 	casette.mouse_entered.connect(_on_casette_mouse_entered)
 	casette.mouse_exited.connect(_on_casette_mouse_exited)
+
+func set_shop_card(is_shop_card: bool):
+	shop_card = is_shop_card
+	if !is_shop_card:
+		CostLabel.visible = false
+	else:
+		CostLabel.visible = true
+
 
 func _gui_input(event):
 	if shop_card and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():

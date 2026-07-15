@@ -5,6 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bwvbujy4ysgvu" path="res://scenes/card/casette.tscn" id="3_2ufkr"]
 [ext_resource type="PackedScene" uid="uid://b5ar2ossl3svv" path="res://scenes/card/paper.tscn" id="4_g65cd"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_qevbn"]
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Card" type="Control" unique_id=1442896117]
 custom_minimum_size = Vector2(128, 180)
 layout_mode = 3
@@ -19,3 +23,14 @@ mouse_filter = 1
 [node name="Paper" parent="." unique_id=1589460870 instance=ExtResource("4_g65cd")]
 layout_mode = 0
 mouse_filter = 1
+
+[node name="CostLabel" type="Label" parent="." unique_id=1077638569]
+layout_mode = 1
+offset_left = -19.705
+offset_top = -10.945
+offset_right = 30.744997
+offset_bottom = 12.055
+text = "10$"
+label_settings = SubResource("LabelSettings_qevbn")
+horizontal_alignment = 1
+vertical_alignment = 1

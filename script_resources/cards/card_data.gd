@@ -7,6 +7,7 @@ extends Resource
 @export var art: Texture2D
 @export var card_color: CardEnums.CardColor = CardEnums.CardColor.RED
 @export var is_instant: bool = false
+@export var cost: int = 5
 @export var effects: Array[CardEffect] = []
 
 

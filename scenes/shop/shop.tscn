@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cbjhhlo1by5tx"]
 
-[ext_resource type="Script" uid="uid://dvs4raibbhy4n" path="res://scenes/shop/shop.gd" id="1_100s2"]
+[ext_resource type="Script" uid="uid://dptvedlb7rrq3" path="res://scenes/shop/shop.gd" id="1_100s2"]
 [ext_resource type="PackedScene" uid="uid://tn41fl850ub5" path="res://scenes/card/card.tscn" id="2_7lxhl"]
 [ext_resource type="Resource" uid="uid://b5owg30f4mevw" path="res://resources/card_db.tres" id="3_7lxhl"]
 
-[node name="Shop" type="MarginContainer" unique_id=827335244 node_paths=PackedStringArray("card_container")]
+[node name="Shop" type="MarginContainer" unique_id=827335244 node_paths=PackedStringArray("card_container", "currency_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,15 +20,36 @@ theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 script = ExtResource("1_100s2")
 card_scene = ExtResource("2_7lxhl")
-card_container = NodePath("HBoxContainer2/ShopCards")
+card_container = NodePath("HBoxContainer2/VBoxContainer/ShopCards")
 cards_db = ExtResource("3_7lxhl")
+currency_label = NodePath("HBoxContainer2/VBoxContainer/HBoxContainer/BalanceAmount")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1221489427]
 layout_mode = 2
 
-[node name="ShopCards" type="HFlowContainer" parent="HBoxContainer2" unique_id=1486777301]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2" unique_id=168333534]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/VBoxContainer" unique_id=897653487]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Balance" type="Label" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1531957841]
+layout_mode = 2
+text = "Balance: "
+
+[node name="BalanceAmount" type="Label" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=70553387]
+layout_mode = 2
+
+[node name="DollarSign" type="Label" parent="HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=293102408]
+layout_mode = 2
+text = "$"
+
+[node name="ShopCards" type="HFlowContainer" parent="HBoxContainer2/VBoxContainer" unique_id=1486777301]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/h_separation = 207
 theme_override_constants/v_separation = 15
 
