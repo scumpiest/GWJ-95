@@ -6,16 +6,8 @@ extends Node
 @export var card_container: HFlowContainer;
 @export var cards_db: CardDB
 
-@export var currency_label: Label;
-
 func _ready() -> void:
-	_money_changed(CurrencyManager.player_money)
-	CurrencyManager.money_change.connect(_money_changed)
 	_draw_cards()
-
-func _money_changed(count: int) -> void:
-	currency_label.text = str(count)
-	pass
 
 func _draw_cards() -> void:
 	for n in 6:

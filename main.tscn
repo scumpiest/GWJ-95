@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://baj1drtjlgf8v" path="res://icon.svg" id="3_deck_tex"]
 [ext_resource type="Resource" uid="uid://lli1fjyggvmk" path="res://resources/starter_deck.tres" id="4_deck"]
 [ext_resource type="PackedScene" uid="uid://cx6g6j2lx7aow" path="res://scenes/character/player.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bvy8ua03rmgwl" path="res://scenes/balance/balance.tscn" id="7_4c57u"]
 [ext_resource type="AudioStream" uid="uid://bik66s0yv6dts" path="res://assets/sounds/Rythm Gamejam 2.mp3" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://b2k5n8m3p7q4r" path="res://scenes/character/enemy1.tscn" id="8_enemy1"]
 [ext_resource type="PackedScene" uid="uid://cbjhhlo1by5tx" path="res://scenes/shop/shop.tscn" id="8_kek77"]
@@ -92,6 +93,9 @@ theme_override_constants/separation = 12
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1946937927]
 layout_mode = 2
 size_flags_horizontal = 8
+
+[node name="Balance" parent="MarginContainer/VBox/HBoxContainer" unique_id=1899342113 instance=ExtResource("7_4c57u")]
+layout_mode = 2
 
 [node name="Shop" type="Button" parent="MarginContainer/VBox/HBoxContainer" unique_id=1940703265]
 unique_name_in_owner = true

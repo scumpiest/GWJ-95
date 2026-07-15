@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://dptvedlb7rrq3" path="res://scenes/shop/shop.gd" id="1_100s2"]
 [ext_resource type="PackedScene" uid="uid://tn41fl850ub5" path="res://scenes/card/card.tscn" id="2_7lxhl"]
 [ext_resource type="Resource" uid="uid://b5owg30f4mevw" path="res://resources/card_db.tres" id="3_7lxhl"]
+[ext_resource type="PackedScene" uid="uid://bvy8ua03rmgwl" path="res://scenes/balance/balance.tscn" id="4_jp048"]
 
-[node name="Shop" type="MarginContainer" unique_id=827335244 node_paths=PackedStringArray("card_container", "currency_label")]
+[node name="Shop" type="MarginContainer" unique_id=827335244 node_paths=PackedStringArray("card_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -22,7 +23,6 @@ script = ExtResource("1_100s2")
 card_scene = ExtResource("2_7lxhl")
 card_container = NodePath("MainContainer/LeftContainer/ShopCards")
 cards_db = ExtResource("3_7lxhl")
-currency_label = NodePath("MainContainer/LeftContainer/BalanceContainer/BalanceAmount")
 
 [node name="MainContainer" type="HBoxContainer" parent="." unique_id=1221489427]
 layout_mode = 2
@@ -32,20 +32,9 @@ propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BalanceContainer" type="HBoxContainer" parent="MainContainer/LeftContainer" unique_id=897653487]
+[node name="Balance" parent="MainContainer/LeftContainer" unique_id=1899342113 instance=ExtResource("4_jp048")]
 layout_mode = 2
 size_flags_horizontal = 4
-
-[node name="Balance" type="Label" parent="MainContainer/LeftContainer/BalanceContainer" unique_id=1531957841]
-layout_mode = 2
-text = "Balance: "
-
-[node name="BalanceAmount" type="Label" parent="MainContainer/LeftContainer/BalanceContainer" unique_id=70553387]
-layout_mode = 2
-
-[node name="DollarSign" type="Label" parent="MainContainer/LeftContainer/BalanceContainer" unique_id=293102408]
-layout_mode = 2
-text = "$"
 
 [node name="ShopCards" type="HFlowContainer" parent="MainContainer/LeftContainer" unique_id=1486777301]
 custom_minimum_size = Vector2(604, 438)

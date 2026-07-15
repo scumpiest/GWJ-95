@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bvy8ua03rmgwl"]
+
+[ext_resource type="Script" uid="uid://dlwiwx1koqm4d" path="res://scenes/balance/balance.gd" id="1_n14ff"]
+
+[node name="Balance" type="HBoxContainer" unique_id=1899342113 node_paths=PackedStringArray("balance_label")]
+script = ExtResource("1_n14ff")
+balance_label = NodePath("BalanceAmount")
+
+[node name="Balance" type="Label" parent="." unique_id=1057535273]
+layout_mode = 2
+text = "Balance: "
+
+[node name="BalanceAmount" type="Label" parent="." unique_id=1099960619]
+layout_mode = 2
+
+[node name="DollarSign" type="Label" parent="." unique_id=1443205294]
+layout_mode = 2
+text = "$"
