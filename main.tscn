@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bik66s0yv6dts" path="res://assets/sounds/Rythm Gamejam 2.mp3" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://b2k5n8m3p7q4r" path="res://scenes/character/enemy1.tscn" id="8_enemy1"]
 [ext_resource type="PackedScene" uid="uid://cbjhhlo1by5tx" path="res://scenes/shop/shop.tscn" id="8_kek77"]
+[ext_resource type="PackedScene" uid="uid://c7stag3sc3n31" path="res://scenes/stage/stage.tscn" id="10_4c57u"]
 
 [node name="Main" type="Control" unique_id=558398176]
 layout_mode = 3
@@ -65,33 +66,33 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Container" type="PanelContainer" parent="MarginContainer/VBox" unique_id=2066776690]
-custom_minimum_size = Vector2(0, 130)
+custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 
 [node name="Player" parent="MarginContainer/VBox/Container" unique_id=1761150887 instance=ExtResource("6_7mycd")]
 unique_name_in_owner = true
-position = Vector2(146, 134.5)
-scale = Vector2(0.3, 0.3)
+position = Vector2(201, 241.5)
+scale = Vector2(0.5, 0.5)
 
 [node name="Enemy1" parent="MarginContainer/VBox/Container" unique_id=-1447774240 instance=ExtResource("8_enemy1")]
 unique_name_in_owner = true
-position = Vector2(450, 134.5)
-scale = Vector2(0.3, 0.3)
+position = Vector2(912, 247.5)
+scale = Vector2(0.5, 0.5)
 
 [node name="HandLabel" type="Label" parent="MarginContainer/VBox" unique_id=2092549864]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Hand"
 
-[node name="Hand" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1180998]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1946937927]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Hand" type="HBoxContainer" parent="MarginContainer/VBox/HBoxContainer" unique_id=1180998]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 180)
 layout_mode = 2
 theme_override_constants/separation = 12
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1946937927]
-layout_mode = 2
-size_flags_horizontal = 8
 
 [node name="Shop" type="Button" parent="MarginContainer/VBox/HBoxContainer" unique_id=1940703265]
 unique_name_in_owner = true
@@ -155,11 +156,16 @@ offset_right = 1128.0
 offset_bottom = 645.5
 grow_horizontal = 1
 grow_vertical = 1
-player_hand = NodePath("../MarginContainer/VBox/Hand")
+player_hand = NodePath("../MarginContainer/VBox/HBoxContainer/Hand")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=279445689]
 stream = ExtResource("7_272bh")
 volume_db = 10.0
 autoplay = true
+
+[node name="Stage" parent="." unique_id=1598227722 instance=ExtResource("10_4c57u")]
+z_index = -99
+position = Vector2(575, 669)
+scale = Vector2(0.56, 0.56)
 
 [connection signal="focus_entered" from="." to="Shop" method="_on_main_focus_entered"]

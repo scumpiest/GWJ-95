@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c7stag3sc3n31"]
+
+[ext_resource type="Script" path="res://scenes/stage/stage.gd" id="1_script"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://b3vhffxsywexr" path="res://assets/sprites/Stage/stage_data_res.tres" id="1_data"]
+
+[node name="Stage" type="Node2D" unique_id=1764009635]
+script = ExtResource("1_script")
+
+[node name="SpineSprite" type="SpineSprite" parent="." unique_id=1601442276]
+skeleton_data_res = ExtResource("1_data")
+preview_skin = "Default"
+preview_animation = "normal_level"
+preview_frame = false
+preview_time = 0.0
