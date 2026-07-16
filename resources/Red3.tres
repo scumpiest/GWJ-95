@@ -11,7 +11,7 @@
 script = ExtResource("4_h7mtc")
 id = &"R3"
 display_name = " Kick it:"
-description = "Deals 5 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. Applies 1 [img width=16 height=16]res://assets/sprites/icons/vulnerability.png/img] if [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] is next. Applies 1 [img width=16 height=16]res://assets/sprites/icons/weakness.png[/img] if [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] is next. Attacks again if [img width=16 height=16]res://assets/sprites/icons/purplecassette.png[/img] is next."
+description = "5 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. Applies 1 [img width=16 height=16]res://assets/sprites/icons/vulnerability.png/img] if [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] is next. Applies 1 [img width=16 height=16]res://assets/sprites/icons/weakness.png[/img] if [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] is next. Attacks again if [img width=16 height=16]res://assets/sprites/icons/purplecassette.png[/img] is next."
 art = ExtResource("1_nvk6j")
 effects = Array[ExtResource("1_tfmf5")]([ExtResource("2_rd7cd"), ExtResource("3_nvk6j"), ExtResource("4_doto8")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"
