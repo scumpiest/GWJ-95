@@ -116,33 +116,5 @@ func get_slot_state(index: int) -> ChainSlotState:
 	return chain_slot_states[index]
 
 
-func previous_slot_was_attack(slot_index: int) -> bool:
-	var prev_index := _get_previous_active_slot_index(slot_index)
-	if prev_index < 0:
-		return false
-
-	var prev_state := chain_slot_states[prev_index]
-	for effect in prev_state.card.effects:
-		if effect.effect_type == CardEnums.EffectType.DAMAGE:
-			return true
-
-	return false
-
-
-func is_even_turn() -> bool:
-	return current_turn % 2 == 0
-
-
-func is_odd_turn() -> bool:
-	return current_turn % 2 == 1
-
-
 func _is_valid_slot_index(slot_index: int) -> bool:
 	return slot_index >= 0 and slot_index < chain_slot_states.size()
-
-
-func _get_previous_active_slot_index(slot_index: int) -> int:
-	for i in range(slot_index - 1, -1, -1):
-		if chain_slot_states[i].is_active():
-			return i
-	return -1
