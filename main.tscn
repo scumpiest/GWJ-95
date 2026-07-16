@@ -48,7 +48,7 @@ text = "Chain"
 
 [node name="HeaderContainer" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1161162445]
 layout_mode = 2
-theme_override_constants/separation = 400
+theme_override_constants/separation = 300
 
 [node name="Chain" type="HBoxContainer" parent="MarginContainer/VBox/HeaderContainer" unique_id=1518842042]
 unique_name_in_owner = true

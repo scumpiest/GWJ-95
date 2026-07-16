@@ -17,14 +17,14 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 var owner_slot: Slot
 var shop_card: bool = false
 var selected_shop_card: CardVisual
-var CostLabel: Label
+var cost_label: Label
 
 signal clicked_card(CardVisual)
 
 func _ready() -> void:
-	CostLabel = get_node("CostLabel")
+	cost_label = get_node("CostLabel")
 	if shop_card:
-		CostLabel.text = str(card_data.cost) + "$"
+		cost_label.text = str(card_data.cost) + "$"
 	else:
 		set_shop_card(false)
 
@@ -37,9 +37,9 @@ func _ready() -> void:
 func set_shop_card(is_shop_card: bool):
 	shop_card = is_shop_card
 	if !is_shop_card:
-		CostLabel.visible = false
+		cost_label.visible = false
 	else:
-		CostLabel.visible = true
+		cost_label.visible = true
 
 
 func _gui_input(event):
