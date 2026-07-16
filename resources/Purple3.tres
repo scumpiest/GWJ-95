@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("2_mb7j1")
 id = &"P3"
-display_name = "March Step:"
+display_name = "March Step"
 description = "Halves your [img width=16 height=16]res://assets/sprites/icons/block.png[/img], deals [img width=16 height=16]res://assets/sprites/icons/damage.png[/img] equal to [img width=16 height=16]res://assets/sprites/icons/block.png[/img] taken"
 art = ExtResource("1_pvm76")
 card_color = 2

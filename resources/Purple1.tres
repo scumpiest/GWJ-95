@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("2_1a5li")
 id = &"P1"
-display_name = "Criss Cross:"
+display_name = "Criss Cross"
 description = "Deals 5 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img] for every Cassette before it, both to you and the enemy."
 art = ExtResource("1_g3c5j")
 card_color = 2

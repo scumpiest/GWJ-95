@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("2_qdtl4")
 id = &"P2"
-display_name = "Finisher:"
+display_name = "Finisher"
 description = "Next Cassette activates 2 extra times. Any cassettes after it will not activate."
 art = ExtResource("1_ctqeu")
 card_color = 2

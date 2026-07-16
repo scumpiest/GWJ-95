@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c82m0jpt83de0"]
+
+[ext_resource type="Texture2D" uid="uid://di5p2hkxyxtg2" path="res://stickers/sticker_reebok.png" id="1_7m2ii"]
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_mcbg7"]
+[ext_resource type="Resource" uid="uid://1mbd54avu5kl" path="res://resources/B1.1.tres" id="3_ibnww"]
+[ext_resource type="Resource" uid="uid://dw5j6tx0m6bmv" path="res://resources/B1.2.tres" id="4_jf647"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="5_mj755"]
+
+[resource]
+script = ExtResource("5_mj755")
+id = &"B1"
+display_name = "Reebok"
+description = "Gives 5 [img width=16 height=16]res://assets/sprites/icons/block.png[/img]. Gives 2 more [img width=16 height=16]res://assets/sprites/icons/block.png[/img] for every [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] nearby."
+art = ExtResource("1_7m2ii")
+card_color = 1
+effects = Array[ExtResource("2_mcbg7")]([ExtResource("3_ibnww"), ExtResource("4_jf647")])
+metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

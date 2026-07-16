@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("2_eg67u")
 id = &"R1"
-display_name = "Warm-up:"
+display_name = "Warm-up"
 description = "Deals 5 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. Deals 1 more [img width=16 height=16]res://assets/sprites/icons/damage.png[/img] for every [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] after it."
 art = ExtResource("1_bmpjm")
 effects = Array[ExtResource("1_dvg4x")]([ExtResource("2_1nsgb"), ExtResource("3_bmpjm")])

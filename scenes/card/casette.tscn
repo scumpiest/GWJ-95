@@ -23,10 +23,10 @@ texture = ExtResource("2_0jlll")
 
 [node name="MarginContainer2" type="MarginContainer" parent="." unique_id=994310190]
 layout_mode = 0
-offset_left = 43.0
-offset_top = -1.0
-offset_right = 83.0
-offset_bottom = 39.0
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 114.0
+offset_bottom = 28.0
 
 [node name="CardName" type="Label" parent="MarginContainer2" unique_id=1786694688]
 layout_mode = 2

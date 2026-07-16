@@ -1,17 +1,17 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cpjo7uksxa8uo"]
 
-[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_r2m7r"]
-[ext_resource type="Texture2D" uid="uid://umk0kuoxmtx6" path="res://stickers/sticker_happy_feet.png" id="1_tucvb"]
-[ext_resource type="Resource" uid="uid://dawgbradugj4y" path="res://resources/B3.1.tres" id="2_vv5b3"]
-[ext_resource type="Resource" uid="uid://dmwpon10xbdhv" path="res://resources/B3.2.tres" id="3_86iw5"]
-[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="3_tucvb"]
+[ext_resource type="Texture2D" uid="uid://umk0kuoxmtx6" path="res://stickers/sticker_happy_feet.png" id="1_ix7s2"]
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_beeeg"]
+[ext_resource type="Resource" uid="uid://dawgbradugj4y" path="res://resources/B3.1.tres" id="3_jewj2"]
+[ext_resource type="Resource" uid="uid://dmwpon10xbdhv" path="res://resources/B3.2.tres" id="4_x1hdb"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="5_ro40h"]
 
 [resource]
-script = ExtResource("3_tucvb")
+script = ExtResource("5_ro40h")
 id = &"B3"
-display_name = "Happy Feet:"
+display_name = "Happy Feet"
 description = "Gives 5 [img width=16 height=16]res://assets/sprites/icons/block.png[/img]. Gives 1 [img width=16 height=16]res://assets/sprites/icons/strength.png[/img] if [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] is next. Gives 1 [img width=16 height=16]res://assets/sprites/icons/protection.png[/img] if [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] is next. Gives 5 more [img width=16 height=16]res://assets/sprites/icons/block.png[/img] if [img width=16 height=16]res://assets/sprites/icons/purplecassette.png[/img] is next."
-art = ExtResource("1_tucvb")
+art = ExtResource("1_ix7s2")
 card_color = 1
-effects = Array[ExtResource("1_r2m7r")]([ExtResource("2_vv5b3"), ExtResource("3_86iw5")])
+effects = Array[ExtResource("2_beeeg")]([ExtResource("3_jewj2"), ExtResource("4_x1hdb")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("5_2b0gc")
 id = &"R5"
-display_name = "Kick and Stomp: "
+display_name = "Kick and Stomp"
 description = "Deal 8 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. If [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] or [img width=16 height=16]res://assets/sprites/icons/purplecassette.png[/img] is next, ignore enemy’s [img width=16 height=16]res://assets/sprites/icons/block.png[/img]."
 art = ExtResource("1_dxxwg")
 effects = Array[ExtResource("2_o781n")]([null, null])
