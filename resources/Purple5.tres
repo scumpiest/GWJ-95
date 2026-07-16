@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cygbos5xehnwl"]
+
+[ext_resource type="Texture2D" uid="uid://c40wff54cnswx" path="res://stickers/sticker_butterfly.png" id="1_awtof"]
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_ltjlg"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="5_iitt4"]
+
+[resource]
+script = ExtResource("5_iitt4")
+id = &"P5"
+display_name = "Butterfly:"
+description = "Activates* only next to [Red] Cassettes. Any [Red Cassettes] after it cannot activate. Any [Green Cassettes] after it activate twice."
+art = ExtResource("1_awtof")
+card_color = 2
+effects = Array[ExtResource("2_ltjlg")]([null, null])
+metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

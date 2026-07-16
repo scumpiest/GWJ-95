@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dw8om5l5cvhrd"]
+
+[ext_resource type="Texture2D" uid="uid://bsuxdwph0oq5m" path="res://stickers/sticker_cabbage_patch.png" id="1_ic5i6"]
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_xcqcy"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="4_6cl5y"]
+
+[resource]
+script = ExtResource("4_6cl5y")
+id = &"B5"
+display_name = "Cabbage Patch:"
+description = "If the enemy intents to deal [Damage], gain 8 [block]. If the enemy intents to gain [Block], deal 10 [Damage]."
+art = ExtResource("1_ic5i6")
+card_color = 1
+effects = Array[ExtResource("2_xcqcy")]([null, null])
+metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

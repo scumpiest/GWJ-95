@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://byibjih7yhhg3"]
 
-[ext_resource type="Texture2D" uid="uid://ds17y82d234jn" path="res://assets/sprites/cards/stickers/sticker_red_kick.png" id="1_dcej4"]
+[ext_resource type="Texture2D" uid="uid://eb7bepu5ll" path="res://stickers/sticker_kick_and_slide.png" id="1_dcej4"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_ih4qp"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_5420x"]
 [ext_resource type="Resource" uid="uid://dlqg7u681iygw" path="res://resources/R4.1.tres" id="2_eia5o"]
@@ -9,8 +9,8 @@
 [resource]
 script = ExtResource("2_5420x")
 id = &"R4"
-display_name = "Red4"
-description = "Deal 3 damage and gain 3 block"
+display_name = "Kick and Slide:"
+description = "Deal 3 [Damage]. If [Red Cassette] is next, gives you [Block] equal to [Damage] dealt by it."
 art = ExtResource("1_dcej4")
 effects = Array[ExtResource("1_ih4qp")]([ExtResource("2_eia5o"), ExtResource("3_dcej4")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

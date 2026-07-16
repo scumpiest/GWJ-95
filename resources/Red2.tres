@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c57d4osifuylx"]
 
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_adsu2"]
-[ext_resource type="Texture2D" uid="uid://ds17y82d234jn" path="res://assets/sprites/cards/stickers/sticker_red_kick.png" id="1_n5gwf"]
+[ext_resource type="Texture2D" uid="uid://co65asxfe56xc" path="res://stickers/sticker_two_step.png" id="1_n5gwf"]
 [ext_resource type="Resource" uid="uid://c582efm6yinoe" path="res://resources/R1.1.tres" id="2_n5gwf"]
 [ext_resource type="Resource" uid="uid://bugmfq8t6y2xy" path="res://resources/R1.2.tres" id="3_ifohc"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="4_m5e6u"]
 
 [resource]
 script = ExtResource("4_m5e6u")
-id = &"R1"
-display_name = "DMG"
-description = "Deals 3 [img ]res://icons/damage.png[/img] at turn’s end. Deals 1 more damage for every red card in the chain."
+id = &"R2"
+display_name = "Two Step:"
+description = "Deals 3 [Damage]. Activates 1 more time for every [Red Cassette] next to it."
 art = ExtResource("1_n5gwf")
 effects = Array[ExtResource("1_adsu2")]([ExtResource("2_n5gwf"), ExtResource("3_ifohc")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

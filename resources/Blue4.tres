@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c83diw73acarc"]
 
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_3xl7n"]
-[ext_resource type="Texture2D" uid="uid://bsdem085ourw" path="res://assets/sprites/cards/stickers/sticker_blue_kick.png" id="1_kkxnl"]
+[ext_resource type="Texture2D" uid="uid://5m7js8awek5j" path="res://stickers/sticker_pepper_seed.png" id="1_kkxnl"]
 [ext_resource type="Resource" uid="uid://rpp3iy48l360" path="res://resources/B4.1.tres" id="2_3xl7n"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="3_76aqk"]
 
 [resource]
 script = ExtResource("3_76aqk")
 id = &"B4"
-display_name = "Blue4"
-description = " Increase your block by 50% at turn’s end"
+display_name = "Pepper Seed:"
+description = "Increase your [Block] by 50%. Cannot be placed nextto other [Green Cassettes]. Cannot be last in the chain."
 art = ExtResource("1_kkxnl")
 card_color = 1
 effects = Array[ExtResource("1_3xl7n")]([ExtResource("2_3xl7n")])

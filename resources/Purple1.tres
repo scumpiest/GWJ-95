@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cnlfkhyfuxm4n"]
 
-[ext_resource type="Texture2D" uid="uid://po8tyuxt8xm5" path="res://assets/sprites/cards/stickers/sticker_purple_kick.png" id="1_g3c5j"]
+[ext_resource type="Texture2D" uid="uid://btjf7j1ubifsh" path="res://stickers/sticker_criss_cross.png" id="1_g3c5j"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_sm6ht"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_1a5li"]
 [ext_resource type="Resource" uid="uid://c0buga2qea6jn" path="res://resources/P1.1.tres" id="2_4s6ug"]
@@ -9,8 +9,8 @@
 [resource]
 script = ExtResource("2_1a5li")
 id = &"P1"
-display_name = "Purple1"
-description = "Your first card in the chain deals 1 more damage for every Purple card in the chain. Receive 1 damage for every Purple card in the chain at turn’s end"
+display_name = "Criss Cross:"
+description = "Deals 5 [Damage] for every Cassette before it, both to you and the enemy."
 art = ExtResource("1_g3c5j")
 card_color = 2
 effects = Array[ExtResource("1_sm6ht")]([ExtResource("2_4s6ug"), ExtResource("3_g3c5j")])

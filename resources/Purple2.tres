@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://dmdv6x5mjcwef"]
 
-[ext_resource type="Texture2D" uid="uid://po8tyuxt8xm5" path="res://assets/sprites/cards/stickers/sticker_purple_kick.png" id="1_ctqeu"]
+[ext_resource type="Texture2D" uid="uid://xqi64766lgsy" path="res://stickers/sticker_finisher.png" id="1_ctqeu"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_giihg"]
 [ext_resource type="Resource" uid="uid://drfe58dr7sb6e" path="res://resources/P2.1.tres" id="2_akpcy"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_qdtl4"]
@@ -9,8 +9,8 @@
 [resource]
 script = ExtResource("2_qdtl4")
 id = &"P2"
-display_name = "Purple2"
-description = "Activate random non-Purple card in the chain 4 times at turn’s end. Destroy it"
+display_name = "Finisher:"
+description = "Next Cassette activates 2 extra times. Any cassettes after it will not activate."
 art = ExtResource("1_ctqeu")
 card_color = 2
 effects = Array[ExtResource("1_giihg")]([ExtResource("2_akpcy"), ExtResource("3_ctqeu")])
