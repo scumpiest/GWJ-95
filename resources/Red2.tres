@@ -10,7 +10,7 @@
 script = ExtResource("4_m5e6u")
 id = &"R2"
 display_name = "Two Step:"
-description = "Deals 3 [Damage]. Activates 1 more time for every [Red Cassette] next to it."
+description = "Deals 3 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. Activates 1 more time for every [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] next to it."
 art = ExtResource("1_n5gwf")
 effects = Array[ExtResource("1_adsu2")]([ExtResource("2_n5gwf"), ExtResource("3_ifohc")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

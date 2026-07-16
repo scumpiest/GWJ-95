@@ -10,7 +10,7 @@
 script = ExtResource("2_mb7j1")
 id = &"P3"
 display_name = "March Step:"
-description = "Halves your [Block], deals [Damage] equal to [Block] taken"
+description = "Halves your [img width=16 height=16]res://assets/sprites/icons/block.png[/img], deals [img width=16 height=16]res://assets/sprites/icons/damage.png[/img] equal to [img width=16 height=16]res://assets/sprites/icons/block.png[/img] taken"
 art = ExtResource("1_pvm76")
 card_color = 2
 effects = Array[ExtResource("1_sokde")]([ExtResource("2_rga04"), ExtResource("3_pvm76")])

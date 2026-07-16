@@ -8,7 +8,7 @@
 script = ExtResource("5_iitt4")
 id = &"P5"
 display_name = "Butterfly:"
-description = "Activates* only next to [Red] Cassettes. Any [Red Cassettes] after it cannot activate. Any [Green Cassettes] after it activate twice."
+description = "Activates* only next to [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img]. Any [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] after it cannot activate. Any [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] after it activate twice."
 art = ExtResource("1_awtof")
 card_color = 2
 effects = Array[ExtResource("2_ltjlg")]([null, null])

@@ -8,7 +8,7 @@
 script = ExtResource("4_6cl5y")
 id = &"B5"
 display_name = "Cabbage Patch:"
-description = "If the enemy intents to deal [Damage], gain 8 [block]. If the enemy intents to gain [Block], deal 10 [Damage]."
+description = "If the enemy intents to deal [img width=16 height=16]res://assets/sprites/icons/damage.png[/img], gain 8 [img width=16 height=16]res://assets/sprites/icons/block.png[/img]. If the enemy intents to gain [img width=16 height=16]res://assets/sprites/icons/block.png[/img], deal 10 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]."
 art = ExtResource("1_ic5i6")
 card_color = 1
 effects = Array[ExtResource("2_xcqcy")]([null, null])
