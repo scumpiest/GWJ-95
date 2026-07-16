@@ -29,6 +29,10 @@ CurrencyManager="*uid://b6ifv43jruvq"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom_font="uid://d1vy08d0s2c1l"
+
 [input]
 
 start_drag={
