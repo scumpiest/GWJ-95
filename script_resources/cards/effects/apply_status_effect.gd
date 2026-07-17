@@ -11,6 +11,6 @@ enum Target { ENEMY, PLAYER }
 func resolve(
 	_context: BattleContext,
 	_slot: ChainSlotState,
-	_resolver: ChainEffectResolver,
+	_resolver,
 ) -> void:
 	pass

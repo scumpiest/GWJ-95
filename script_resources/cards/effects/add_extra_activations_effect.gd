@@ -5,13 +5,11 @@ extends CardEffect
 @export var extra_count: int = 1
 
 
-func get_timing() -> Timing:
-	return Timing.PRE
 
 
 func resolve(
 	_context: BattleContext,
 	_slot: ChainSlotState,
-	_resolver: ChainEffectResolver,
+	_resolver,
 ) -> void:
 	pass

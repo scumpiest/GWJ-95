@@ -4,13 +4,14 @@ extends Resource
 # PRE will run before the chain is resolved and ACTIVE will run after
 enum Timing { PRE, ACTIVE }
 
+@export var timing: Timing = Timing.ACTIVE
 @export var condition: CardEnums.ConditionType = CardEnums.ConditionType.NONE
 @export var base_value: int = 0
 @export var condition_color: CardEnums.CardColor = CardEnums.CardColor.RED
 
 
 func get_timing() -> Timing:
-	return Timing.ACTIVE
+	return timing
 
 ## Compute the value of the effect based on the condition.
 func compute_value(context: BattleContext, slot: ChainSlotState) -> int:

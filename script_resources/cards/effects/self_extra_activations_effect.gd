@@ -4,13 +4,12 @@ extends CardEffect
 @export var per_adjacent_color: CardEnums.CardColor = CardEnums.CardColor.RED
 
 
-func get_timing() -> Timing:
-	return Timing.PRE
 
 
 func resolve(
-	_context: BattleContext,
-	_slot: ChainSlotState,
-	_resolver: ChainEffectResolver,
+	context: BattleContext,
+	slot: ChainSlotState,
+	resolver,
 ) -> void:
-	pass
+	var extra_activations: int = context.count_adjacent_same_color(slot.slot_index, per_adjacent_color)
+	slot.activation_count += extra_activations
