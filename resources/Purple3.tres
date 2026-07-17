@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cm3cfdpofhp36"]
 
-[ext_resource type="Texture2D" uid="uid://po8tyuxt8xm5" path="res://assets/sprites/cards/stickers/sticker_purple_kick.png" id="1_pvm76"]
+[ext_resource type="Texture2D" uid="uid://kf3qjpyrf8t5" path="res://stickers/sticker_march_step.png" id="1_pvm76"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_sokde"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_mb7j1"]
 [ext_resource type="Resource" uid="uid://cf1pf31h3tk7g" path="res://resources/P3.1.tres" id="2_rga04"]
@@ -9,8 +9,8 @@
 [resource]
 script = ExtResource("2_mb7j1")
 id = &"P3"
-display_name = "Purple3"
-description = "Halves your block at turn’s end, deals damage equal to block taken"
+display_name = "March Step"
+description = "Halves your [img width=16 height=16]res://assets/sprites/icons/block.png[/img], deals [img width=16 height=16]res://assets/sprites/icons/damage.png[/img] equal to [img width=16 height=16]res://assets/sprites/icons/block.png[/img] taken"
 art = ExtResource("1_pvm76")
 card_color = 2
 effects = Array[ExtResource("1_sokde")]([ExtResource("2_rga04"), ExtResource("3_pvm76")])

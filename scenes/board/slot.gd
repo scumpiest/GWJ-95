@@ -33,10 +33,10 @@ var next_card_slot: Slot
 func _ready() -> void:
 	add_to_group("card_slots")
 	var parent = get_parent()
-	var cardIndex = parent.get_children().find(self);
+	var card_index = parent.get_children().find(self);
 
-	previous_card_slot = parent.get_child(cardIndex-1)
-	next_card_slot = parent.get_child(cardIndex+1)
+	previous_card_slot = parent.get_child(card_index-1)
+	next_card_slot = parent.get_child(card_index+1)
 
 
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -61,15 +61,15 @@ func get_card() -> CardVisual:
 	return null
 
 func next_card() -> CardData:
-	var cardVisual = next_card_slot.get_card()
-	if cardVisual:
-		return cardVisual.card_data
+	var card_visual = next_card_slot.get_card()
+	if card_visual:
+		return card_visual.card_data
 	return null
 
 func prev_card() -> CardData:
-	var cardVisual = previous_card_slot.get_card()
-	if cardVisual:
-		return cardVisual.card_data
+	var card_visual = previous_card_slot.get_card()
+	if card_visual:
+		return card_visual.card_data
 	return null
 
 

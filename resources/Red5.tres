@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://b6pewvoj63iv3"]
+
+[ext_resource type="Texture2D" uid="uid://daqt3edyipqi1" path="res://stickers/sticker_kick_and_stomp.png" id="1_dxxwg"]
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_o781n"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="5_2b0gc"]
+
+[resource]
+script = ExtResource("5_2b0gc")
+id = &"R5"
+display_name = "Kick and Stomp"
+description = "Deal 8 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. If [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] or [img width=16 height=16]res://assets/sprites/icons/purplecassette.png[/img] is next, ignore enemy’s [img width=16 height=16]res://assets/sprites/icons/block.png[/img]."
+art = ExtResource("1_dxxwg")
+effects = Array[ExtResource("2_o781n")]([null, null])
+metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

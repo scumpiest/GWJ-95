@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://batsj87cryt0m"]
+
+[ext_resource type="Texture2D" uid="uid://3dym5e2dnfi0" path="res://stickers/sticker_party_duke.png" id="1_tb8b1"]
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_13s4k"]
+[ext_resource type="Resource" uid="uid://bopdyvme5g8sp" path="res://resources/B2.1.tres" id="3_v2q5y"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="4_rapu7"]
+
+[resource]
+script = ExtResource("4_rapu7")
+id = &"B2"
+display_name = "Party Duke"
+description = "Next Cassette activates 1 extra time."
+art = ExtResource("1_tb8b1")
+card_color = 1
+effects = Array[ExtResource("2_13s4k")]([ExtResource("3_v2q5y")])
+metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

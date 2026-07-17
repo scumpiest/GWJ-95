@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://c83diw73acarc"]
+
+[ext_resource type="Texture2D" uid="uid://5m7js8awek5j" path="res://stickers/sticker_pepper_seed.png" id="1_k52ll"]
+[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_vb82p"]
+[ext_resource type="Resource" uid="uid://rpp3iy48l360" path="res://resources/B4.1.tres" id="3_k3onc"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="4_ts0oj"]
+
+[resource]
+script = ExtResource("4_ts0oj")
+id = &"B4"
+display_name = "Pepper Seed"
+description = "Increase your [img width=16 height=16]res://assets/sprites/icons/block.png[/img] by 50%.Does not activate if placed next to [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] or last in the chain."
+art = ExtResource("1_k52ll")
+card_color = 1
+effects = Array[ExtResource("2_vb82p")]([ExtResource("3_k3onc")])
+metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

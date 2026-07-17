@@ -14,8 +14,8 @@ extends Control
 @onready var deck_card_label: Label = %DeckCardLabel
 @onready var player: Player = %Player
 @onready var enemy: Enemy = %Enemy1
-@onready var shopContainer: MarginContainer = self.get_node("Shop");
-@onready var mainContainer: MarginContainer = self.get_node("MarginContainer");
+@onready var shop_container: MarginContainer = self.get_node("Shop");
+@onready var main_container: MarginContainer = self.get_node("MarginContainer");
 
 
 func _ready() -> void:
@@ -28,14 +28,15 @@ func _ready() -> void:
 	GameManager.start_battle(battle_context)
 	GameManager.deck_count_changed.connect(_on_deck_count_changed)
 	GameManager.discard_count_changed.connect(_on_discard_count_changed)
+	GameManager.phase_changed.connect(_on_phase_changed)
 
-	shop_button.pressed.connect(func(): shopContainer.visible = true)
-	shopContainer.visibility_changed.connect(func(): mainContainer.visible = !shopContainer.visible)
+	shop_button.pressed.connect(func(): shop_container.visible = true)
+	shop_container.visibility_changed.connect(func(): main_container.visible = !shop_container.visible)
 
 	_spawn_cards(GameManager.draw_cards(initial_hand_size))
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
 
-
+# TODO: add animation to spawn cards
 func _spawn_cards(cards: Array[CardData]) -> void:
 	for card_data in cards:
 		var card_visual := card_scene.instantiate() as CardVisual
@@ -45,16 +46,17 @@ func _spawn_cards(cards: Array[CardData]) -> void:
 
 func _on_end_turn_button_pressed() -> void:
 	end_turn.disabled = true
+	if not GameManager.begin_chain_resolve():
+		end_turn.disabled = false
+		return
 
 	await _trigger_chain_sequentially()
-
-	var hand_cards: Array[CardData] = []
+	var discarded := clear_chain_slots()
 	for card in hand.get_children():
-		hand_cards.append(card.card_data)
+		discarded.append(card.card_data)
 		card.queue_free()
-
-	_spawn_cards(GameManager.end_player_turn(hand_cards, cards_per_draw))
-
+	var drawn := GameManager.end_player_turn(discarded, cards_per_draw)
+	_spawn_cards(drawn)
 	end_turn.disabled = false
 
 
@@ -72,7 +74,20 @@ func _trigger_chain_sequentially() -> void:
 		print("Activating card: ", slot_node.color)
 		await card.activate()
 		slot_node.stop_slot_jiggle()
+
 	player.play_idle_pose()
+
+
+func clear_chain_slots() -> Array[CardData]:
+	var cards: Array[CardData] = []
+	for child in chain.get_children():
+		var card := (child as Slot).clear_card()
+		if card == null:
+			continue
+		cards.append(card.card_data)
+		card.queue_free()
+		child.set_highlighted(false)
+	return cards
 
 
 func _on_deck_count_changed(count: int) -> void:
@@ -81,3 +96,9 @@ func _on_deck_count_changed(count: int) -> void:
 
 func _on_discard_count_changed(count: int) -> void:
 	discard_pile_label.text = str(count)
+
+
+func _on_phase_changed(phase: GameManager.Phase) -> void:
+	print("Phase changed: ", GameManager.Phase.keys()[phase])
+	if phase != GameManager.Phase.PLAN:
+		end_turn.disabled = true

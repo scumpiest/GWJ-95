@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://sn02svbvypvs"]
 
-[ext_resource type="Texture2D" uid="uid://po8tyuxt8xm5" path="res://assets/sprites/cards/stickers/sticker_purple_kick.png" id="1_mp1cg"]
+[ext_resource type="Texture2D" uid="uid://crkobhwc7qrkb" path="res://stickers/sticker_humpty_dance.png" id="1_mp1cg"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_trkfr"]
 [ext_resource type="Resource" uid="uid://btbfsblguuqwh" path="res://resources/P4.1.tres" id="2_drgs7"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_jdumm"]
@@ -9,8 +9,8 @@
 [resource]
 script = ExtResource("2_jdumm")
 id = &"P4"
-display_name = "Purple4"
-description = "Nearby cards become Purple and gain +1 power while this card exists"
+display_name = "Humpty Dance"
+description = "Gives 2 [img width=16 height=16]res://assets/sprites/icons/vulnerability.png[/img] to the enemy and 1 [img width=16 height=16]res://assets/sprites/icons/vulnerability.png[/img] to you."
 art = ExtResource("1_mp1cg")
 card_color = 2
 effects = Array[ExtResource("1_trkfr")]([ExtResource("2_drgs7"), ExtResource("3_mp1cg")])

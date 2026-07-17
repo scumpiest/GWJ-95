@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://bt0w588peu2j7"]
 
-[ext_resource type="Texture2D" uid="uid://ds17y82d234jn" path="res://assets/sprites/cards/stickers/sticker_red_kick.png" id="1_nvk6j"]
+[ext_resource type="Texture2D" uid="uid://c16yhrnd1y5wt" path="res://stickers/sticker_kick_it.png" id="1_nvk6j"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_tfmf5"]
 [ext_resource type="Resource" uid="uid://d4exf2h3hr33" path="res://resources/R3.1.tres" id="2_rd7cd"]
 [ext_resource type="Resource" uid="uid://25binnt4yd6p" path="res://resources/R3.2.tres" id="3_nvk6j"]
@@ -10,8 +10,8 @@
 [resource]
 script = ExtResource("4_h7mtc")
 id = &"R3"
-display_name = "Red3"
-description = "Deals 3 damage at turn’s end. Applies 1 Vulnerable on even turns and 1 Weakness on odd turns"
+display_name = " Kick it"
+description = "5 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. Applies 1 [img width=16 height=16]res://assets/sprites/icons/vulnerability.png/[img] if [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] is next. Applies 1 [img width=16 height=16]res://assets/sprites/icons/weakness.png[/img] if [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] is next. Attacks again if [img width=16 height=16]res://assets/sprites/icons/purplecassette.png[/img] is next."
 art = ExtResource("1_nvk6j")
 effects = Array[ExtResource("1_tfmf5")]([ExtResource("2_rd7cd"), ExtResource("3_nvk6j"), ExtResource("4_doto8")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

@@ -42,4 +42,3 @@ func _on_buy_button_pressed() -> void:
 				card.selected_shop_card = null
 				card.clicked_card.disconnect(on_card_clicked)
 				card.reparent(player_hand)
-
