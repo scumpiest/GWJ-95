@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://v6k4vvnaq2qn"
+path="res://.godot/imported/Store.atlas-745a59fb49845e18d24439800cc087ec.spatlas"
+
+[deps]
+
+source_file="res://assets/sprites/store/Store.atlas"
+dest_files=["res://.godot/imported/Store.atlas-745a59fb49845e18d24439800cc087ec.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
