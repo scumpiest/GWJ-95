@@ -61,22 +61,36 @@ func _on_end_turn_button_pressed() -> void:
 
 
 func _trigger_chain_sequentially() -> void:
-	for slot_node in chain.get_children():
-		if slot_node is not Slot:
-			continue
+	var resolver: ChainEffectResolver = ChainEffectResolver.new()
+	_sync_chain_states()
 
+	var slot_index: int = 0
+	for slot_node in chain.get_children():
 		var card = slot_node.get_card()
 		if card == null:
+			slot_index += 1
 			continue
 
 		player.play_next_pose()
 		slot_node.make_slot_jiggle()
 		print("Activating card: ", slot_node.color)
 		await card.activate()
+
+		var slot_state: ChainSlotState = GameManager.context.get_slot_state(slot_index)
+		for effect in card.card_data.effects:
+			if effect.get_timing() == CardEffect.Timing.ACTIVE:
+				effect.resolve(GameManager.context, slot_state, resolver)
+
+		slot_index += 1
 		slot_node.stop_slot_jiggle()
 
 	player.play_idle_pose()
 
+func _sync_chain_states() -> void:
+	var i: int = 0
+	for slot_node in chain.get_children():
+		GameManager.context.chain_slot_states[i] = ChainSlotState.new().from_slot(i, slot_node)
+		i += 1
 
 func clear_chain_slots() -> Array[CardData]:
 	var cards: Array[CardData] = []

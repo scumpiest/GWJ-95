@@ -12,15 +12,22 @@ enum Timing { PRE, ACTIVE }
 func get_timing() -> Timing:
 	return Timing.ACTIVE
 
-
-func compute_value(_context: BattleContext, _slot: ChainSlotState) -> int:
-	return base_value
+## Compute the value of the effect based on the condition.
+func compute_value(context: BattleContext, slot: ChainSlotState) -> int:
+	match condition:
+		CardEnums.ConditionType.NONE:
+			return base_value
+		CardEnums.ConditionType.COLOR_AFTER_COUNT:
+			return base_value + context.count_color_after_index(slot.slot_index, condition_color)
+		_:
+			push_error("Condition type %s not implemented" % condition)
+			return 0
 
 
 ## Base class for all card effects.
 func resolve(
-	_context: BattleContext,
-	_slot: ChainSlotState,
-	_resolver: ChainEffectResolver,
+	context: BattleContext,
+	slot: ChainSlotState,
+	resolver: ChainEffectResolver,
 ) -> void:
 	push_error("%s.resolve() not implemented" % get_script().resource_path)

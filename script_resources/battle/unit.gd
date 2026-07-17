@@ -5,8 +5,7 @@ class_name Unit
 signal died
 signal health_changed(health: int)
 signal block_changed(block: int)
-signal power_changed(power: int)
-signal status_changed
+signal status_changed(status: String, stacks: int)
 
 var id: int
 var name: String
@@ -15,9 +14,10 @@ var image: Texture2D
 var health: int
 var max_health: int
 var block: int
-var power: int
 
-var statuses: Dictionary
+var statuses: Dictionary[String, int] = {
+    "vulnerable": 0, "weakness": 0, "protection": 0, "strength": 0
+    }
 
 func take_damage(damage: int):
     health -= damage
@@ -26,24 +26,17 @@ func take_damage(damage: int):
         die()
 
 func apply_status(status: String):
-    statuses[status] = true
-    emit_signal("status_changed")
+    statuses[status] += 1
+    emit_signal("status_changed", status, statuses[status])
 
 func gain_block(block_amount: int):
-    self.block += block_amount
+    block += block_amount
     emit_signal("block_changed", block)
-
-func gain_power(power_amount: int):
-    self.power += power_amount
-    emit_signal("power_changed", power)
 
 func lose_block(block_amount: int):
-    self.block -= block_amount
+    block -= block_amount
     emit_signal("block_changed", block)
 
-func lose_power(power_amount: int):
-    self.power -= power_amount
-    emit_signal("power_changed", power)
 
 func die():
     print(name + " died")
@@ -51,5 +44,4 @@ func die():
     health = 0
     max_health = 0
     block = 0
-    power = 0
     emit_signal("died")
