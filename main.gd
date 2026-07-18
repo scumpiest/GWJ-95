@@ -17,6 +17,7 @@ class_name Main
 @onready var shop_container: MarginContainer = self.get_node("Shop");
 @onready var main_container: MarginContainer = self.get_node("MarginContainer");
 @onready var enemy_container: Control = %EnemyContainer
+@onready var reward_screen: RewardScreen = %RewardScreen
 
 var current_enemy: Node2D
 @onready var speech_bubble: Button = $MarginContainer/CanvasLayer/SpeechBubble
@@ -40,10 +41,15 @@ func _ready() -> void:
 			tween.tween_property(main_container, "modulate:a", 0.0, scene_animation_duration)
 		main_container.visible = !shop_container.visible
 		)
+	deck_button.pressed.connect(_on_deck_pressed)
 
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
+
+
+func _on_deck_pressed() -> void:
+	reward_screen.show_choices()
 
 func next_level() -> void:
 	if LevelManager.current_level.type == Level.LevelType.SHOP:

@@ -16,9 +16,8 @@
 [ext_resource type="Resource" uid="uid://byibjih7yhhg3" path="res://resources/cards/Red4.tres" id="13_jx1t7"]
 [ext_resource type="Resource" uid="uid://cygbos5xehnwl" path="res://resources/cards/Purple5.tres" id="14_ihsoe"]
 [ext_resource type="Resource" uid="uid://b6pewvoj63iv3" path="res://resources/cards/Red5.tres" id="15_2tkrr"]
-[ext_resource type="Resource" uid="uid://dw8om5l5cvhrd" path="res://resources/cards/Green5.tres" id="16_rvpxh"]
 
 [resource]
 script = ExtResource("2_6o7j7")
-cards = Array[ExtResource("1_xabg0")]([ExtResource("2_7hyya"), ExtResource("3_sftud"), ExtResource("4_65q30"), ExtResource("5_h1jwh"), ExtResource("6_ld5j4"), ExtResource("7_7upfs"), ExtResource("8_h2ptm"), ExtResource("9_tioxn"), ExtResource("10_3ydbm"), ExtResource("11_qy4wc"), ExtResource("12_fxv2r"), ExtResource("13_jx1t7"), ExtResource("14_ihsoe"), ExtResource("15_2tkrr"), ExtResource("16_rvpxh")])
+cards = Array[ExtResource("1_xabg0")]([ExtResource("2_7hyya"), ExtResource("3_sftud"), ExtResource("4_65q30"), ExtResource("5_h1jwh"), ExtResource("6_ld5j4"), ExtResource("7_7upfs"), ExtResource("8_h2ptm"), ExtResource("9_tioxn"), ExtResource("10_3ydbm"), ExtResource("11_qy4wc"), ExtResource("12_fxv2r"), ExtResource("13_jx1t7"), ExtResource("14_ihsoe"), ExtResource("15_2tkrr"), null])
 metadata/_custom_type_script = "uid://dfx0hkg2gat16"
