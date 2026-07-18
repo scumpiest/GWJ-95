@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_axcb7")
+type = 1
 enemy_scene = ExtResource("1_mhd4p")
 enemy_data = ExtResource("1_mpxpg")
 metadata/_custom_type_script = "uid://dyvq2g50fm40e"
