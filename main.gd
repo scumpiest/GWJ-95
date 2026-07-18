@@ -5,6 +5,7 @@ class_name Main
 @export var cards_per_draw: int = 5
 @export var initial_hand_size: int = 5
 @export var card_scene: PackedScene
+@export var is_tutorial: bool = false
 
 @onready var deck_button: TextureButton = %Deck
 @onready var hand: HBoxContainer = %Hand
@@ -18,6 +19,12 @@ class_name Main
 @onready var enemy_container: Control = %EnemyContainer
 
 var current_enemy: Node2D
+@onready var speech_bubble: Button = $MarginContainer/CanvasLayer/SpeechBubble
+@onready var text_tutorial: RichTextLabel = $MarginContainer/CanvasLayer/RichTextLabel
+@onready var speech_bubble_pressed: bool = false
+@onready var end_turn_button_pressed: bool = false
+
+var step = 0
 
 func _ready() -> void:
 	GameManager.deck_count_changed.connect(_on_deck_count_changed)
@@ -69,6 +76,9 @@ func next_level() -> void:
 	_spawn_cards(GameManager.draw_cards(initial_hand_size))
 	print("Enemy intent: ", GameManager.context.enemy_intent)
 
+	
+	if is_tutorial:
+		run_tutorial()
 
 # TODO: add animation to spawn cards
 func _spawn_cards(cards: Array[CardData]) -> void:
@@ -83,6 +93,8 @@ func _on_end_turn_button_pressed() -> void:
 	if not GameManager.begin_chain_resolve():
 		end_turn.disabled = false
 		return
+	if is_tutorial == true:
+		end_turn_button_pressed = true
 
 	await _trigger_chain_sequentially()
 	var discarded := clear_chain_slots()
@@ -141,3 +153,39 @@ func _on_card_activated(slot: Slot, card: CardVisual) -> void:
 	slot.make_slot_jiggle()
 	print("Activating card: ", slot.color)
 	await card.activate()
+
+func run_tutorial():
+	speech_bubble_pressed = false
+	speech_bubble.visible = true
+	#for key in Databank.tutorial_dialogue.keys():
+	text_tutorial.text = Databank.tutorial_dialogue[step]
+	print(text_tutorial.text)
+			
+		#await $".".next_speechbubble
+
+func _process(delta: float) -> void:
+	match step:
+		0, 3, 4, 6, 7, 8:
+			if speech_bubble_pressed == true:
+				step += 1
+				run_tutorial()
+		1: 
+			for i in range(0, 5):
+				if chain.get_child(i).get_child(0).get_child_count() != 0:
+					step += 1
+					run_tutorial()
+		2:
+			var slots_filled = 0
+			for i in range(0, 5):
+				if chain.get_child(i).get_child(0).get_child_count() != 0:
+					slots_filled += 1
+			if slots_filled == chain.get_child_count():
+				step += 1
+				run_tutorial()
+		5:
+			if end_turn_button_pressed == true:
+				step += 1
+				run_tutorial()
+
+func _on_speech_bubble_pressed() -> void:
+	speech_bubble_pressed = true

@@ -23,6 +23,7 @@ grow_vertical = 2
 script = ExtResource("1_main")
 deck = ExtResource("4_deck")
 card_scene = ExtResource("1_card_visual")
+is_tutorial = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=335792737]
 layout_mode = 1
@@ -37,6 +38,21 @@ theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
+
+[node name="CanvasLayer" type="CanvasLayer" parent="MarginContainer" unique_id=721030733]
+
+[node name="SpeechBubble" type="Button" parent="MarginContainer/CanvasLayer" unique_id=1339568607]
+z_index = 20
+offset_left = 969.0
+offset_top = 114.0
+offset_right = 1036.0
+offset_bottom = 155.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CanvasLayer" unique_id=32164973]
+offset_left = 969.0
+offset_top = 147.0
+offset_right = 970.0
+offset_bottom = 147.0
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer" unique_id=788442826]
 layout_mode = 2
@@ -183,3 +199,4 @@ layer = 100
 [node name="IconTooltip" parent="TooltipLayer" unique_id=305762781 instance=ExtResource("11_icon_tooltip")]
 
 [connection signal="focus_entered" from="." to="Shop" method="_on_main_focus_entered"]
+[connection signal="pressed" from="MarginContainer/CanvasLayer/SpeechBubble" to="." method="_on_speech_bubble_pressed"]
