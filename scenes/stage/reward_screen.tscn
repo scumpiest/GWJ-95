@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="3_dqbyl"]
 [ext_resource type="Resource" uid="uid://bt0w588peu2j7" path="res://resources/cards/Red3.tres" id="4_kvf8a"]
 [ext_resource type="Resource" uid="uid://cpjo7uksxa8uo" path="res://resources/cards/Green3.tres" id="5_fr36x"]
-[ext_resource type="Texture2D" uid="uid://cur7818unfr74" path="res://assets/sprites/ui/icon_dollars.png" id="6_rtp6k"]
+[ext_resource type="PackedScene" uid="uid://bvy8ua03rmgwl" path="res://scenes/balance/balance.tscn" id="6_fr36x"]
 [ext_resource type="Texture2D" uid="uid://cl4v6wdwirxba" path="res://assets/sprites/ui/line.png" id="7_kvf8a"]
 [ext_resource type="Texture2D" uid="uid://csk11iftatfrr" path="res://assets/sprites/ui/icon_char.png" id="8_fr36x"]
 [ext_resource type="Texture2D" uid="uid://bioic34jqtq3a" path="res://assets/sprites/ui/icon_mark.png" id="9_fr36x"]
@@ -46,20 +46,9 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="TopContainer" type="HBoxContainer" parent="MarginContainer/Content" unique_id=1611553751]
+[node name="Balance" parent="MarginContainer/Content" unique_id=1899342113 instance=ExtResource("6_fr36x")]
 layout_mode = 2
 size_flags_horizontal = 8
-
-[node name="Label" type="Label" parent="MarginContainer/Content/TopContainer" unique_id=410698324]
-layout_mode = 2
-text = "100"
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Content/TopContainer" unique_id=1353465203]
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-texture = ExtResource("6_rtp6k")
-expand_mode = 1
-stretch_mode = 4
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/Content" unique_id=1940130546]
 unique_name_in_owner = true
