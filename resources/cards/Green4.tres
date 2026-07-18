@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://5m7js8awek5j" path="res://stickers/sticker_pepper_seed.png" id="1_k52ll"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_vb82p"]
-[ext_resource type="Resource" uid="uid://rpp3iy48l360" path="res://resources/G4.1.tres" id="3_k3onc"]
+[ext_resource type="Resource" uid="uid://rpp3iy48l360" path="res://resources/card-effects/G4.1.tres" id="3_k3onc"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="4_ts0oj"]
 
 [resource]

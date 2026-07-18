@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://eb7bepu5ll" path="res://stickers/sticker_kick_and_slide.png" id="1_dcej4"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_ih4qp"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_5420x"]
-[ext_resource type="Resource" uid="uid://dlqg7u681iygw" path="res://resources/R4.1.tres" id="2_eia5o"]
-[ext_resource type="Resource" uid="uid://3ys6ajyf25ln" path="res://resources/R4.2.tres" id="3_dcej4"]
+[ext_resource type="Resource" uid="uid://dlqg7u681iygw" path="res://resources/card-effects/R4.1.tres" id="2_eia5o"]
+[ext_resource type="Resource" uid="uid://3ys6ajyf25ln" path="res://resources/card-effects/R4.2.tres" id="3_dcej4"]
 
 [resource]
 script = ExtResource("2_5420x")

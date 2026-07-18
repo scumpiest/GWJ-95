@@ -1,21 +1,24 @@
 [gd_resource type="Resource" script_class="CardDB" format=3 uid="uid://b5owg30f4mevw"]
 
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="1_xabg0"]
-[ext_resource type="Resource" uid="uid://sn02svbvypvs" path="res://resources/Purple4.tres" id="2_3yn2y"]
 [ext_resource type="Script" uid="uid://dfx0hkg2gat16" path="res://script_resources/deck_db.gd" id="2_6o7j7"]
-[ext_resource type="Resource" uid="uid://cm3cfdpofhp36" path="res://resources/Purple3.tres" id="3_8gqrl"]
-[ext_resource type="Resource" uid="uid://dmdv6x5mjcwef" path="res://resources/Purple2.tres" id="4_h3v6c"]
-[ext_resource type="Resource" uid="uid://cnlfkhyfuxm4n" path="res://resources/Purple1.tres" id="5_7hyya"]
-[ext_resource type="Resource" uid="uid://c83diw73acarc" path="res://resources/Green4.tres" id="6_sftud"]
-[ext_resource type="Resource" uid="uid://cpjo7uksxa8uo" path="res://resources/Green3.tres" id="7_65q30"]
-[ext_resource type="Resource" uid="uid://batsj87cryt0m" path="res://resources/Green2.tres" id="8_h1jwh"]
-[ext_resource type="Resource" uid="uid://c82m0jpt83de0" path="res://resources/Green1.tres" id="9_ld5j4"]
-[ext_resource type="Resource" uid="uid://0pr1g0rl1wwk" path="res://resources/Red1.tres" id="10_7upfs"]
-[ext_resource type="Resource" uid="uid://c57d4osifuylx" path="res://resources/Red2.tres" id="11_h2ptm"]
-[ext_resource type="Resource" uid="uid://bt0w588peu2j7" path="res://resources/Red3.tres" id="12_tioxn"]
-[ext_resource type="Resource" uid="uid://byibjih7yhhg3" path="res://resources/Red4.tres" id="13_3ydbm"]
+[ext_resource type="Resource" uid="uid://sn02svbvypvs" path="res://resources/cards/Purple4.tres" id="2_7hyya"]
+[ext_resource type="Resource" uid="uid://cm3cfdpofhp36" path="res://resources/cards/Purple3.tres" id="3_sftud"]
+[ext_resource type="Resource" uid="uid://dmdv6x5mjcwef" path="res://resources/cards/Purple2.tres" id="4_65q30"]
+[ext_resource type="Resource" uid="uid://cnlfkhyfuxm4n" path="res://resources/cards/Purple1.tres" id="5_h1jwh"]
+[ext_resource type="Resource" uid="uid://c83diw73acarc" path="res://resources/cards/Green4.tres" id="6_ld5j4"]
+[ext_resource type="Resource" uid="uid://cpjo7uksxa8uo" path="res://resources/cards/Green3.tres" id="7_7upfs"]
+[ext_resource type="Resource" uid="uid://batsj87cryt0m" path="res://resources/cards/Green2.tres" id="8_h2ptm"]
+[ext_resource type="Resource" uid="uid://c82m0jpt83de0" path="res://resources/cards/Green1.tres" id="9_tioxn"]
+[ext_resource type="Resource" uid="uid://0pr1g0rl1wwk" path="res://resources/cards/Red1.tres" id="10_3ydbm"]
+[ext_resource type="Resource" uid="uid://c57d4osifuylx" path="res://resources/cards/Red2.tres" id="11_qy4wc"]
+[ext_resource type="Resource" uid="uid://bt0w588peu2j7" path="res://resources/cards/Red3.tres" id="12_fxv2r"]
+[ext_resource type="Resource" uid="uid://byibjih7yhhg3" path="res://resources/cards/Red4.tres" id="13_jx1t7"]
+[ext_resource type="Resource" uid="uid://cygbos5xehnwl" path="res://resources/cards/Purple5.tres" id="14_ihsoe"]
+[ext_resource type="Resource" uid="uid://b6pewvoj63iv3" path="res://resources/cards/Red5.tres" id="15_2tkrr"]
+[ext_resource type="Resource" uid="uid://dw8om5l5cvhrd" path="res://resources/cards/Green5.tres" id="16_rvpxh"]
 
 [resource]
 script = ExtResource("2_6o7j7")
-cards = Array[ExtResource("1_xabg0")]([ExtResource("2_3yn2y"), ExtResource("3_8gqrl"), ExtResource("4_h3v6c"), ExtResource("5_7hyya"), ExtResource("6_sftud"), ExtResource("7_65q30"), ExtResource("8_h1jwh"), ExtResource("9_ld5j4"), ExtResource("10_7upfs"), ExtResource("11_h2ptm"), ExtResource("12_tioxn"), ExtResource("13_3ydbm")])
+cards = Array[ExtResource("1_xabg0")]([ExtResource("2_7hyya"), ExtResource("3_sftud"), ExtResource("4_65q30"), ExtResource("5_h1jwh"), ExtResource("6_ld5j4"), ExtResource("7_7upfs"), ExtResource("8_h2ptm"), ExtResource("9_tioxn"), ExtResource("10_3ydbm"), ExtResource("11_qy4wc"), ExtResource("12_fxv2r"), ExtResource("13_jx1t7"), ExtResource("14_ihsoe"), ExtResource("15_2tkrr"), ExtResource("16_rvpxh")])
 metadata/_custom_type_script = "uid://dfx0hkg2gat16"

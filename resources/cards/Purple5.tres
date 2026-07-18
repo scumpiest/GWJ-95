@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c40wff54cnswx" path="res://stickers/sticker_butterfly.png" id="1_awtof"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_ltjlg"]
-[ext_resource type="Resource" uid="uid://dtu6ppcj8l5ds" path="res://resources/P5.1.tres" id="3_3aq3e"]
+[ext_resource type="Resource" uid="uid://dtu6ppcj8l5ds" path="res://resources/card-effects/P5.1.tres" id="3_3aq3e"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="5_iitt4"]
 
 [resource]

@@ -185,9 +185,9 @@ parameters/looping = true
 z_index = -99
 scale = Vector2(0.56, 0.56)
 
-[node name="TooltipLayer" type="CanvasLayer" parent="."]
+[node name="TooltipLayer" type="CanvasLayer" parent="." unique_id=744251079]
 layer = 100
 
-[node name="IconTooltip" parent="TooltipLayer" instance=ExtResource("11_icon_tooltip")]
+[node name="IconTooltip" parent="TooltipLayer" unique_id=305762781 instance=ExtResource("11_icon_tooltip")]
 
 [connection signal="focus_entered" from="." to="Shop" method="_on_main_focus_entered"]

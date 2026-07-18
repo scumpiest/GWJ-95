@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://umk0kuoxmtx6" path="res://stickers/sticker_happy_feet.png" id="1_ix7s2"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_beeeg"]
-[ext_resource type="Resource" uid="uid://dawgbradugj4y" path="res://resources/G3.1.tres" id="3_ix7s2"]
-[ext_resource type="Resource" uid="uid://dmwpon10xbdhv" path="res://resources/G3.2.tres" id="4_beeeg"]
+[ext_resource type="Resource" uid="uid://dawgbradugj4y" path="res://resources/card-effects/G3.1.tres" id="3_ix7s2"]
+[ext_resource type="Resource" uid="uid://dmwpon10xbdhv" path="res://resources/card-effects/G3.2.tres" id="4_beeeg"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="5_ro40h"]
 
 [resource]

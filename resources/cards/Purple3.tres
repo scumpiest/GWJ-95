@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://kf3qjpyrf8t5" path="res://stickers/sticker_march_step.png" id="1_pvm76"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_sokde"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_mb7j1"]
-[ext_resource type="Resource" uid="uid://cf1pf31h3tk7g" path="res://resources/P3.1.tres" id="2_rga04"]
-[ext_resource type="Resource" uid="uid://uk6di3lwhchy" path="res://resources/P3.2.tres" id="3_pvm76"]
+[ext_resource type="Resource" uid="uid://cf1pf31h3tk7g" path="res://resources/card-effects/P3.1.tres" id="2_rga04"]
+[ext_resource type="Resource" uid="uid://uk6di3lwhchy" path="res://resources/card-effects/P3.2.tres" id="3_pvm76"]
 
 [resource]
 script = ExtResource("2_mb7j1")

@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://crkobhwc7qrkb" path="res://stickers/sticker_humpty_dance.png" id="1_mp1cg"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_trkfr"]
-[ext_resource type="Resource" uid="uid://btbfsblguuqwh" path="res://resources/P4.1.tres" id="2_drgs7"]
+[ext_resource type="Resource" uid="uid://btbfsblguuqwh" path="res://resources/card-effects/P4.1.tres" id="2_drgs7"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_jdumm"]
-[ext_resource type="Resource" uid="uid://bvbcrdravbl0f" path="res://resources/P4.2.tres" id="3_mp1cg"]
+[ext_resource type="Resource" uid="uid://bvbcrdravbl0f" path="res://resources/card-effects/P4.2.tres" id="3_mp1cg"]
 
 [resource]
 script = ExtResource("2_jdumm")

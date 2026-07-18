@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bsuxdwph0oq5m" path="res://stickers/sticker_cabbage_patch.png" id="1_4otvy"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_ujkup"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="3_6lw4b"]
-[ext_resource type="Resource" uid="uid://cnhvklfvnupe4" path="res://resources/G5.1.tres" id="3_ex83y"]
-[ext_resource type="Resource" uid="uid://b2powq12uo676" path="res://resources/G5.2.tres" id="4_ets5y"]
+[ext_resource type="Resource" uid="uid://cnhvklfvnupe4" path="res://resources/card-effects/G5.1.tres" id="3_ex83y"]
+[ext_resource type="Resource" uid="uid://b2powq12uo676" path="res://resources/card-effects/G5.2.tres" id="4_ets5y"]
 
 [resource]
 script = ExtResource("3_6lw4b")
