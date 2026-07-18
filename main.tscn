@@ -171,6 +171,8 @@ size_flags_horizontal = 8
 text = "END TURN"
 
 [node name="Shop" parent="." unique_id=827335244 node_paths=PackedStringArray("player_hand") instance=ExtResource("8_kek77")]
+visible = true
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0

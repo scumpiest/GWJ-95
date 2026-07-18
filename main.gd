@@ -25,13 +25,21 @@ var current_enemy: Node2D
 @onready var end_turn_button_pressed: bool = false
 
 var step = 0
+var scene_animation_duration: float = .4
 
 func _ready() -> void:
 	GameManager.deck_count_changed.connect(_on_deck_count_changed)
 	GameManager.discard_count_changed.connect(_on_discard_count_changed)
 	GameManager.phase_changed.connect(_on_phase_changed)
 
-	shop_container.visibility_changed.connect(func(): main_container.visible = !shop_container.visible)
+	shop_container.visibility_changed.connect(func():
+		var tween := create_tween()
+		if !shop_container.visible:
+			tween.tween_property(main_container, "modulate:a", 1.0, scene_animation_duration)
+		else:
+			tween.tween_property(main_container, "modulate:a", 0.0, scene_animation_duration)
+		main_container.visible = !shop_container.visible
+		)
 
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
 	LevelManager.next_level.connect(next_level)
@@ -40,6 +48,8 @@ func _ready() -> void:
 func next_level() -> void:
 	if LevelManager.current_level.type == Level.LevelType.SHOP:
 		shop_container.visible = true
+		var tween := create_tween()
+		tween.tween_property(shop_container, "modulate:a", 1.0, scene_animation_duration)
 		shop_container.health_bought = false
 		return
 	else:
