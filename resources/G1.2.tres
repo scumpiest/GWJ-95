@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BlockEffect" format=3 uid="uid://dw5j6tx0m6bmv"]
 
-[ext_resource type="Script" uid="uid://cnrftvyjwabc" path="res://script_resources/cards/effects/block_effect.gd" id="1_vb4g7"]
+[ext_resource type="Script" uid="uid://cnrftvyjwabc" path="res://script_resources/cards/effects/block_effect.gd" id="1_q6cwb"]
 
 [resource]
-script = ExtResource("1_vb4g7")
+script = ExtResource("1_q6cwb")
 condition = 2
 base_value = 2
 condition_color = 1
