@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ChainModifierEffect" format=3 uid="uid://dtu6ppcj8l5ds"]
+
+[ext_resource type="Script" uid="uid://dv0cfghijklm" path="res://script_resources/cards/effects/chain_modifier_effect.gd" id="1_msvbg"]
+
+[resource]
+script = ExtResource("1_msvbg")
+timing = 0
+metadata/_custom_type_script = "uid://dlux45kkxncst"
