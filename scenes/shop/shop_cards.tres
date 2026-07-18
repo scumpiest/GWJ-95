@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardDB" format=3 uid="uid://daf7g2ycn8ptc"]
+
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="1_53k0v"]
+[ext_resource type="Script" uid="uid://dfx0hkg2gat16" path="res://script_resources/deck_db.gd" id="2_53k0v"]
+[ext_resource type="Resource" uid="uid://b6pewvoj63iv3" path="res://resources/Red5.tres" id="2_kkvuv"]
+[ext_resource type="Resource" uid="uid://c83diw73acarc" path="res://resources/Green4.tres" id="3_soyd3"]
+[ext_resource type="Resource" uid="uid://dw8om5l5cvhrd" path="res://resources/Green5.tres" id="4_qsloc"]
+[ext_resource type="Resource" uid="uid://cm3cfdpofhp36" path="res://resources/Purple3.tres" id="5_op6xy"]
+[ext_resource type="Resource" uid="uid://sn02svbvypvs" path="res://resources/Purple4.tres" id="6_g7ynf"]
+[ext_resource type="Resource" uid="uid://cygbos5xehnwl" path="res://resources/Purple5.tres" id="7_vndyv"]
+
+[resource]
+script = ExtResource("2_53k0v")
+cards = Array[ExtResource("1_53k0v")]([ExtResource("2_kkvuv"), ExtResource("3_soyd3"), ExtResource("4_qsloc"), ExtResource("5_op6xy"), ExtResource("6_g7ynf"), ExtResource("7_vndyv")])
+metadata/_custom_type_script = "uid://dfx0hkg2gat16"
