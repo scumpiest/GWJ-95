@@ -1,4 +1,5 @@
 extends Control
+class_name Main
 
 @export var deck: DeckData
 @export var cards_per_draw: int = 5
@@ -13,32 +14,59 @@ extends Control
 @onready var discard_pile_label: Label = %DiscardPileLabel
 @onready var deck_card_label: Label = %DeckCardLabel
 @onready var player: Player = %Player
-@onready var enemy: Enemy = %Enemy1
 @onready var shop_container: MarginContainer = self.get_node("Shop");
 @onready var main_container: MarginContainer = self.get_node("MarginContainer");
+@onready var enemy_container: Control = %EnemyContainer
 
+var current_enemy: Node2D
 
 func _ready() -> void:
-	var battle_context := BattleContext.new(
-		player.unit,
-		enemy.unit,
-		deck,
-		chain.get_child_count(),
-	)
-	GameManager.start_battle(battle_context)
 	GameManager.deck_count_changed.connect(_on_deck_count_changed)
 	GameManager.discard_count_changed.connect(_on_discard_count_changed)
 	GameManager.phase_changed.connect(_on_phase_changed)
 
-	# TODO: delete after testing
-	GameManager.context.enemy_intent = enemy.roll_intent()
-	print("Enemy intent: ", GameManager.context.enemy_intent)
-
 	shop_button.pressed.connect(func(): shop_container.visible = true)
 	shop_container.visibility_changed.connect(func(): main_container.visible = !shop_container.visible)
 
-	_spawn_cards(GameManager.draw_cards(initial_hand_size))
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
+	LevelManager.next_level.connect(next_level)
+	LevelManager.next_level.emit()
+
+func next_level() -> void:
+	if LevelManager.current_level.type == Level.LevelType.SHOP:
+		shop_container.visible = true
+		return
+	else:
+		shop_container.visible = false
+
+	if current_enemy:
+		current_enemy.free()
+		current_enemy = null
+
+	var current_level := LevelManager.current_level
+	var enemy_scene = current_level.enemy_scene.instantiate()
+	enemy_scene.position = Vector2(910, 314)
+	enemy_scene.scale = Vector2(0.5,0.5)
+
+	enemy_scene.unit = LevelManager._get_current_enemy()
+	enemy_container.add_child(enemy_scene)
+	enemy_scene.unit.died.connect(func(): LevelManager.next_level.emit())
+	current_enemy = enemy_scene
+
+	var battle_context := BattleContext.new(
+		player.unit,
+		enemy_scene.unit,
+		deck,
+		chain.get_child_count(),
+	)
+	GameManager.start_battle(battle_context)
+
+	# TODO: delete after testing
+	GameManager.context.enemy_intent = enemy_scene.roll_intent()
+	# TODO: This might need moving? It fucks with the state currently as you're getting a lot of cards now
+	_spawn_cards(GameManager.draw_cards(initial_hand_size))
+	print("Enemy intent: ", GameManager.context.enemy_intent)
+
 
 # TODO: add animation to spawn cards
 func _spawn_cards(cards: Array[CardData]) -> void:

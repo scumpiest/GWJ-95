@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cx6g6j2lx7aow" path="res://scenes/character/player.tscn" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://bik66s0yv6dts" path="res://assets/sounds/Rythm Gamejam 2.mp3" id="7_272bh"]
 [ext_resource type="Script" uid="uid://bt6vcyblqjfcc" path="res://script_resources/hand.gd" id="8_dg77c"]
-[ext_resource type="PackedScene" uid="uid://b2k5n8m3p7q4r" path="res://scenes/character/enemy1.tscn" id="8_enemy1"]
 [ext_resource type="PackedScene" uid="uid://cbjhhlo1by5tx" path="res://scenes/shop/shop.tscn" id="8_kek77"]
 [ext_resource type="PackedScene" uid="uid://c7stag3sc3n31" path="res://scenes/stage/stage.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" path="res://scenes/ui/icon_tooltip.tscn" id="11_icon_tooltip"]
@@ -87,10 +86,9 @@ unique_name_in_owner = true
 position = Vector2(200, 311.5)
 scale = Vector2(0.5, 0.5)
 
-[node name="Enemy1" parent="MarginContainer/VBox/Container" unique_id=-1447774240 instance=ExtResource("8_enemy1")]
+[node name="EnemyContainer" type="Control" parent="MarginContainer/VBox/Container" unique_id=51155914]
 unique_name_in_owner = true
-position = Vector2(912, 311.5)
-scale = Vector2(0.5, 0.5)
+layout_mode = 2
 
 [node name="HandLabel" type="Label" parent="MarginContainer/VBox" unique_id=2092549864]
 layout_mode = 2

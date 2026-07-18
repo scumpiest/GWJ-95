@@ -1,0 +1,13 @@
+[gd_resource type="SpineSkeletonDataResource" format=3 uid="uid://cco714kadgaa"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bne5nfcysdseg" path="res://assets/sprites/characters/Boss/Boss.atlas" id="1_h8bq4"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://3xkbm2hllrpa" path="res://assets/sprites/characters/Boss/Boss.skel" id="2_xsbmo"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_h8bq4"]
+from = "appear"
+to = "appear"
+
+[resource]
+atlas_res = ExtResource("1_h8bq4")
+skeleton_file_res = ExtResource("2_xsbmo")
+animation_mixes = [SubResource("SpineAnimationMix_h8bq4")]

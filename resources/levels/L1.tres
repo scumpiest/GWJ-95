@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Level" format=3 uid="uid://dw0wkiqvltldf"]
+
+[ext_resource type="Script" uid="uid://dyvq2g50fm40e" path="res://script_resources/level.gd" id="1_fwrit"]
+[ext_resource type="PackedScene" uid="uid://b2k5n8m3p7q4r" path="res://scenes/character/enemy1.tscn" id="1_sfjmu"]
+[ext_resource type="Resource" uid="uid://cg5ilwxy2fpl" path="res://resources/enemies/E1.tres" id="1_xwdkh"]
+
+[resource]
+script = ExtResource("1_fwrit")
+enemy_scene = ExtResource("1_sfjmu")
+enemy_data = ExtResource("1_xwdkh")
+metadata/_custom_type_script = "uid://dyvq2g50fm40e"

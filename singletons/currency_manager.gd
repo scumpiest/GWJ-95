@@ -1,6 +1,6 @@
 extends Node
 
-var player_money: int = 100
+var player_money: int = 25
 signal money_change
 
 func add_money(count: int) -> void:
