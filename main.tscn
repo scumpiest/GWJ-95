@@ -182,7 +182,6 @@ parameters/looping = true
 
 [node name="Stage" parent="." unique_id=1598227722 instance=ExtResource("10_4c57u")]
 z_index = -99
-position = Vector2(575, 669)
 scale = Vector2(0.56, 0.56)
 
 [connection signal="focus_entered" from="." to="Shop" method="_on_main_focus_entered"]
