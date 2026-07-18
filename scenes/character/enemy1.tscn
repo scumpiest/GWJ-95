@@ -1,14 +1,22 @@
 [gd_scene format=3 uid="uid://b2k5n8m3p7q4r"]
 
-[ext_resource type="Script" path="res://scenes/character/enemy.gd" id="1_enemy"]
+[ext_resource type="Script" uid="uid://c7n4k8m2qaq1r" path="res://scenes/character/enemy.gd" id="1_enemy"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://dh3xq8w2n5k1p" path="res://assets/sprites/characters/enemy1/enemy_data_res.tres" id="2_data"]
 
-[node name="Enemy1" type="Node2D" unique_id=2847193056]
+[node name="Enemy1" type="Node2D" unique_id=-1447774240]
 script = ExtResource("1_enemy")
 
-[node name="SpineSprite" type="SpineSprite" parent="." unique_id=9182736450]
+[node name="SpineSprite" type="SpineSprite" parent="." unique_id=592801858]
 skeleton_data_res = ExtResource("2_data")
 preview_skin = "Default"
 preview_animation = "-- Empty --"
 preview_frame = false
 preview_time = 0.0
+
+[node name="HP" type="Label" parent="." unique_id=2128229694]
+offset_left = -64.0
+offset_top = -504.0
+offset_right = 3.0
+offset_bottom = -408.0
+theme_override_font_sizes/font_size = 48
+text = "100"

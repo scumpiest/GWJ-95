@@ -23,8 +23,6 @@ func _init_unit() -> void:
 	unit.health = starting_health
 	unit.max_health = starting_health
 	unit.block = 0
-	unit.power = 0
-	unit.statuses = {}
 
 
 func play_idle_pose() -> void:

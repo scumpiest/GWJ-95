@@ -37,16 +37,20 @@ func count_color_in_chain(color: CardEnums.CardColor) -> int:
 			count += 1
 	return count
 
+func count_color_after_index(slot_index: int, color: CardEnums.CardColor) -> int:
+	var count: int = 0
+	for i in range(slot_index + 1, chain_slot_states.size()):
+		var slot_state := chain_slot_states[i]
+		if slot_state.is_active():
+			if slot_state.card_color == color:
+				count += 1
+			else:
+				break
+	print("Count color after index %s: %s for color %s" % [slot_index, count, color])
+	return count
 
-func count_adjacent_same_color(slot_index: int) -> int:
-	if not _is_valid_slot_index(slot_index):
-		return 0
 
-	var slot_state := chain_slot_states[slot_index]
-	if not slot_state.is_active():
-		return 0
-
-	var color := slot_state.card_color
+func count_adjacent_same_color(slot_index: int, color: CardEnums.CardColor) -> int:
 	var count: int = 0
 
 	if get_next_slot_color(slot_index) == color:

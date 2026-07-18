@@ -5,11 +5,13 @@ extends RefCounted
 const NO_REPEAT_TARGET: int = -1
 
 var slot_index: int
+var activation_count: int = 1
 var card: CardData
 # color after mutation
 var card_color: CardEnums.CardColor = CardEnums.CardColor.RED
 var power: int
 var destroyed: bool
+var skip_activation: bool = false
 var repeat_target_index: int = NO_REPEAT_TARGET
 
 

@@ -2,9 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://0wkgemoyvbsq" path="res://stickers/sticker_warm_up.png" id="1_bmpjm"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_dvg4x"]
-[ext_resource type="Resource" uid="uid://rrq6yseyupfl" path="res://resources/R2.1.tres" id="2_1nsgb"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_eg67u"]
-[ext_resource type="Resource" uid="uid://ccfvg4pjlqbxb" path="res://resources/R2.2.tres" id="3_bmpjm"]
+[ext_resource type="Resource" uid="uid://c582efm6yinoe" path="res://resources/R1.1.tres" id="3_bmpjm"]
 
 [resource]
 script = ExtResource("2_eg67u")
@@ -12,5 +11,5 @@ id = &"R1"
 display_name = "Warm-up"
 description = "Deals 5 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. Deals 1 more [img width=16 height=16]res://assets/sprites/icons/damage.png[/img] for every [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] after it."
 art = ExtResource("1_bmpjm")
-effects = Array[ExtResource("1_dvg4x")]([ExtResource("2_1nsgb"), ExtResource("3_bmpjm")])
+effects = Array[ExtResource("1_dvg4x")]([ExtResource("3_bmpjm")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

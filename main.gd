@@ -61,22 +61,21 @@ func _on_end_turn_button_pressed() -> void:
 
 
 func _trigger_chain_sequentially() -> void:
+	_sync_chain_states()
+	var resolver: ChainEffectResolver = ChainEffectResolver.new()
+
+	var slots: Array[Slot] = []
 	for slot_node in chain.get_children():
-		if slot_node is not Slot:
-			continue
+		slots.append(slot_node)
 
-		var card = slot_node.get_card()
-		if card == null:
-			continue
-
-		player.play_next_pose()
-		slot_node.make_slot_jiggle()
-		print("Activating card: ", slot_node.color)
-		await card.activate()
-		slot_node.stop_slot_jiggle()
-
+	await resolver.resolve_chain(GameManager.context, slots, _on_card_activated)
 	player.play_idle_pose()
 
+func _sync_chain_states() -> void:
+	var i: int = 0
+	for slot_node in chain.get_children():
+		GameManager.context.chain_slot_states[i] = ChainSlotState.new().from_slot(i, slot_node)
+		i += 1
 
 func clear_chain_slots() -> Array[CardData]:
 	var cards: Array[CardData] = []
@@ -102,3 +101,9 @@ func _on_phase_changed(phase: GameManager.Phase) -> void:
 	print("Phase changed: ", GameManager.Phase.keys()[phase])
 	if phase != GameManager.Phase.PLAN:
 		end_turn.disabled = true
+
+func _on_card_activated(slot: Slot, card: CardVisual) -> void:
+	player.play_next_pose()
+	slot.make_slot_jiggle()
+	print("Activating card: ", slot.color)
+	await card.activate()
