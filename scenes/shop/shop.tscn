@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dptvedlb7rrq3" path="res://scenes/shop/shop.gd" id="1_100s2"]
 [ext_resource type="PackedScene" uid="uid://tn41fl850ub5" path="res://scenes/card/card.tscn" id="2_7lxhl"]
-[ext_resource type="Resource" uid="uid://b5owg30f4mevw" path="res://resources/card_db.tres" id="3_7lxhl"]
+[ext_resource type="Resource" uid="uid://daf7g2ycn8ptc" path="res://scenes/shop/shop_cards.tres" id="3_ctpgp"]
 [ext_resource type="PackedScene" uid="uid://bvy8ua03rmgwl" path="res://scenes/balance/balance.tscn" id="4_jp048"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://c52m31fydasvl" path="res://assets/sprites/store/store_data_res.tres" id="5_ctpgp"]
 
 [node name="Shop" type="MarginContainer" unique_id=827335244 node_paths=PackedStringArray("card_container", "shop_backdrop")]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,7 +24,7 @@ theme_override_constants/margin_bottom = 24
 script = ExtResource("1_100s2")
 card_scene = ExtResource("2_7lxhl")
 card_container = NodePath("MainContainer/LeftContainer/ShopCards")
-cards_db = ExtResource("3_7lxhl")
+shop_cards = ExtResource("3_ctpgp")
 shop_backdrop = NodePath("SpineSprite")
 
 [node name="SpineSprite" type="SpineSprite" parent="." unique_id=484380240]
@@ -54,7 +55,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 offset_transform_enabled = true
-offset_transform_position = Vector2(-139.24, 1.785)
+offset_transform_position = Vector2(-67.26, 1.785)
 offset_transform_visual_only = false
 theme_override_constants/h_separation = 57
 theme_override_constants/v_separation = 53
@@ -66,8 +67,14 @@ size_flags_vertical = 8
 [node name="ButtonContainer" type="HBoxContainer" parent="MainContainer/RightContainer" unique_id=1114831843]
 layout_mode = 2
 
+[node name="BuyHealthButton" type="Button" parent="MainContainer/RightContainer/ButtonContainer" unique_id=808619565]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+50% Health $10"
+
 [node name="LeaveButton" type="Button" parent="MainContainer/RightContainer/ButtonContainer" unique_id=445792254]
 layout_mode = 2
 text = "Leave shop"
 
+[connection signal="pressed" from="MainContainer/RightContainer/ButtonContainer/BuyHealthButton" to="." method="_on_buy_health_button_pressed"]
 [connection signal="pressed" from="MainContainer/RightContainer/ButtonContainer/LeaveButton" to="." method="_on_leave_button_pressed"]
