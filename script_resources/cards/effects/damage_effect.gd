@@ -14,6 +14,8 @@ func resolve(
 		context: BattleContext,
 		slot: ChainSlotState,
 ) -> void:
+	slot.last_damage_dealt = 0
+
 	var damage: int = compute_value(context, slot)
 	if damage <= 0:
 		return
@@ -28,8 +30,12 @@ func resolve(
 
 	match target:
 		Target.ENEMY:
-			CombatCalculation.apply_damage(attacker, defender, damage, pierce_block)
+			slot.last_damage_dealt = CombatCalculation.apply_damage(
+					attacker, defender, damage, pierce_block
+			)
 		Target.BOTH:
-			CombatCalculation.apply_damage(attacker, defender, damage, pierce_block)
+			slot.last_damage_dealt = CombatCalculation.apply_damage(
+					attacker, defender, damage, pierce_block
+			)
 			CombatCalculation.apply_damage(attacker, attacker, damage, pierce_block)
 	

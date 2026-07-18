@@ -13,6 +13,7 @@ var power: int
 var destroyed: bool
 var skip_activation: bool = false
 var repeat_target_index: int = NO_REPEAT_TARGET
+var last_damage_dealt: int = 0
 
 
 func from_slot(index: int, slot: Slot) -> ChainSlotState:
