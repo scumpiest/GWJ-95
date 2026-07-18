@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="CardEffect" format=3 uid="uid://cf1pf31h3tk7g"]
+[gd_resource type="Resource" script_class="ModifyBlockEffect" format=3 uid="uid://cf1pf31h3tk7g"]
 
-[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_h1ryo"]
+[ext_resource type="Script" uid="uid://pqerubncvwx" path="res://script_resources/cards/effects/modify_block_effect.gd" id="1_h1ryo"]
 
 [resource]
 script = ExtResource("1_h1ryo")
-status_type = 0
+mode = 1
 metadata/_custom_type_script = "uid://dlux45kkxncst"

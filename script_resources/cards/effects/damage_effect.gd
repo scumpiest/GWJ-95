@@ -9,6 +9,13 @@ enum Target {
 @export var target: Target = Target.ENEMY
 @export var pierce_block: bool = false
 @export var pierce_if_next_is_color: Array[CardEnums.CardColor] = []
+@export var use_last_block_spent: bool = false
+
+# Override the compute_value method to return the last block spent if use_last_block_spent is true.
+func compute_value(context: BattleContext, slot: ChainSlotState) -> int:
+	if use_last_block_spent:
+		return slot.last_block_spent
+	return super.compute_value(context, slot)
 
 func resolve(
 		context: BattleContext,
