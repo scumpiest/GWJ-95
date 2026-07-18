@@ -21,6 +21,7 @@ buses/default_bus_layout="uid://bbxrhpvmm03x1"
 
 [autoload]
 
+LevelManager="*uid://c2dguuqv3s670"
 GameManager="*uid://0elpsgyklpmo"
 CurrencyManager="*uid://b6ifv43jruvq"
 

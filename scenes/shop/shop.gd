@@ -54,7 +54,7 @@ func get_shop_cards() -> Array[CardVisual]:
 	return card_container.get_children() as Array[CardVisual]
 
 func _on_leave_button_pressed() -> void:
-	self.visible = false
+	LevelManager.next_level.emit()
 
 func _buy_and_handle_animation(handle_buy: Callable, price: int, handle_reject = null):
 

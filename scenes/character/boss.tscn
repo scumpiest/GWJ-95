@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://te5fg8wdiq0t"]
+
+[ext_resource type="Script" uid="uid://c7n4k8m2qaq1r" path="res://scenes/character/enemy.gd" id="1_rqgsp"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cco714kadgaa" path="res://assets/sprites/characters/Boss/boss_data_res.tres" id="2_k8cyi"]
+
+[node name="Boss" type="Node2D" unique_id=209409117]
+script = ExtResource("1_rqgsp")
+metadata/_custom_type_script = "uid://c7n4k8m2qaq1r"
+
+[node name="SpineSprite" type="SpineSprite" parent="." unique_id=1698810843]
+skeleton_data_res = ExtResource("2_k8cyi")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+
+[node name="HP" type="Label" parent="." unique_id=517324167]
+offset_left = -120.0
+offset_top = -624.0
+offset_right = 120.0
+offset_bottom = -464.0
+theme_override_font_sizes/font_size = 32
+text = "HP: 30/30"
+horizontal_alignment = 1
+vertical_alignment = 2
