@@ -8,6 +8,8 @@ var is_player_turn: bool
 var is_battle_over: bool
 var player_won: bool
 
+var enemy_intent: String = ""
+
 var chain_slot_states: Array[ChainSlotState] = []
 
 var deck: DeckData
@@ -128,3 +130,10 @@ func get_slot_state(index: int) -> ChainSlotState:
 
 func _is_valid_slot_index(slot_index: int) -> bool:
 	return slot_index >= 0 and slot_index < chain_slot_states.size()
+
+
+func enemy_intents_damage() -> bool:
+	return enemy_intent == "damage"
+
+func enemy_intents_block() -> bool:
+	return enemy_intent == "block"

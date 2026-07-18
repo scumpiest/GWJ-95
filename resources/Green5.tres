@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bsuxdwph0oq5m" path="res://stickers/sticker_cabbage_patch.png" id="1_4otvy"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_ujkup"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="3_6lw4b"]
+[ext_resource type="Resource" uid="uid://cnhvklfvnupe4" path="res://resources/G5.1.tres" id="3_ex83y"]
+[ext_resource type="Resource" uid="uid://b2powq12uo676" path="res://resources/G5.2.tres" id="4_ets5y"]
 
 [resource]
 script = ExtResource("3_6lw4b")
@@ -11,5 +13,5 @@ display_name = "Cabbage Patch"
 description = "If the enemy intents to deal [img width=16 height=16]res://assets/sprites/icons/damage.png[/img], gain 8 [img width=16 height=16]res://assets/sprites/icons/block.png[/img]. If the enemy intents to gain [img width=16 height=16]res://assets/sprites/icons/block.png[/img], deal 10 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]."
 art = ExtResource("1_4otvy")
 card_color = 1
-effects = Array[ExtResource("2_ujkup")]([null, null])
+effects = Array[ExtResource("2_ujkup")]([ExtResource("3_ex83y"), ExtResource("4_ets5y")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

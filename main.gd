@@ -30,6 +30,10 @@ func _ready() -> void:
 	GameManager.discard_count_changed.connect(_on_discard_count_changed)
 	GameManager.phase_changed.connect(_on_phase_changed)
 
+	# TODO: delete after testing
+	GameManager.context.enemy_intent = enemy.roll_intent()
+	print("Enemy intent: ", GameManager.context.enemy_intent)
+
 	shop_button.pressed.connect(func(): shop_container.visible = true)
 	shop_container.visibility_changed.connect(func(): main_container.visible = !shop_container.visible)
 

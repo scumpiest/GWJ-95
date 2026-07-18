@@ -31,6 +31,14 @@ func _init_unit() -> void:
 	unit.max_health = starting_health
 	unit.block = 0
 
+func roll_intent() -> String:
+	var roll: float = randf()
+	var accumulator: float = 0.0
+	for intent: String in move_list:
+		accumulator += move_chance[intent]
+		if roll <= accumulator:
+			return intent
+	return "damage"
 
 func play_idle_pose() -> void:
 	_sprite.get_animation_state().set_animation("idle", true, 0)

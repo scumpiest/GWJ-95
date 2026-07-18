@@ -26,6 +26,8 @@ func compute_value(context: BattleContext, slot: ChainSlotState) -> int:
 			return base_value if meets_condition(context, slot) else 0
 		CardEnums.ConditionType.CARD_BEFORE_COUNT:
 			return base_value * context.count_card_before_index(slot.slot_index)
+		CardEnums.ConditionType.ENEMY_INTENTS_DAMAGE, CardEnums.ConditionType.ENEMY_INTENTS_BLOCK:
+			return base_value if meets_condition(context, slot) else 0
 		_:
 			push_error("Condition type %s not implemented" % condition)
 			return 0
@@ -39,13 +41,17 @@ func meets_condition(context: BattleContext, slot: ChainSlotState) -> bool:
 			return true
 		CardEnums.ConditionType.NEXT_IS_COLOR:
 			return context.get_next_slot_color(slot.slot_index) == condition_color
+		CardEnums.ConditionType.ENEMY_INTENTS_DAMAGE:
+			return context.enemy_intents_damage()
+		CardEnums.ConditionType.ENEMY_INTENTS_BLOCK:
+			return context.enemy_intents_block()
 		_:
 			push_error("Condition type %s not implemented" % condition)
 			return false
 
 ## Base class for all card effects.
 func resolve(
-	context: BattleContext,
-	slot: ChainSlotState,
+	_context: BattleContext,
+	_slot: ChainSlotState,
 ) -> void:
 	push_error("%s.resolve() not implemented" % get_script().resource_path)
