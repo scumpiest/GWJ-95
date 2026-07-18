@@ -5,14 +5,44 @@
 [ext_resource type="PackedScene" uid="uid://k0msilr74cgg" path="res://scenes/board/slot.tscn" id="2_slot"]
 [ext_resource type="Texture2D" uid="uid://baj1drtjlgf8v" path="res://icon.svg" id="3_deck_tex"]
 [ext_resource type="Resource" uid="uid://lli1fjyggvmk" path="res://resources/starter_deck.tres" id="4_deck"]
+[ext_resource type="Texture2D" uid="uid://cp7je3bdn2qf5" path="res://assets/sprites/ui/sign1.png" id="4_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bvy8ua03rmgwl" path="res://scenes/balance/balance.tscn" id="5_efxa6"]
+[ext_resource type="Texture2D" uid="uid://ddgbicyis01ps" path="res://assets/sprites/ui/sign2.png" id="5_vivmo"]
 [ext_resource type="PackedScene" uid="uid://cx6g6j2lx7aow" path="res://scenes/character/player.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://bdovnwwna2dje" path="res://animated_sprite_2d.gd" id="6_vivmo"]
+[ext_resource type="Texture2D" uid="uid://c7d7flmyj4ale" path="res://assets/sprites/ui/arrow_1.png" id="7_2cqfq"]
 [ext_resource type="AudioStream" uid="uid://bik66s0yv6dts" path="res://assets/sounds/Rythm Gamejam 2.mp3" id="7_272bh"]
 [ext_resource type="Script" uid="uid://bt6vcyblqjfcc" path="res://script_resources/hand.gd" id="8_dg77c"]
 [ext_resource type="PackedScene" uid="uid://cbjhhlo1by5tx" path="res://scenes/shop/shop.tscn" id="8_kek77"]
 [ext_resource type="PackedScene" uid="uid://c7stag3sc3n31" path="res://scenes/stage/stage.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" path="res://scenes/ui/icon_tooltip.tscn" id="11_icon_tooltip"]
 [ext_resource type="PackedScene" uid="uid://dqhivoovq4phj" path="res://scenes/stage/reward_screen.tscn" id="12_reward"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_chyd6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgoo1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h1tde"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_skiwf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_msp22"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e3exj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_chyd6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_vivmo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w48qg")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Main" type="Control" unique_id=558398176]
 layout_mode = 3
@@ -24,7 +54,6 @@ grow_vertical = 2
 script = ExtResource("1_main")
 deck = ExtResource("4_deck")
 card_scene = ExtResource("1_card_visual")
-is_tutorial = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=335792737]
 layout_mode = 1
@@ -44,16 +73,39 @@ theme_override_constants/margin_bottom = 24
 
 [node name="SpeechBubble" type="Button" parent="MarginContainer/CanvasLayer" unique_id=1339568607]
 z_index = 20
-offset_left = 969.0
-offset_top = 114.0
-offset_right = 1036.0
-offset_bottom = 155.0
+offset_left = 708.0
+offset_top = 30.000002
+offset_right = 836.93274
+offset_bottom = 114.63425
+scale = Vector2(2.5283442, 1.7372693)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_chyd6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kgoo1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h1tde")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_skiwf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_msp22")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e3exj")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CanvasLayer" unique_id=32164973]
 offset_left = 969.0
 offset_top = 147.0
 offset_right = 970.0
 offset_bottom = 147.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/CanvasLayer" unique_id=116648833]
+position = Vector2(917, 144)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_chyd6")
+frame_progress = 0.43926346
+script = ExtResource("6_vivmo")
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/CanvasLayer" unique_id=1428469790]
+position = Vector2(1002, 127)
+rotation = 3.1415927
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("7_2cqfq")
+
+[node name="Timer" type="Timer" parent="MarginContainer/CanvasLayer" unique_id=363797640]
+wait_time = 0.3
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer" unique_id=788442826]
 layout_mode = 2
@@ -207,3 +259,4 @@ visible = false
 
 [connection signal="focus_entered" from="." to="Shop" method="_on_main_focus_entered"]
 [connection signal="pressed" from="MarginContainer/CanvasLayer/SpeechBubble" to="." method="_on_speech_bubble_pressed"]
+[connection signal="timeout" from="MarginContainer/CanvasLayer/Timer" to="MarginContainer/CanvasLayer/AnimatedSprite2D" method="_on_timer_timeout"]
