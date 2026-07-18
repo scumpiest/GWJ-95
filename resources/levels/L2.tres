@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="Level" format=3 uid="uid://bddyiyaoecu5q"]
 
 [ext_resource type="Script" uid="uid://dyvq2g50fm40e" path="res://script_resources/level.gd" id="1_axcb7"]
-[ext_resource type="PackedScene" uid="uid://te5fg8wdiq0t" path="res://scenes/character/boss.tscn" id="1_mhd4p"]
-[ext_resource type="Resource" uid="uid://qq5lhybj8gsd" path="res://resources/enemies/E2.tres" id="1_mpxpg"]
+[ext_resource type="Resource" uid="uid://cg5ilwxy2fpl" path="res://resources/enemies/E1.tres" id="1_mpxpg"]
+[ext_resource type="PackedScene" uid="uid://b2k5n8m3p7q4r" path="res://scenes/character/enemy1.tscn" id="2_oxurg"]
+[ext_resource type="Resource" uid="uid://kj26atmlb1is" path="res://resources/rewards/reward2.tres" id="3_oxurg"]
 
 [resource]
 script = ExtResource("1_axcb7")
-type = 1
-enemy_scene = ExtResource("1_mhd4p")
+enemy_scene = ExtResource("2_oxurg")
 enemy_data = ExtResource("1_mpxpg")
+rewards = ExtResource("3_oxurg")
 metadata/_custom_type_script = "uid://dyvq2g50fm40e"

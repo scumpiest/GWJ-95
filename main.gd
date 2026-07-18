@@ -44,9 +44,13 @@ func _ready() -> void:
 	deck_button.pressed.connect(_on_deck_pressed)
 
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
+	reward_screen.card_chosen.connect(_chosen_card)
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
 
+func _chosen_card(card_data: CardData) -> void:
+	_spawn_cards([card_data])
+	LevelManager.next_level.emit()
 
 func _on_deck_pressed() -> void:
 	reward_screen.show_choices()
@@ -74,7 +78,10 @@ func next_level() -> void:
 	enemy_container.add_child(enemy_scene)
 	enemy_scene.unit.died.connect(func():
 		clear_chain_slots()
-		LevelManager.next_level.emit()
+		if LevelManager.current_level.rewards:
+			reward_screen.show_choices(LevelManager.current_level.rewards.cards)
+		else:
+			LevelManager.next_level.emit()
 		)
 	current_enemy = enemy_scene
 

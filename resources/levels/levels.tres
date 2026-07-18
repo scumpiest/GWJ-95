@@ -5,8 +5,11 @@
 [ext_resource type="Script" uid="uid://ddoqihac0i5dg" path="res://script_resources/levels.gd" id="2_xh8l7"]
 [ext_resource type="Resource" uid="uid://cbjqbstsno01f" path="res://resources/levels/shop.tres" id="3_68ell"]
 [ext_resource type="Resource" uid="uid://bddyiyaoecu5q" path="res://resources/levels/L2.tres" id="4_cwn2x"]
+[ext_resource type="Resource" uid="uid://b08yo7g8wqlme" path="res://resources/levels/L3.tres" id="5_q1rpi"]
+[ext_resource type="Resource" uid="uid://cfa3c8bv3wvp" path="res://resources/levels/L4.tres" id="6_hlqhg"]
+[ext_resource type="Resource" uid="uid://gyg2irn5c7ug" path="res://resources/levels/LBOSS.tres" id="7_wr7gj"]
 
 [resource]
 script = ExtResource("2_xh8l7")
-levels = Array[ExtResource("1_xelc6")]([ExtResource("2_68ell"), ExtResource("3_68ell"), ExtResource("4_cwn2x")])
+levels = Array[ExtResource("1_xelc6")]([ExtResource("2_68ell"), ExtResource("4_cwn2x"), ExtResource("3_68ell"), ExtResource("5_q1rpi"), ExtResource("6_hlqhg"), ExtResource("3_68ell"), ExtResource("7_wr7gj")])
 metadata/_custom_type_script = "uid://ddoqihac0i5dg"
