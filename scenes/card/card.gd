@@ -18,6 +18,7 @@ var owner_slot: Slot
 var shop_card: bool = false
 var cost_label: Label
 var tween: Tween
+var img_metadata_regex: RegEx
 var start_x: int
 
 signal clicked_card(CardVisual)
@@ -36,6 +37,8 @@ func _ready() -> void:
 	_apply_display_mode(false)
 	casette.mouse_entered.connect(_on_casette_mouse_entered)
 	casette.mouse_exited.connect(_on_casette_mouse_exited)
+	_description_label.meta_hover_started.connect(_on_description_meta_hover_started)
+	_description_label.meta_hover_ended.connect(_on_description_meta_hover_ended)
 
 func set_shop_card(is_shop_card: bool):
 	shop_card = is_shop_card
@@ -53,9 +56,39 @@ func _gui_input(event):
 func _bind_card_data() -> void:
 	if card_data == null:
 		return
-	_description_label.text = card_data.description
+	_description_label.text = icon_metadata(card_data.description)
 	_sticker.texture = card_data.art
 	_name_label.text = card_data.display_name
+
+
+func icon_metadata(description: String) -> String:
+	if img_metadata_regex == null:
+		img_metadata_regex = RegEx.new()
+		img_metadata_regex.compile("\\[img([^\\]]*)\\](res://[^\\[]+)\\[/img\\]")
+	var result := description
+	for match in img_metadata_regex.search_all(description):
+		var full := match.get_string()
+		var path := match.get_string(2)
+		var key := path.get_file().get_basename()
+		result = result.replace(full, "[url=%s]%s[/url]" % [key, full])
+	return result
+
+
+func get_icon_tooltip() -> IconTooltip:
+	return get_tree().get_first_node_in_group("icon_tooltip") as IconTooltip
+
+
+func _on_description_meta_hover_started(meta: Variant) -> void:
+	var tooltip := get_icon_tooltip()
+	if tooltip == null:
+		return
+	tooltip.show_for(str(meta))
+
+
+func _on_description_meta_hover_ended(_meta: Variant) -> void:
+	var tooltip := get_icon_tooltip()
+	if tooltip != null:
+		tooltip.hide_tooltip()
 
 
 func set_owner_slot(slot: Slot) -> void:
@@ -154,3 +187,6 @@ func _on_casette_mouse_exited() -> void:
 
 	self.z_index = 10
 	set_casette_highlighted(false)
+	var tooltip := get_icon_tooltip()
+	if tooltip != null:
+		tooltip.hide_tooltip()
