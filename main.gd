@@ -20,12 +20,13 @@ class_name Main
 @onready var reward_screen: RewardScreen = %RewardScreen
 
 var current_enemy: Node2D
-@onready var speech_bubble: Button = $MarginContainer/CanvasLayer/SpeechBubble
+@onready var tutorial: CanvasLayer = $MarginContainer/CanvasLayer
+@onready var bubble_button: Button = $MarginContainer/CanvasLayer/BubbleButton
 @onready var text_tutorial: RichTextLabel = $MarginContainer/CanvasLayer/RichTextLabel
 @onready var speech_bubble_pressed: bool = false
 @onready var end_turn_button_pressed: bool = false
 
-var step = 0
+@onready var step = 0
 var scene_animation_duration: float = .4
 
 func _ready() -> void:
@@ -179,7 +180,7 @@ func _on_card_activated(slot: Slot, card: CardVisual) -> void:
 
 func run_tutorial():
 	speech_bubble_pressed = false
-	speech_bubble.visible = true
+	tutorial.visible = true
 	#for key in Databank.tutorial_dialogue.keys():
 	text_tutorial.text = Databank.tutorial_dialogue[step]
 	print(text_tutorial.text)
@@ -209,6 +210,12 @@ func _process(delta: float) -> void:
 			if end_turn_button_pressed == true:
 				step += 1
 				run_tutorial()
+		9:
+			is_tutorial = false
+			step = 0
+	
+	if is_tutorial == false:
+		tutorial.visible = false
 
 func _on_speech_bubble_pressed() -> void:
 	speech_bubble_pressed = true
