@@ -9,8 +9,29 @@ enum Target { ENEMY, PLAYER }
 
 
 func resolve(
-	_context: BattleContext,
-	_slot: ChainSlotState,
-	_resolver,
+	context: BattleContext,
+	slot: ChainSlotState,
+	resolver,
 ) -> void:
-	pass
+	if not meets_condition(context, slot):
+		return
+	
+	# Get the unit to apply the status to based on the target
+	var unit: Unit = context.enemy if target == Target.ENEMY else context.player
+	var key : String = get_status_key(status_type)
+	for i in stacks:
+		unit.apply_status(key)
+
+func get_status_key(status: CardEnums.StatusType) -> String:
+	match status:
+		CardEnums.StatusType.VULNERABLE:
+			return "vulnerable"
+		CardEnums.StatusType.WEAKNESS:
+			return "weakness"
+		CardEnums.StatusType.PROTECTION:
+			return "protection"
+		CardEnums.StatusType.STRENGTH:
+			return "strength"
+		_:
+			push_error("Status type %s not implemented" % status)
+			return ""

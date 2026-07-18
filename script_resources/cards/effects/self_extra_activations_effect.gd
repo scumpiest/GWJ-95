@@ -11,5 +11,10 @@ func resolve(
 	slot: ChainSlotState,
 	resolver,
 ) -> void:
-	var extra_activations: int = context.count_adjacent_same_color(slot.slot_index, per_adjacent_color)
-	slot.activation_count += extra_activations
+	if condition == CardEnums.ConditionType.NEXT_IS_COLOR:
+		if meets_condition(context, slot):
+			slot.activation_count += 1
+		return
+
+	var extra: int = context.count_adjacent_same_color(slot.slot_index, per_adjacent_color)
+	slot.activation_count += extra

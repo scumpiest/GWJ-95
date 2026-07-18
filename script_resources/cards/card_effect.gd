@@ -24,6 +24,16 @@ func compute_value(context: BattleContext, slot: ChainSlotState) -> int:
 			push_error("Condition type %s not implemented" % condition)
 			return 0
 
+## Check if the condition is met for the given slot.
+func meets_condition(context: BattleContext, slot: ChainSlotState) -> bool:
+	match condition:
+		CardEnums.ConditionType.NONE:
+			return true
+		CardEnums.ConditionType.NEXT_IS_COLOR:
+			return context.get_next_slot_color(slot.slot_index) == condition_color
+		_:
+			push_error("Condition type %s not implemented" % condition)
+			return false
 
 ## Base class for all card effects.
 func resolve(

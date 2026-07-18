@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="CardEffect" format=3 uid="uid://d4exf2h3hr33"]
+[gd_resource type="Resource" script_class="DamageEffect" format=3 uid="uid://d4exf2h3hr33"]
 
-[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_7n3f2"]
+[ext_resource type="Script" uid="uid://bwvkym0hxqpp" path="res://script_resources/cards/effects/damage_effect.gd" id="1_7n3f2"]
 
 [resource]
 script = ExtResource("1_7n3f2")
-base_value = 3
-status_type = 0
+base_value = 5
 metadata/_custom_type_script = "uid://dlux45kkxncst"
