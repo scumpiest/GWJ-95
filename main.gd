@@ -49,7 +49,10 @@ func next_level() -> void:
 
 	enemy_scene.unit = LevelManager._get_current_enemy()
 	enemy_container.add_child(enemy_scene)
-	enemy_scene.unit.died.connect(func(): LevelManager.next_level.emit())
+	enemy_scene.unit.died.connect(func():
+		clear_chain_slots()
+		LevelManager.next_level.emit()
+		)
 	current_enemy = enemy_scene
 
 	var battle_context := BattleContext.new(
