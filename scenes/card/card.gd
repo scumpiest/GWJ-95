@@ -16,7 +16,6 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 
 var owner_slot: Slot
 var shop_card: bool = false
-var selected_shop_card: CardVisual
 var cost_label: Label
 var tween: Tween
 
@@ -148,9 +147,6 @@ func _on_casette_mouse_exited() -> void:
 
 	tween = create_tween()
 	tween.tween_property(self, "scale", Vector2.ONE, .1).set_trans(Tween.TRANS_SINE)
-
-	if selected_shop_card == self:
-		return
 
 	if owner_slot != null:
 		paper.visible = false
