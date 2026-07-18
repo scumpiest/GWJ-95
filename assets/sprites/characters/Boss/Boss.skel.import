@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://3xkbm2hllrpa"
+path="res://.godot/imported/Boss.skel-5017bae27586413d96ee3a60e4dcee71.spskel"
+
+[deps]
+
+source_file="res://assets/sprites/characters/Boss/Boss.skel"
+dest_files=["res://.godot/imported/Boss.skel-5017bae27586413d96ee3a60e4dcee71.spskel"]
+
+[params]
+

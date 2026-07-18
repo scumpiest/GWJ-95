@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://bne5nfcysdseg"
+path="res://.godot/imported/Boss.atlas-57042efdde1a41ffa315798256eae886.spatlas"
+
+[deps]
+
+source_file="res://assets/sprites/characters/Boss/Boss.atlas"
+dest_files=["res://.godot/imported/Boss.atlas-57042efdde1a41ffa315798256eae886.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
