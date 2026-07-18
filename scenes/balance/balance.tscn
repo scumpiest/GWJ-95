@@ -2,6 +2,18 @@
 
 [ext_resource type="Script" uid="uid://dlwiwx1koqm4d" path="res://scenes/balance/balance.gd" id="1_n14ff"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_efxa6"]
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n14ff"]
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wm4fx"]
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Balance" type="HBoxContainer" unique_id=1899342113 node_paths=PackedStringArray("balance_label")]
 script = ExtResource("1_n14ff")
 balance_label = NodePath("BalanceAmount")
@@ -9,10 +21,13 @@ balance_label = NodePath("BalanceAmount")
 [node name="Balance" type="Label" parent="." unique_id=1057535273]
 layout_mode = 2
 text = "Balance: "
+label_settings = SubResource("LabelSettings_efxa6")
 
 [node name="BalanceAmount" type="Label" parent="." unique_id=1099960619]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_n14ff")
 
 [node name="DollarSign" type="Label" parent="." unique_id=1443205294]
 layout_mode = 2
 text = "$"
+label_settings = SubResource("LabelSettings_wm4fx")

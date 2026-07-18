@@ -18,10 +18,13 @@ var owner_slot: Slot
 var shop_card: bool = false
 var selected_shop_card: CardVisual
 var cost_label: Label
+var tween: Tween
 
 signal clicked_card(CardVisual)
 
 func _ready() -> void:
+	# Pivot point is for the animation so it's centered
+	self.pivot_offset = self.get_rect().size/2
 	cost_label = get_node("CostLabel")
 	if shop_card:
 		cost_label.text = str(card_data.cost) + "$"
@@ -128,12 +131,29 @@ func set_activation_highlighted(active: bool) -> void:
 func _on_casette_mouse_entered() -> void:
 	if owner_slot != null:
 		paper.visible = true
+	if tween:
+		tween.kill()
+
+	tween = create_tween()
+	tween.tween_property(self, "scale", Vector2.ONE * 1.1, .2).set_trans(Tween.TRANS_SINE)
+
+	self.z_index = 100
+
 	set_casette_highlighted(true)
 
 
 func _on_casette_mouse_exited() -> void:
+	if tween:
+		tween.kill()
+
+	tween = create_tween()
+	tween.tween_property(self, "scale", Vector2.ONE, .1).set_trans(Tween.TRANS_SINE)
+
 	if selected_shop_card == self:
 		return
+
 	if owner_slot != null:
 		paper.visible = false
+
+	self.z_index = 10
 	set_casette_highlighted(false)

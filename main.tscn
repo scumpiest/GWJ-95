@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bvy8ua03rmgwl" path="res://scenes/balance/balance.tscn" id="5_efxa6"]
 [ext_resource type="PackedScene" uid="uid://cx6g6j2lx7aow" path="res://scenes/character/player.tscn" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://bik66s0yv6dts" path="res://assets/sounds/Rythm Gamejam 2.mp3" id="7_272bh"]
+[ext_resource type="Script" uid="uid://bt6vcyblqjfcc" path="res://script_resources/hand.gd" id="8_dg77c"]
 [ext_resource type="PackedScene" uid="uid://b2k5n8m3p7q4r" path="res://scenes/character/enemy1.tscn" id="8_enemy1"]
 [ext_resource type="PackedScene" uid="uid://cbjhhlo1by5tx" path="res://scenes/shop/shop.tscn" id="8_kek77"]
 [ext_resource type="PackedScene" uid="uid://c7stag3sc3n31" path="res://scenes/stage/stage.tscn" id="10_4c57u"]
@@ -47,12 +48,15 @@ theme_override_font_sizes/font_size = 16
 text = "Chain"
 
 [node name="HeaderContainer" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1161162445]
+custom_maximum_size = Vector2(1101.79, -1)
 layout_mode = 2
 theme_override_constants/separation = 300
 
 [node name="Chain" type="HBoxContainer" parent="MarginContainer/VBox/HeaderContainer" unique_id=1518842042]
 unique_name_in_owner = true
+propagate_maximum_size = false
 layout_mode = 2
+size_flags_horizontal = 2
 theme_override_constants/separation = 8
 
 [node name="Slot0" parent="MarginContainer/VBox/HeaderContainer/Chain" unique_id=336822404 instance=ExtResource("2_slot")]
@@ -72,7 +76,6 @@ layout_mode = 2
 
 [node name="Balance" parent="MarginContainer/VBox/HeaderContainer" unique_id=1899342113 instance=ExtResource("5_efxa6")]
 layout_mode = 2
-offset_transform_enabled = true
 
 [node name="Container" type="PanelContainer" parent="MarginContainer/VBox" unique_id=2066776690]
 custom_minimum_size = Vector2(0, 260)
@@ -94,14 +97,18 @@ theme_override_font_sizes/font_size = 16
 text = "Hand"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1946937927]
+propagate_maximum_size = false
 layout_mode = 2
-size_flags_horizontal = 8
 
 [node name="Hand" type="HBoxContainer" parent="MarginContainer/VBox/HBoxContainer" unique_id=1180998]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 180)
+custom_minimum_size = Vector2(702.62, 180)
+custom_maximum_size = Vector2(702, -1)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 12
+script = ExtResource("8_dg77c")
+max_width_set = 702
 
 [node name="Shop" type="Button" parent="MarginContainer/VBox/HBoxContainer" unique_id=1940703265]
 unique_name_in_owner = true
