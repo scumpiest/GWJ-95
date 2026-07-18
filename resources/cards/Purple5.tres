@@ -12,5 +12,6 @@ display_name = "Butterfly"
 description = "Activates only next to [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img]. Any [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] after it cannot activate. Any [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] after it activate twice."
 art = ExtResource("1_awtof")
 card_color = 2
+cost = 40
 effects = Array[ExtResource("2_ltjlg")]([ExtResource("3_3aq3e")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"
