@@ -54,10 +54,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 offset_transform_enabled = true
-offset_transform_position = Vector2(-118.715, 1.785)
+offset_transform_position = Vector2(-139.24, 1.785)
 offset_transform_visual_only = false
-theme_override_constants/h_separation = 55
-theme_override_constants/v_separation = 56
+theme_override_constants/h_separation = 57
+theme_override_constants/v_separation = 53
 
 [node name="RightContainer" type="VBoxContainer" parent="MainContainer" unique_id=1690061262]
 layout_mode = 2
@@ -65,10 +65,6 @@ size_flags_vertical = 8
 
 [node name="ButtonContainer" type="HBoxContainer" parent="MainContainer/RightContainer" unique_id=1114831843]
 layout_mode = 2
-
-[node name="BuyButton" type="Button" parent="MainContainer/RightContainer/ButtonContainer" unique_id=1247772807]
-layout_mode = 2
-text = "Buy"
 
 [node name="LeaveButton" type="Button" parent="MainContainer/RightContainer/ButtonContainer" unique_id=445792254]
 layout_mode = 2

@@ -18,6 +18,7 @@ var owner_slot: Slot
 var shop_card: bool = false
 var cost_label: Label
 var tween: Tween
+var start_x: int
 
 signal clicked_card(CardVisual)
 

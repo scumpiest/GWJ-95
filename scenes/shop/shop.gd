@@ -8,6 +8,7 @@ extends Node
 
 @export var shop_backdrop: SpineSprite
 var animation_state: SpineAnimationState
+var tween: Tween
 
 func _ready() -> void:
 	_draw_cards()
@@ -32,6 +33,16 @@ func on_card_clicked(card: CardVisual) -> void:
 		card.clicked_card.disconnect(on_card_clicked)
 		card.reparent(player_hand)
 	else:
+		if tween:
+			tween.kill()
+		if !card.start_x:
+			card.start_x = card.position.x
+		tween = create_tween()
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(card, "position:x", card.start_x + 20, .1).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(card, "position:x", card.start_x - 20, .1).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(card, "position:x", card.start_x, .1).set_trans(Tween.TRANS_SINE)
+
 		animation_state.set_animation("store_no_money", false, 0)
 		animation_state.add_animation("store_normal", 1, true, 0)
 
