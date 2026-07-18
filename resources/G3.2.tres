@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ApplyStatusEffect" format=3 uid="uid://dmwpon10xbdhv"]
+
+[ext_resource type="Script" uid="uid://dsfghkmlnpqr" path="res://script_resources/cards/effects/apply_status_effect.gd" id="1_trcd2"]
+
+[resource]
+script = ExtResource("1_trcd2")
+status_type = 4
+target = 1
+timing = 0
+condition = 1
+metadata/_custom_type_script = "uid://dlux45kkxncst"

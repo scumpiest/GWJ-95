@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://di5p2hkxyxtg2" path="res://stickers/sticker_reebok.png" id="1_7m2ii"]
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="2_mcbg7"]
-[ext_resource type="Resource" uid="uid://1mbd54avu5kl" path="res://resources/B1.1.tres" id="3_ibnww"]
-[ext_resource type="Resource" uid="uid://dw5j6tx0m6bmv" path="res://resources/B1.2.tres" id="4_jf647"]
+[ext_resource type="Resource" uid="uid://1mbd54avu5kl" path="res://resources/G1.1.tres" id="3_ibnww"]
+[ext_resource type="Resource" uid="uid://dw5j6tx0m6bmv" path="res://resources/G1.2.tres" id="4_jf647"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="5_mj755"]
 
 [resource]
