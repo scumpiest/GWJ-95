@@ -9,7 +9,6 @@ extends CardEffect
 func resolve(
 	context: BattleContext,
 	slot: ChainSlotState,
-	resolver,
 ) -> void:
 	if condition == CardEnums.ConditionType.NEXT_IS_COLOR:
 		if meets_condition(context, slot):

@@ -11,7 +11,6 @@ enum Target { ENEMY, PLAYER }
 func resolve(
 	context: BattleContext,
 	slot: ChainSlotState,
-	resolver,
 ) -> void:
 	if not meets_condition(context, slot):
 		return

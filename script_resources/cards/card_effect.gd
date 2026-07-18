@@ -20,6 +20,10 @@ func compute_value(context: BattleContext, slot: ChainSlotState) -> int:
 			return base_value
 		CardEnums.ConditionType.COLOR_AFTER_COUNT:
 			return base_value + context.count_color_after_index(slot.slot_index, condition_color)
+		CardEnums.ConditionType.ADJACENT_COUNT_COLOR:
+			return base_value * context.count_adjacent_same_color(slot.slot_index, condition_color)
+		CardEnums.ConditionType.NEXT_IS_COLOR:
+			return base_value if meets_condition(context, slot) else 0
 		_:
 			push_error("Condition type %s not implemented" % condition)
 			return 0
@@ -28,6 +32,8 @@ func compute_value(context: BattleContext, slot: ChainSlotState) -> int:
 func meets_condition(context: BattleContext, slot: ChainSlotState) -> bool:
 	match condition:
 		CardEnums.ConditionType.NONE:
+			return true
+		CardEnums.ConditionType.COLOR_AFTER_COUNT, CardEnums.ConditionType.ADJACENT_COUNT_COLOR:
 			return true
 		CardEnums.ConditionType.NEXT_IS_COLOR:
 			return context.get_next_slot_color(slot.slot_index) == condition_color
@@ -39,6 +45,5 @@ func meets_condition(context: BattleContext, slot: ChainSlotState) -> bool:
 func resolve(
 	context: BattleContext,
 	slot: ChainSlotState,
-	resolver: ChainEffectResolver,
 ) -> void:
 	push_error("%s.resolve() not implemented" % get_script().resource_path)
