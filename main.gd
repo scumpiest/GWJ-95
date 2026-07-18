@@ -7,7 +7,6 @@ class_name Main
 @export var card_scene: PackedScene
 
 @onready var deck_button: TextureButton = %Deck
-@onready var shop_button: Button = %Shop
 @onready var hand: HBoxContainer = %Hand
 @onready var chain: HBoxContainer = %Chain
 @onready var end_turn: Button = %EndTurnButton
@@ -25,7 +24,6 @@ func _ready() -> void:
 	GameManager.discard_count_changed.connect(_on_discard_count_changed)
 	GameManager.phase_changed.connect(_on_phase_changed)
 
-	shop_button.pressed.connect(func(): shop_container.visible = true)
 	shop_container.visibility_changed.connect(func(): main_container.visible = !shop_container.visible)
 
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
@@ -35,6 +33,7 @@ func _ready() -> void:
 func next_level() -> void:
 	if LevelManager.current_level.type == Level.LevelType.SHOP:
 		shop_container.visible = true
+		shop_container.health_bought = false
 		return
 	else:
 		shop_container.visible = false

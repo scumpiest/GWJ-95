@@ -109,11 +109,6 @@ theme_override_constants/separation = 12
 script = ExtResource("8_dg77c")
 max_width_set = 702
 
-[node name="Shop" type="Button" parent="MarginContainer/VBox/HBoxContainer" unique_id=1940703265]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Shop"
-
 [node name="Deck" type="TextureButton" parent="MarginContainer/VBox/HBoxContainer" unique_id=1847293650]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 112)
