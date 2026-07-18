@@ -10,22 +10,31 @@ outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Card" type="Control" unique_id=1442896117]
+z_index = 10
 custom_minimum_size = Vector2(128, 180)
 layout_mode = 3
-anchors_preset = 0
+anchor_right = 0.11100001
+anchor_bottom = 0.27800003
+offset_right = 0.12799072
+offset_bottom = -0.14401245
+mouse_filter = 1
 script = ExtResource("1_visual")
 card_data = ExtResource("2_imta7")
 
 [node name="Casette" parent="." unique_id=1921422628 instance=ExtResource("3_2ufkr")]
+use_parent_material = true
 layout_mode = 0
 mouse_filter = 1
 
 [node name="Paper" parent="." unique_id=1589460870 instance=ExtResource("4_g65cd")]
+use_parent_material = true
 layout_mode = 0
+offset_right = 0.0
+offset_bottom = 0.0
 mouse_filter = 1
 
 [node name="CostLabel" type="Label" parent="." unique_id=1077638569]
-layout_mode = 1
+layout_mode = 0
 offset_left = -19.705
 offset_top = -10.945
 offset_right = 30.744997
