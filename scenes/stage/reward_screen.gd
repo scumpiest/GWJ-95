@@ -7,6 +7,7 @@ const ICON_CHAR_START := Vector2(448, 504)
 const ICON_MARK_START := Vector2(376, 591)
 const ICON_STEP_X := 72.0
 const NO_MARK_PROGRESS := [2, 5]
+const MAX_PROGRESS := 6
 
 @export var card_scene: PackedScene
 @export var reward_options: Array[CardData] = []
@@ -31,7 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
 	if event.is_action_pressed("tweens_in"):
-		set_progress(_progress + 1)
+		set_progress(mini(_progress + 1, MAX_PROGRESS - 1))
 		get_viewport().set_input_as_handled()
 
 
@@ -78,7 +79,7 @@ func _clear_icon_marks() -> void:
 func _update_progress_icon() -> void:
 	var progress := 0
 	if LevelManager.current_level:
-		progress = maxi(LevelManager.levels.find(LevelManager.current_level), 0)
+		progress = mini(LevelManager.levels.find(LevelManager.current_level), MAX_PROGRESS)
 	set_progress(progress)
 
 
