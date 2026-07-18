@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BlockEffect" format=3 uid="uid://dawgbradugj4y"]
+
+[ext_resource type="Script" uid="uid://cnrftvyjwabc" path="res://script_resources/cards/effects/block_effect.gd" id="1_4jwtd"]
+
+[resource]
+script = ExtResource("1_4jwtd")
+base_value = 5
+metadata/_custom_type_script = "uid://dlux45kkxncst"

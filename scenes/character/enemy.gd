@@ -17,8 +17,10 @@ var unit: Unit
 func _ready() -> void:
 	_init_unit()
 	unit.health_changed.connect(_on_health_changed)
+	unit.status_changed.connect(_on_status_changed)
+	unit.block_changed.connect(_on_block_changed)
 	_sprite.get_animation_state().set_animation("idle", true, 0)
-	_hp.text = "HP: %s" % unit.health
+	_update_hp_display()
 
 
 func _init_unit() -> void:
@@ -34,5 +36,24 @@ func play_idle_pose() -> void:
 	_sprite.get_animation_state().set_animation("idle", true, 0)
 
 
-func _on_health_changed(health: int) -> void:
-	_hp.text = "HP: %s" % health
+func _on_health_changed(_health: int) -> void:
+	_update_hp_display()
+
+
+func _on_status_changed(_status: String, _stacks: int) -> void:
+	_update_hp_display()
+
+
+func _on_block_changed(_block: int) -> void:
+	_update_hp_display()
+
+
+func _update_hp_display() -> void:
+	var lines: PackedStringArray = ["HP: %s/%s" % [unit.health, unit.max_health]]
+	if unit.block > 0:
+		lines.append("BLK: %s" % unit.block)
+	for status_name: String in unit.statuses:
+		var stacks: int = unit.statuses[status_name]
+		if stacks > 0:
+			lines.append("%s: %s" % [status_name.substr(0, 3).to_upper(), stacks])
+	_hp.text = "\n".join(lines)

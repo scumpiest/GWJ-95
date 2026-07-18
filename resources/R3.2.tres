@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="CardEffect" format=3 uid="uid://25binnt4yd6p"]
+[gd_resource type="Resource" script_class="ApplyStatusEffect" format=3 uid="uid://25binnt4yd6p"]
 
-[ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_u2mmg"]
+[ext_resource type="Script" uid="uid://dsfghkmlnpqr" path="res://script_resources/cards/effects/apply_status_effect.gd" id="1_u2mmg"]
 
 [resource]
 script = ExtResource("1_u2mmg")
-effect_type = 2
-base_value = 1
+timing = 0
 condition = 1
 metadata/_custom_type_script = "uid://dlux45kkxncst"

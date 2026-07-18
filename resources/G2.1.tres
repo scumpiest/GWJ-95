@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AddExtraActivationsEffect" format=3 uid="uid://bopdyvme5g8sp"]
+
+[ext_resource type="Script" uid="uid://btwx0jcvdefg" path="res://script_resources/cards/effects/add_extra_activations_effect.gd" id="1_tesjb"]
+
+[resource]
+script = ExtResource("1_tesjb")
+timing = 0
+metadata/_custom_type_script = "uid://dlux45kkxncst"

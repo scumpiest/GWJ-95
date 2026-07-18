@@ -3,8 +3,11 @@ extends CardEffect
 
 
 func resolve(
-	_context: BattleContext,
-	_slot: ChainSlotState,
-	_resolver,
+	context: BattleContext,
+	slot: ChainSlotState,
 ) -> void:
-	pass
+	var amount: int = compute_value(context, slot)
+	if amount <= 0:
+		return
+
+	context.player.gain_block(amount)

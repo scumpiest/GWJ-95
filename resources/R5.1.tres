@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AddBlockEqualToDamageEffect" format=3 uid="uid://b7mpc6fxw5rw7"]
+
+[ext_resource type="Script" uid="uid://bxcenpqrstuv" path="res://script_resources/cards/effects/add_block_equal_to_damage_effect.gd" id="1_lj5rr"]
+
+[resource]
+script = ExtResource("1_lj5rr")
+condition = 1
+metadata/_custom_type_script = "uid://dlux45kkxncst"

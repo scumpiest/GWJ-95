@@ -3,8 +3,14 @@ extends CardEffect
 
 
 func resolve(
-	_context: BattleContext,
-	_slot: ChainSlotState,
-	_resolver,
+	context: BattleContext,
+	slot: ChainSlotState,
 ) -> void:
-	pass
+	if not meets_condition(context, slot):
+		return
+
+	var damage_dealt: int = slot.last_damage_dealt
+	if damage_dealt <= 0:
+		return
+
+	context.player.gain_block(damage_dealt)

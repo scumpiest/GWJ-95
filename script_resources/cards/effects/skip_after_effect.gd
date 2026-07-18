@@ -4,8 +4,10 @@ extends CardEffect
 
 
 func resolve(
-	_context: BattleContext,
-	_slot: ChainSlotState,
-	_resolver,
+	context: BattleContext,
+	slot: ChainSlotState,
 ) -> void:
-	pass
+	for i in range(slot.slot_index + 2, context.chain_slot_states.size()):
+		var next_slot: ChainSlotState = context.chain_slot_states[i]
+		if next_slot.is_active():
+			next_slot.skip_activation = true

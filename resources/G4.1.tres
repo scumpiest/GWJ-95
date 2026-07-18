@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ModifyBlockEffect" format=3 uid="uid://rpp3iy48l360"]
+
+[ext_resource type="Script" uid="uid://pqerubncvwx" path="res://script_resources/cards/effects/modify_block_effect.gd" id="1_33l1j"]
+
+[resource]
+script = ExtResource("1_33l1j")
+require_no_adjacent_color = true
+require_not_last = true
+metadata/_custom_type_script = "uid://dlux45kkxncst"

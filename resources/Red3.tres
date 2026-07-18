@@ -6,12 +6,13 @@
 [ext_resource type="Resource" uid="uid://25binnt4yd6p" path="res://resources/R3.2.tres" id="3_nvk6j"]
 [ext_resource type="Resource" uid="uid://beauv2mxt8ud6" path="res://resources/R3.3.tres" id="4_doto8"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="4_h7mtc"]
+[ext_resource type="Resource" uid="uid://dv0ukdl78lur6" path="res://resources/R3.4.tres" id="6_h7mtc"]
 
 [resource]
 script = ExtResource("4_h7mtc")
 id = &"R3"
 display_name = " Kick it"
-description = "5 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. Applies 1 [img width=16 height=16]res://assets/sprites/icons/vulnerability.png/[img] if [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] is next. Applies 1 [img width=16 height=16]res://assets/sprites/icons/weakness.png[/img] if [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] is next. Attacks again if [img width=16 height=16]res://assets/sprites/icons/purplecassette.png[/img] is next."
+description = "3 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. Applies 1 [img width=16 height=16]res://assets/sprites/icons/vulnerability.png[/img] if [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] is next. Applies 1 [img width=16 height=16]res://assets/sprites/icons/weakness.png[/img] if [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] is next. Attacks again if [img width=16 height=16]res://assets/sprites/icons/purplecassette.png[/img] is next."
 art = ExtResource("1_nvk6j")
-effects = Array[ExtResource("1_tfmf5")]([ExtResource("2_rd7cd"), ExtResource("3_nvk6j"), ExtResource("4_doto8")])
+effects = Array[ExtResource("1_tfmf5")]([ExtResource("2_rd7cd"), ExtResource("3_nvk6j"), ExtResource("4_doto8"), ExtResource("6_h7mtc")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"
