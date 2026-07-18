@@ -3,6 +3,21 @@
 [ext_resource type="SpineAtlasResource" uid="uid://v6k4vvnaq2qn" path="res://assets/sprites/store/Store.atlas" id="1_cncof"]
 [ext_resource type="SpineSkeletonFileResource" uid="uid://dwi2ixvrtgdkv" path="res://assets/sprites/store/Store.skel" id="2_7evpr"]
 
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_cncof"]
+from = "store_normal"
+to = "store_normal"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_7evpr"]
+from = "store_no_money"
+to = "store_no_money"
+mix = 1.0
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_lr8ey"]
+from = "store_purchase"
+to = "store_purchase"
+mix = 2.0
+
 [resource]
 atlas_res = ExtResource("1_cncof")
 skeleton_file_res = ExtResource("2_7evpr")
+animation_mixes = [SubResource("SpineAnimationMix_cncof"), SubResource("SpineAnimationMix_7evpr"), SubResource("SpineAnimationMix_lr8ey")]

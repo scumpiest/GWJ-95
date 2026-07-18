@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bvy8ua03rmgwl" path="res://scenes/balance/balance.tscn" id="4_jp048"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://c52m31fydasvl" path="res://assets/sprites/store/store_data_res.tres" id="5_ctpgp"]
 
-[node name="Shop" type="MarginContainer" unique_id=827335244 node_paths=PackedStringArray("card_container")]
+[node name="Shop" type="MarginContainer" unique_id=827335244 node_paths=PackedStringArray("card_container", "shop_backdrop")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,6 +24,7 @@ script = ExtResource("1_100s2")
 card_scene = ExtResource("2_7lxhl")
 card_container = NodePath("MainContainer/LeftContainer/ShopCards")
 cards_db = ExtResource("3_7lxhl")
+shop_backdrop = NodePath("SpineSprite")
 
 [node name="SpineSprite" type="SpineSprite" parent="." unique_id=484380240]
 skeleton_data_res = ExtResource("5_ctpgp")
@@ -52,8 +53,11 @@ propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-theme_override_constants/h_separation = 110
-theme_override_constants/v_separation = 77
+offset_transform_enabled = true
+offset_transform_position = Vector2(-118.715, 1.785)
+offset_transform_visual_only = false
+theme_override_constants/h_separation = 55
+theme_override_constants/v_separation = 56
 
 [node name="RightContainer" type="VBoxContainer" parent="MainContainer" unique_id=1690061262]
 layout_mode = 2

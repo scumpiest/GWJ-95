@@ -6,8 +6,13 @@ extends Node
 @export var card_container: HFlowContainer;
 @export var cards_db: CardDB
 
+@export var shop_backdrop: SpineSprite
+var animation_state: SpineAnimationState
+
 func _ready() -> void:
 	_draw_cards()
+	animation_state = shop_backdrop.get_animation_state()
+	animation_state.set_animation("store_normal", true, 0)
 
 func _draw_cards() -> void:
 	for n in 6:
@@ -37,8 +42,14 @@ func _on_buy_button_pressed() -> void:
 		if card.selected_shop_card == card:
 			if CurrencyManager.subtract_money(card.card_data.cost):
 				# Set shop card to false, reset selected states
+				animation_state.set_animation("store_purchase", false, 0)
+				animation_state.add_animation("store_normal", 1, true, 0)
 				card.set_shop_card(false)
 				card.set_casette_highlighted(false)
 				card.selected_shop_card = null
 				card.clicked_card.disconnect(on_card_clicked)
 				card.reparent(player_hand)
+			else:
+				animation_state.set_animation("store_no_money", false, 0)
+				animation_state.add_animation("store_normal", 1, true, 0)
+
