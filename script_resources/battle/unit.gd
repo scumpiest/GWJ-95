@@ -19,6 +19,14 @@ var statuses: Dictionary[String, int] = {
     "vulnerable": 0, "weakness": 0, "protection": 0, "strength": 0
     }
 
+func add_health_percentage(health_percentage: int):
+    var health_to_add = (float(max_health) / 100) * health_percentage
+    if (health_to_add + health) < max_health:
+        health += health_to_add
+    else:
+        health = max_health
+
+
 func take_damage(damage: int):
     health -= damage
     emit_signal("health_changed", health)
