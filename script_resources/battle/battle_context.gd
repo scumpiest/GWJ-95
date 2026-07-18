@@ -61,6 +61,12 @@ func count_adjacent_same_color(slot_index: int, color: CardEnums.CardColor) -> i
 
 	return count
 
+func count_card_before_index(slot_index: int) -> int:
+	var count: int = 0
+	for i in slot_index:
+		if chain_slot_states[i].is_active():
+			count += 1
+	return count
 
 func get_previous_slot_color(slot_index: int) -> Variant:
 	if slot_index <= 0 or not _is_valid_slot_index(slot_index):

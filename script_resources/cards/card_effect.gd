@@ -24,6 +24,8 @@ func compute_value(context: BattleContext, slot: ChainSlotState) -> int:
 			return base_value * context.count_adjacent_same_color(slot.slot_index, condition_color)
 		CardEnums.ConditionType.NEXT_IS_COLOR:
 			return base_value if meets_condition(context, slot) else 0
+		CardEnums.ConditionType.CARD_BEFORE_COUNT:
+			return base_value * context.count_card_before_index(slot.slot_index)
 		_:
 			push_error("Condition type %s not implemented" % condition)
 			return 0

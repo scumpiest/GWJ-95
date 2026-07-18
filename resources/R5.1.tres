@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DamageEffect" format=3 uid="uid://b7mpc6fxw5rw7"]
+
+[ext_resource type="Script" uid="uid://bwvkym0hxqpp" path="res://script_resources/cards/effects/damage_effect.gd" id="1_lj5rr"]
+
+[resource]
+script = ExtResource("1_lj5rr")
+pierce_if_next_is_color = Array[int]([1, 2])
+base_value = 8
+metadata/_custom_type_script = "uid://dlux45kkxncst"
