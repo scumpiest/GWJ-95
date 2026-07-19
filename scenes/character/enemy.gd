@@ -38,7 +38,7 @@ func play_idle_pose() -> void:
 	_sprite.get_animation_state().set_animation("idle", true, 0)
 
 
-func _on_health_changed(_health: int) -> void:
+func _on_health_changed(_health: int, _old_health: int) -> void:
 	_update_hp_display()
 
 
