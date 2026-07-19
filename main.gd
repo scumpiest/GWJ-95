@@ -8,6 +8,7 @@ class_name Main
 @export var is_tutorial: bool = false
 
 @onready var deck_button: TextureButton = %Deck
+@onready var shop_button: Button = %Shop
 @onready var hand: HBoxContainer = %Hand
 @onready var chain: HBoxContainer = %Chain
 @onready var end_turn: Button = %EndTurnButton
@@ -18,16 +19,16 @@ class_name Main
 @onready var main_container: MarginContainer = self.get_node("MarginContainer");
 @onready var enemy_container: Control = %EnemyContainer
 @onready var reward_screen: RewardScreen = %RewardScreen
-
-var current_enemy: Node2D
 @onready var tutorial: CanvasLayer = $MarginContainer/CanvasLayer
 @onready var bubble_button: Button = $MarginContainer/CanvasLayer/BubbleButton
 @onready var text_tutorial: RichTextLabel = $MarginContainer/CanvasLayer/RichTextLabel
 @onready var speech_bubble_pressed: bool = false
 @onready var end_turn_button_pressed: bool = false
 
+
 var step = 0
-var scene_animation_duration: float = .4
+var scene_animation_duration: float = 0.4
+var current_enemy: Node2D
 
 func _ready() -> void:
 	GameManager.phase_changed.connect(_on_phase_changed)
@@ -47,12 +48,11 @@ func _ready() -> void:
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
 
+
 func _chosen_card(card_data: CardData) -> void:
 	_spawn_cards([card_data])
 	LevelManager.next_level.emit()
 
-func _on_deck_pressed() -> void:
-	reward_screen.show_choices()
 
 func next_level() -> void:
 	if LevelManager.current_level.type == Level.LevelType.SHOP:
@@ -82,6 +82,7 @@ func next_level() -> void:
 		else:
 			LevelManager.next_level.emit()
 		)
+	enemy_scene.unit.died.connect(func(): LevelManager.next_level.emit())
 	current_enemy = enemy_scene
 
 	var battle_context := BattleContext.new(
@@ -98,9 +99,6 @@ func next_level() -> void:
 	_spawn_cards(GameManager.draw_cards(initial_hand_size))
 	print("Enemy intent: ", GameManager.context.enemy_intent)
 
-	
-	if is_tutorial:
-		run_tutorial()
 
 # TODO: add animation to spawn cards
 func _spawn_cards(cards: Array[CardData]) -> void:
@@ -115,8 +113,6 @@ func _on_end_turn_button_pressed() -> void:
 	if not GameManager.begin_chain_resolve():
 		end_turn.disabled = false
 		return
-	if is_tutorial == true:
-		end_turn_button_pressed = true
 
 	await _trigger_chain_sequentially()
 	var discarded := clear_chain_slots()

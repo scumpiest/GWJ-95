@@ -1,6 +1,7 @@
 extends Node
 
 @export var player_hand: Node
+@export var max_hand_size: int = 5
 
 @onready var player: Player = %Player
 @onready var buy_health_button: Button = %BuyHealthButton
