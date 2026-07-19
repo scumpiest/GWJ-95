@@ -34,6 +34,8 @@ var discard_delay: float = 0.3 #seconds
 var position_discard: Vector2 = Vector2(956, 564)
 var position_duration: float = 0.45 #seconds
 
+var _discarding: bool = false
+
 signal clicked_card(CardVisual)
 signal animation_finished
 
@@ -189,6 +191,8 @@ func set_activation_highlighted(active: bool) -> void:
 
 
 func _on_casette_mouse_entered() -> void:
+	if _discarding:
+		return
 	AudioManager.play_card_hover()
 	if owner_slot != null:
 		paper.visible = true
@@ -204,6 +208,8 @@ func _on_casette_mouse_entered() -> void:
 
 
 func _on_casette_mouse_exited() -> void:
+	if _discarding:
+		return
 	if tween:
 		tween.kill()
 
@@ -241,25 +247,37 @@ func discard_animation() -> void:
 	var discard_pos := _get_marker_position("DiscardMarker", position_discard)
 	var start_pos := global_position
 
+	# Prevent hovering the card mid-flight (e.g. the mouse being over it when the
+	# animation starts, or the card flying past the cursor) from firing
+	# mouse_entered/mouse_exited and killing our tween below, which would stop
+	# the "finished" signal from ever being emitted and stall the discard.
+	_discarding = true
 	_kill_tween()
+	var tooltip := get_icon_tooltip()
+	if tooltip != null:
+		tooltip.hide_tooltip()
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	casette.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	set_casette_highlighted(false)
 	top_level = true
 	global_position = start_pos
 	z_index = 200
 
-	tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_SPRING)
-	tween.tween_property(self, "scale:x", scale_x_range, scale_x_duration)
-	tween.parallel().tween_property(self, "scale:y", scale_y_range, scale_y_duration)
-	tween.parallel().tween_property(self, "rotation_degrees", _random_tilt(), rotation_duration)
+	var discard_tween := create_tween()
+	tween = discard_tween
+	discard_tween.set_ease(Tween.EASE_OUT)
+	discard_tween.set_trans(Tween.TRANS_SPRING)
+	discard_tween.tween_property(self, "scale:x", scale_x_range, scale_x_duration)
+	discard_tween.parallel().tween_property(self, "scale:y", scale_y_range, scale_y_duration)
+	discard_tween.parallel().tween_property(self, "rotation_degrees", _random_tilt(), rotation_duration)
 
-	tween.set_trans(Tween.TRANS_QUINT)
-	tween.tween_property(self, "scale:x", 0.25, scale_x_duration).set_delay(discard_delay)
-	tween.parallel().tween_property(self, "scale:y", 0.25, scale_y_duration).set_delay(discard_delay)
-	tween.parallel().tween_property(self, "global_position", discard_pos, position_duration).set_delay(discard_delay)
-	tween.parallel().tween_property(self, "modulate:a", 0.0, position_duration).set_delay(discard_delay)
+	discard_tween.set_trans(Tween.TRANS_QUINT)
+	discard_tween.tween_property(self, "scale:x", 0.25, scale_x_duration).set_delay(discard_delay)
+	discard_tween.parallel().tween_property(self, "scale:y", 0.25, scale_y_duration).set_delay(discard_delay)
+	discard_tween.parallel().tween_property(self, "global_position", discard_pos, position_duration).set_delay(discard_delay)
+	discard_tween.parallel().tween_property(self, "modulate:a", 0.0, position_duration).set_delay(discard_delay)
 
-	await tween.finished
-	tween = null
+	await discard_tween.finished
+	if tween == discard_tween:
+		tween = null
 	animation_finished.emit()

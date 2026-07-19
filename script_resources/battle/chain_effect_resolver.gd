@@ -6,8 +6,13 @@ func resolve_chain(
 		context: BattleContext,
 		slots: Array[Slot],
 		on_activate: Callable,
+		on_pre_resolved: Callable = Callable(),
 ) -> void:
 	run_pre_effects(context)
+	# skip_activation is only known once PRE effects have run, so this is the
+	# earliest point at which slot visuals (e.g. the inactive stamp) can be updated.
+	if on_pre_resolved.is_valid():
+		on_pre_resolved.call(context)
 	await run_active_effects(context, slots, on_activate)
 
 

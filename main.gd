@@ -41,6 +41,10 @@ var _battle_won: bool = false
 var _battle_lost: bool = false
 
 func _ready() -> void:
+	if LevelManager.start_as_tutorial:
+		is_tutorial = true
+		LevelManager.start_as_tutorial = false
+
 	GameManager.phase_changed.connect(_on_phase_changed)
 	GameManager.deck_count_changed.connect(_on_deck_count_changed)
 	GameManager.discard_count_changed.connect(_on_discard_count_changed)
@@ -67,6 +71,9 @@ func _ready() -> void:
 	LevelManager.next_level.emit()
 	
 	timer_arrow.start()
+
+	if is_tutorial:
+		run_tutorial()
 
 
 func _on_reward_visibility_changed() -> void:
@@ -236,8 +243,17 @@ func _trigger_chain_sequentially() -> void:
 	for slot_node in chain.get_children():
 		slots.append(slot_node)
 
-	await resolver.resolve_chain(GameManager.context, slots, _on_card_activated)
+	await resolver.resolve_chain(
+		GameManager.context, slots, _on_card_activated, _update_skipped_slot_visuals.bind(slots)
+	)
 	player.play_idle_pose()
+
+# Slots can only be known to be skipped once PRE effects have resolved, so this
+# reflects the live skip_activation calculation rather than any pre-set state.
+func _update_skipped_slot_visuals(context: BattleContext, slots: Array[Slot]) -> void:
+	for i in context.chain_slot_states.size():
+		var slot_state: ChainSlotState = context.chain_slot_states[i]
+		slots[i].set_skipped(slot_state.is_active() and slot_state.skip_activation)
 
 func _sync_chain_states() -> void:
 	var i: int = 0
@@ -248,12 +264,14 @@ func _sync_chain_states() -> void:
 func clear_chain_slots() -> Array[CardData]:
 	var cards: Array[CardData] = []
 	for child in chain.get_children():
-		var card := (child as Slot).clear_card()
+		var slot := child as Slot
+		slot.set_skipped(false)
+		var card := slot.clear_card()
 		if card == null:
 			continue
 		cards.append(card.card_data)
 		card.queue_free()
-		child.set_highlighted(false)
+		slot.set_highlighted(false)
 	return cards
 
 
@@ -264,6 +282,7 @@ func _clear_chain_slot_visuals() -> Array[CardVisual]:
 	for slot_node in chain.get_children():
 		var slot := slot_node as Slot
 		slot.set_highlighted(false)
+		slot.set_skipped(false)
 		var card := slot.get_card()
 		if card == null:
 			continue
@@ -303,6 +322,7 @@ func _on_phase_changed(phase: GameManager.Phase) -> void:
 func _on_card_activated(slot: Slot, card: CardVisual) -> void:
 	player.play_next_pose()
 	slot.make_slot_jiggle()
+	slot.play_cassette_vfx(card.card_data.card_color)
 	print("Activating card: ", slot.color)
 	await card.activate()
 

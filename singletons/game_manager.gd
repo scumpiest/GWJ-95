@@ -12,6 +12,7 @@ signal deck_count_changed(count: int)
 signal discard_count_changed(count: int)
 signal phase_changed(phase: Phase)
 signal enemy_intent_changed(move: EnemyMove)
+signal enemy_acted
 
 @export var card_db: CardDB
 
@@ -55,6 +56,7 @@ func _resolve_enemy_turn() -> void:
 		return
 
 	if context.enemy_intent != null:
+		enemy_acted.emit()
 		context.enemy_intent.execute(context, context.enemy_data)
 
 

@@ -13,6 +13,7 @@ class_name EnemyResource
 @export var damage_per_turn: int = 0
 @export var block_per_turn: int = 0
 @export var purple_damage_multiplier: float = 1.0
+@export var red_damage_multiplier: float = 1.0
 @export var color_slots_min: int = 0
 @export var color_slots_max: int = 0
 
@@ -57,6 +58,10 @@ func has_scaling_passive() -> bool:
 
 func has_purple_vulnerability() -> bool:
 	return not is_equal_approx(purple_damage_multiplier, 1.0)
+
+
+func has_red_vulnerability() -> bool:
+	return not is_equal_approx(red_damage_multiplier, 1.0)
 
 
 func has_slot_color_passive() -> bool:

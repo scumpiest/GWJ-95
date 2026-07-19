@@ -22,9 +22,9 @@ apply_weakness = 1
 script = ExtResource("1_e3")
 id = 3
 name = "Enemy 3"
-description = "Receives twice more damage from Purple Cassettes."
-health = 100
-max_health = 100
+description = "[img width=16 height=16]res://assets/sprites/icons/icon_purple_vulnerability.png[/img] Purple Vulnerability: Receives twice as much damage from Purple Cassettes."
+health = 60
+max_health = 60
 moves = Array[ExtResource("2_move")]([SubResource("move_1"), SubResource("move_2"), SubResource("move_3")])
 purple_damage_multiplier = 2.0
 metadata/_custom_type_script = "uid://72a7l2y26pqx"

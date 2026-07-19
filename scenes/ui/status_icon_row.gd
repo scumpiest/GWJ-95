@@ -8,6 +8,10 @@ const ICON_VULNERABLE := preload("res://assets/sprites/icons/vulnerability.png")
 const ICON_WEAKNESS := preload("res://assets/sprites/icons/weakness.png")
 const ICON_PROTECTION := preload("res://assets/sprites/icons/protection.png")
 const ICON_STRENGTH := preload("res://assets/sprites/icons/strength.png")
+const ICON_RAMP_UP := preload("res://assets/sprites/icons/icon_ramp_up.png")
+const ICON_IMPROVISATION := preload("res://assets/sprites/icons/icon_improvisation.png")
+const ICON_PURPLE_VULNERABILITY := preload("res://assets/sprites/icons/icon_purple_vulnerability.png")
+const ICON_RED_VULNERABILITY := preload("res://assets/sprites/icons/icon_red_vulnerability.png")
 
 const STATUS_ICONS := {
 	"vulnerable": ICON_VULNERABLE,
@@ -24,6 +28,7 @@ const STATUS_TOOLTIP_KEYS := {
 }
 
 var _unit: Unit
+var _enemy_data: EnemyResource
 
 
 func _ready() -> void:
@@ -50,6 +55,11 @@ func bind_unit(unit: Unit) -> void:
 	refresh()
 
 
+func bind_enemy_data(enemy_data: EnemyResource) -> void:
+	_enemy_data = enemy_data
+	refresh()
+
+
 func refresh() -> void:
 	_clear_icons()
 	if _unit == null:
@@ -72,7 +82,36 @@ func refresh() -> void:
 		_add_entry(texture, label, tooltip_key)
 		has_any = true
 
+	if _add_power_entries():
+		has_any = true
+
 	visible = has_any
+
+
+func _add_power_entries() -> bool:
+	if _enemy_data == null:
+		return false
+
+	var added := false
+
+	if _enemy_data.has_scaling_passive():
+		var rank := maxi(_enemy_data.damage_per_turn, _enemy_data.block_per_turn)
+		_add_entry(ICON_RAMP_UP, str(rank) if rank > 1 else "", "icon_ramp_up")
+		added = true
+
+	if _enemy_data.has_slot_color_passive():
+		_add_entry(ICON_IMPROVISATION, "", "icon_improvisation")
+		added = true
+
+	if _enemy_data.has_purple_vulnerability():
+		_add_entry(ICON_PURPLE_VULNERABILITY, "", "icon_purple_vulnerability")
+		added = true
+
+	if _enemy_data.has_red_vulnerability():
+		_add_entry(ICON_RED_VULNERABILITY, "", "icon_red_vulnerability")
+		added = true
+
+	return added
 
 
 func _on_block_changed(_block: int) -> void:

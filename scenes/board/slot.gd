@@ -6,6 +6,7 @@ signal card_changed(card: CardVisual)
 @export var highlight_color: Color = Color.WHITE
 
 @onready var _anchor: CenterContainer = $CardAnchor
+@onready var _inactive_overlay: TextureRect = $InactiveOverlay
 
 var color: CardEnums.CardColor
 
@@ -28,6 +29,8 @@ var rotation_back_delay: float = 0.3 #seconds
 
 var previous_card_slot: Slot
 var next_card_slot: Slot
+
+const CASSETTE_VFX_Z_INDEX := 1 # behind the card (z_index 10) but above the slot panel
 
 
 func _ready() -> void:
@@ -172,6 +175,17 @@ func set_activation_highlighted(active: bool) -> void:
 	if _base_panel_style == null:
 		return
 	add_theme_stylebox_override("panel", _activation_panel_style if active else _base_panel_style)
+
+
+func set_skipped(active: bool) -> void:
+	if _inactive_overlay == null:
+		return
+	_inactive_overlay.visible = active
+
+
+func play_cassette_vfx(card_color: CardEnums.CardColor) -> void:
+	var animation_name := TriggerVfx.animation_for_cassette_color(card_color)
+	TriggerVfx.spawn(self, animation_name, size * 0.5, CASSETTE_VFX_Z_INDEX)
 
 func _process(_delta: float) -> void:
 	

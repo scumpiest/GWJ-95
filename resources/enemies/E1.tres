@@ -20,7 +20,9 @@ block = 10
 script = ExtResource("1_c6fmt")
 id = 1
 name = "Enemy 1"
-health = 50
-max_health = 50
+description = "[img width=16 height=16]res://assets/sprites/icons/icon_red_vulnerability.png[/img] Red Vulnerability: Receives twice as much damage from Red Cassettes."
+health = 30
+max_health = 30
 moves = Array[ExtResource("2_move")]([SubResource("move_1"), SubResource("move_2"), SubResource("move_3")])
+red_damage_multiplier = 2.0
 metadata/_custom_type_script = "uid://72a7l2y26pqx"

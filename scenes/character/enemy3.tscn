@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://ck5m8q2p7n3wt"]
+
+[ext_resource type="Script" uid="uid://c7n4k8m2qaq1r" path="res://scenes/character/enemy.gd" id="1_enemy"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bqj7t2n4wk8f6" path="res://assets/sprites/characters/enemy3/enemy_data_res.tres" id="2_data"]
+[ext_resource type="Texture2D" uid="uid://cj8t1k6itmjba" path="res://assets/sprites/ui/icon_heart.png" id="3_heart"]
+[ext_resource type="Script" uid="uid://ujq614oqltyc" path="res://scenes/ui/status_icon_row.gd" id="4_status_row"]
+[ext_resource type="Texture2D" uid="uid://bwic0btrmfn08" path="res://assets/sprites/ui/thought_bubble.png" id="5_edwm4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_healthbar_border"]
+bg_color = Color(0.043137256, 0.023529412, 0.05490196, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhunq"]
+bg_color = Color(0.94100165, 0.34064347, 0.38857287, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33gp4"]
+bg_color = Color(0.9411765, 0.34117648, 0.3882353, 1)
+
+[node name="Enemy3" type="Node2D"]
+script = ExtResource("1_enemy")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_data")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+
+[node name="HealthBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -152.0
+offset_top = -504.0
+offset_right = 148.0
+offset_bottom = -434.0
+mouse_filter = 2
+metadata/_edit_group_ = true
+
+[node name="StatusRow" type="HBoxContainer" parent="HealthBar"]
+z_index = 12
+layout_mode = 0
+offset_left = 40.0
+offset_top = -44.0
+offset_right = 300.0
+offset_bottom = 8.0
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 1
+script = ExtResource("4_status_row")
+
+[node name="HeartIcon" type="TextureRect" parent="HealthBar"]
+z_index = 10
+layout_mode = 0
+offset_top = 3.0
+offset_right = 64.0
+offset_bottom = 67.0
+texture = ExtResource("3_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BarBorder" type="Panel" parent="HealthBar"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 15.0
+offset_right = 300.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_healthbar_border")
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthBar"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 18.0
+offset_right = 291.0
+offset_bottom = 51.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bhunq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_33gp4")
+show_percentage = false
+
+[node name="ThoughtBubble" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(203, -348)
+scale = Vector2(0.7376238, 0.75)
+texture = ExtResource("5_edwm4")
+
+[node name="IntentRow" type="HBoxContainer" parent="ThoughtBubble"]
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = 22.0
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1

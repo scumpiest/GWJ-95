@@ -21,6 +21,8 @@ func _ready() -> void:
 	unit.block_changed.connect(_handle_block_changed)
 	unit.health_changed.connect(_health_decreased)
 	unit.health_changed.connect(_update_health_bar)
+	unit.status_changed.connect(_on_status_changed)
+	unit.died.connect(_on_died)
 	_update_health_bar(unit.health, unit.health)
 	_status_row.bind_unit(unit)
 	_sprite.get_animation_state().set_animation("idle", true, 0)
@@ -28,10 +30,19 @@ func _ready() -> void:
 func _health_decreased(health: int, old_health: int):
 	if old_health > health:
 		LevelManager.send_task_event(BattleTask.EventType.DAMAGE_TAKEN, old_health - health)
+		TriggerVfx.spawn(self, TriggerVfx.HIT)
 
 func _update_health_bar(health: int, _old_health: int) -> void:
 	_health_bar.max_value = unit.max_health
 	_health_bar.value = health
+
+func _on_status_changed(status: String, _stacks: int) -> void:
+	TriggerVfx.spawn(self, TriggerVfx.animation_for_status(status))
+
+
+func _on_died() -> void:
+	TriggerVfx.spawn(self, TriggerVfx.DEFEAT)
+
 
 func _handle_block_changed(block: int):
 	if block > _last_block:

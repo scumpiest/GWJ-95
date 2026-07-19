@@ -53,7 +53,7 @@ theme_override_constants/separation = 20
 
 [node name="TextureButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1833481452]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxTexture_chyd6")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_kgoo1")
@@ -69,4 +69,5 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_h1tde")
 text = "PRESS THIS"
 script = ExtResource("4_wu84c")
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/TextureButton3" to="MarginContainer/VBoxContainer/TextureButton3" method="_on_pressed"]

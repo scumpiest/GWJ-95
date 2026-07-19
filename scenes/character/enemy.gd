@@ -2,6 +2,7 @@ class_name Enemy
 extends Node2D
 
 const INTENT_ICON_SIZE := Vector2(72, 72)
+const POSE_COUNT := 3
 const StatusIconRowScene := preload("res://scenes/ui/status_icon_row.gd")
 
 const ICON_DAMAGE := preload("res://assets/sprites/icons/damage.png")
@@ -9,7 +10,6 @@ const ICON_BLOCK := preload("res://assets/sprites/icons/block.png")
 const ICON_WEAKNESS := preload("res://assets/sprites/icons/weakness.png")
 const ICON_VULNERABILITY := preload("res://assets/sprites/icons/vulnerability.png")
 
-@onready var _sprite: SpineSprite = $SpineSprite
 @onready var _health_bar: ProgressBar = get_node_or_null("HealthBar/ProgressBar")
 @onready var _thought_bubble: Sprite2D = get_node_or_null("ThoughtBubble")
 @onready var _intent_row: HBoxContainer = get_node_or_null("ThoughtBubble/IntentRow")
@@ -18,21 +18,36 @@ const ICON_VULNERABILITY := preload("res://assets/sprites/icons/vulnerability.pn
 var unit: Unit
 var enemy_data: EnemyResource
 
+# Most enemies have a single SpineSprite, but composite encounters (e.g. a
+# level showing two enemy visuals sharing one health pool) may have several;
+# these are collected from all descendants rather than a fixed node path.
+var _sprites: Array[SpineSprite] = []
+var _pose_index: int = 0
+
 
 func _ready() -> void:
+	_sprites = _collect_spine_sprites(self)
 	unit.health_changed.connect(_on_health_changed)
+	unit.status_changed.connect(_on_status_changed)
+	unit.died.connect(_on_died)
 	_ensure_intent_row()
 	_ensure_status_row()
 	_status_row.bind_unit(unit)
+	_status_row.bind_enemy_data(enemy_data)
 	GameManager.enemy_intent_changed.connect(set_intent)
+	GameManager.enemy_acted.connect(play_next_pose)
 
-	if _sprite.skeleton_data_res.find_animation("appear"):
-		if LevelManager.current_level != null and LevelManager.current_level.type == Level.LevelType.BOSS:
-			AudioManager.play_enemy_ground_hit()
-		_sprite.get_animation_state().set_animation("appear", false, 0)
-		_sprite.get_animation_state().add_animation("idle", 4, true, 0)
-	else:
-		_sprite.get_animation_state().set_animation("idle", true, 0)
+	var should_play_ground_hit := false
+	for sprite in _sprites:
+		if sprite.skeleton_data_res and sprite.skeleton_data_res.find_animation("appear"):
+			if LevelManager.current_level != null and LevelManager.current_level.type == Level.LevelType.BOSS:
+				should_play_ground_hit = true
+			sprite.get_animation_state().set_animation("appear", false, 0)
+			sprite.get_animation_state().add_animation("idle", 4, true, 0)
+		else:
+			sprite.get_animation_state().set_animation("idle", true, 0)
+	if should_play_ground_hit:
+		AudioManager.play_enemy_ground_hit()
 	_update_health_bar()
 
 	if GameManager.context != null:
@@ -42,6 +57,8 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	if GameManager.enemy_intent_changed.is_connected(set_intent):
 		GameManager.enemy_intent_changed.disconnect(set_intent)
+	if GameManager.enemy_acted.is_connected(play_next_pose):
+		GameManager.enemy_acted.disconnect(play_next_pose)
 
 
 func roll_intent() -> EnemyMove:
@@ -75,26 +92,66 @@ func set_intent(move: EnemyMove) -> void:
 		var label := str(hit_damage)
 		if move.hit_count > 1:
 			label = "%sx%d" % [hit_damage, move.hit_count]
-		_add_intent_entry(ICON_DAMAGE, label)
+		_add_intent_entry(ICON_DAMAGE, label, "damage")
 
 	if move.gains_block():
-		_add_intent_entry(ICON_BLOCK, str(move.block + block_bonus))
+		_add_intent_entry(ICON_BLOCK, str(move.block + block_bonus), "block")
 
 	if move.apply_weakness > 0:
 		var weakness_label := str(move.apply_weakness) if move.apply_weakness > 1 else ""
-		_add_intent_entry(ICON_WEAKNESS, weakness_label)
+		_add_intent_entry(ICON_WEAKNESS, weakness_label, "weakness")
 
 	if move.apply_vulnerable > 0:
 		var vulnerable_label := str(move.apply_vulnerable) if move.apply_vulnerable > 1 else ""
-		_add_intent_entry(ICON_VULNERABILITY, vulnerable_label)
+		_add_intent_entry(ICON_VULNERABILITY, vulnerable_label, "vulnerability")
 
 
 func play_idle_pose() -> void:
-	_sprite.get_animation_state().set_animation("idle", true, 0)
+	for sprite in _sprites:
+		sprite.get_animation_state().set_animation("idle", true, 0)
 
 
-func _on_health_changed(_health: int, _old_health: int) -> void:
+func play_next_pose() -> void:
+	var next_pose := randi_range(1, POSE_COUNT)
+	while POSE_COUNT > 1 and next_pose == _pose_index:
+		next_pose = randi_range(1, POSE_COUNT)
+	_pose_index = next_pose
+	for sprite in _sprites:
+		if sprite.skeleton_data_res and not sprite.skeleton_data_res.find_animation("pose%d" % _pose_index):
+			continue
+		sprite.get_animation_state().set_animation("pose%d" % _pose_index, false, 0)
+		sprite.get_animation_state().add_animation("idle", 0, true, 0)
+
+
+func play_defeat_pose() -> void:
+	for sprite in _sprites:
+		if sprite.skeleton_data_res and not sprite.skeleton_data_res.find_animation("defeat"):
+			continue
+		sprite.get_animation_state().set_animation("defeat", false, 0)
+
+
+func _on_died() -> void:
+	play_defeat_pose()
+	TriggerVfx.spawn(self, TriggerVfx.DEFEAT)
+
+
+func _collect_spine_sprites(node: Node) -> Array[SpineSprite]:
+	var sprites: Array[SpineSprite] = []
+	for child in node.get_children():
+		if child is SpineSprite:
+			sprites.append(child)
+		sprites.append_array(_collect_spine_sprites(child))
+	return sprites
+
+
+func _on_health_changed(health: int, old_health: int) -> void:
 	_update_health_bar()
+	if old_health > health:
+		TriggerVfx.spawn(self, TriggerVfx.HIT)
+
+
+func _on_status_changed(status: String, _stacks: int) -> void:
+	TriggerVfx.spawn(self, TriggerVfx.animation_for_status(status))
 
 
 func _update_health_bar() -> void:
@@ -155,10 +212,12 @@ func _clear_intent_icons() -> void:
 		child.free()
 
 
-func _add_intent_entry(texture: Texture2D, value_text: String) -> void:
+func _add_intent_entry(texture: Texture2D, value_text: String, tooltip_key: String) -> void:
 	var entry := Control.new()
 	entry.custom_minimum_size = INTENT_ICON_SIZE
-	entry.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	entry.mouse_filter = Control.MOUSE_FILTER_STOP
+	entry.mouse_entered.connect(_on_intent_entry_mouse_entered.bind(tooltip_key))
+	entry.mouse_exited.connect(_on_intent_entry_mouse_exited)
 
 	var icon := TextureRect.new()
 	icon.texture = texture
@@ -187,3 +246,19 @@ func _add_intent_entry(texture: Texture2D, value_text: String) -> void:
 		entry.add_child(label)
 
 	_intent_row.add_child(entry)
+
+
+func _on_intent_entry_mouse_entered(tooltip_key: String) -> void:
+	var tooltip := _get_icon_tooltip()
+	if tooltip != null:
+		tooltip.show_for(tooltip_key)
+
+
+func _on_intent_entry_mouse_exited() -> void:
+	var tooltip := _get_icon_tooltip()
+	if tooltip != null:
+		tooltip.hide_tooltip()
+
+
+func _get_icon_tooltip() -> IconTooltip:
+	return get_tree().get_first_node_in_group("icon_tooltip") as IconTooltip

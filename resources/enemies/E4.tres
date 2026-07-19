@@ -27,9 +27,9 @@ hit_count = 2
 script = ExtResource("1_e4")
 id = 4
 name = "Enemy 4"
-description = "Deals 2 more damage and gains 2 more block with every turn."
-health = 150
-max_health = 150
+description = "[img width=16 height=16]res://assets/sprites/icons/icon_ramp_up.png[/img]2 Ramp-up: Attacks deal 2 more damage and defense gives 2 more block with every turn."
+health = 80
+max_health = 80
 moves = Array[ExtResource("2_move")]([SubResource("move_1"), SubResource("move_2"), SubResource("move_3"), SubResource("move_4")])
 damage_per_turn = 2
 block_per_turn = 2

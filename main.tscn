@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dqhivoovq4phj" path="res://scenes/stage/reward_screen.tscn" id="12_reward"]
 [ext_resource type="Texture2D" uid="uid://bg6gdtan8g6fv" path="res://assets/sprites/ui/icon_discard_pile.png" id="15_getpj"]
 [ext_resource type="Texture2D" uid="uid://cysf181gpkhee" path="res://assets/sprites/ui/icon_draw_pile.png" id="17_ryguw"]
+[ext_resource type="Texture2D" uid="uid://bnegp1eeenxwd" path="res://assets/ui/button.png" id="18_endturn_btn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_chyd6"]
 animations = [{
@@ -119,6 +120,53 @@ corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_endturn_normal"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+texture = ExtResource("18_endturn_btn")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_endturn_pressed"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+texture = ExtResource("18_endturn_btn")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+modulate_color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_endturn_hover"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+texture = ExtResource("18_endturn_btn")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+modulate_color = Color(1.25, 1.25, 1.25, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_endturn_disabled"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+texture = ExtResource("18_endturn_btn")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+modulate_color = Color(1, 1, 1, 0.5)
+
 [node name="Main" type="Control" unique_id=558398176]
 layout_mode = 3
 anchors_preset = 15
@@ -129,7 +177,6 @@ grow_vertical = 2
 script = ExtResource("1_main")
 deck = ExtResource("4_deck")
 card_scene = ExtResource("1_card_visual")
-is_tutorial = true
 
 [node name="DiscardMarker" type="Marker2D" parent="." unique_id=1300470750]
 unique_name_in_owner = true
@@ -266,7 +313,7 @@ layout_mode = 2
 
 [node name="DiscardPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=428355634]
 z_index = 20
-position = Vector2(931, 562.5)
+position = Vector2(912, 565.5)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("15_getpj")
 
@@ -326,6 +373,13 @@ unique_name_in_owner = true
 z_index = 20
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_endturn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_endturn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxTexture_endturn_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_endturn_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_endturn_disabled")
+theme_override_styles/focus = SubResource("StyleBoxTexture_endturn_normal")
 text = "END TURN"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBox/MarginContainer" unique_id=1946937927]

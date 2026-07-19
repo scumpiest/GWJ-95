@@ -1,0 +1,21 @@
+[gd_resource type="SpineSkeletonDataResource" format=3 uid="uid://bqj7t2n4wk8f6"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://crb5e6chg26tk" path="res://assets/sprites/characters/enemy3/Enemy3.atlas" id="1_atlas"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://213l3sfcsy33" path="res://assets/sprites/characters/enemy3/Enemy3.skel" id="2_skel"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_l0e0x"]
+from = "defeat"
+to = "defeat"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_vaqun"]
+from = "defeat"
+to = "defeat"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_puyko"]
+from = "defeat"
+to = "defeat"
+
+[resource]
+atlas_res = ExtResource("1_atlas")
+skeleton_file_res = ExtResource("2_skel")
+animation_mixes = [SubResource("SpineAnimationMix_l0e0x"), SubResource("SpineAnimationMix_vaqun"), SubResource("SpineAnimationMix_puyko")]

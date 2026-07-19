@@ -5,11 +5,15 @@ var levels: Array[Level]
 var current_level: Level
 var main: Main
 
+# Set by the main menu right before switching to the game scene so the first
+# level starts in tutorial mode.
+var start_as_tutorial: bool = false
+
 signal next_level
 signal task_state_changed(state: BattleTask.State)
 
 func _ready() -> void:
-	main = get_node("/root/Main")
+	main = get_node_or_null("/root/Main")
 	levels = levels_resource.levels
 	next_level.connect(_next_level)
 

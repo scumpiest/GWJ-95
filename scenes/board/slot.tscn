@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://k0msilr74cgg"]
 
 [ext_resource type="Script" uid="uid://balovkd1t78px" path="res://scenes/board/slot.gd" id="1_slot"]
+[ext_resource type="Texture2D" uid="uid://cumluq5ur5hne" path="res://assets/sprites/cards/cassette/slot_inactive.png" id="2_inactive"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot"]
 bg_color = Color(0.08, 0.08, 0.1, 0.6)
@@ -25,3 +26,11 @@ script = ExtResource("1_slot")
 [node name="CardAnchor" type="CenterContainer" parent="." unique_id=1156093911]
 layout_mode = 2
 mouse_filter = 2
+
+[node name="InactiveOverlay" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_inactive")
+expand_mode = 1
+stretch_mode = 5

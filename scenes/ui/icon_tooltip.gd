@@ -12,6 +12,12 @@ const ICON_TOOLTIPS := {
 	"redcassette": "Red cassette",
 	"greencassette": "Green cassette",
 	"purplecassette": "Purple cassette",
+	"icon_ramp_up": ("Attacks deal more damage and defense gives more block with every turn"),
+	"icon_improvisation": (
+		"Every turn, 1-3 slots become colored with a random color. " + "Any cassette in that slot switches its color to the slot's one"
+	),
+	"icon_purple_vulnerability": ("Receives twice as much damage from Purple Cassettes"),
+	"icon_red_vulnerability": ("Receives twice as much damage from Red Cassettes"),
 }
 
 @onready var icon: TextureRect = $HBox/Icon
@@ -47,4 +53,5 @@ func _process(_delta: float) -> void:
 
 
 func _follow_mouse() -> void:
+	global_position = get_global_mouse_position() + Vector2(12, 12)
 	global_position = get_global_mouse_position() + Vector2(12, 12)

@@ -26,9 +26,9 @@ hit_count = 3
 script = ExtResource("1_boss")
 id = 5
 name = "Boss"
-description = "Every turn, 1-3 slots become colored with a random color. Any cassette in that slot switches its color to the slot's one."
-health = 200
-max_health = 200
+description = "[img width=16 height=16]res://assets/sprites/icons/icon_improvisation.png[/img] Improvisation: Every turn, 1-3 slots become colored with a random color. Any cassette in that slot switches its color to the slot's one."
+health = 100
+max_health = 100
 moves = Array[ExtResource("2_move")]([SubResource("move_1"), SubResource("move_2"), SubResource("move_3"), SubResource("move_4")])
 color_slots_min = 1
 color_slots_max = 3
