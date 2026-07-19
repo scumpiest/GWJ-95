@@ -22,6 +22,17 @@
 [ext_resource type="Texture2D" uid="uid://bg6gdtan8g6fv" path="res://assets/sprites/ui/icon_discard_pile.png" id="15_getpj"]
 [ext_resource type="Texture2D" uid="uid://cysf181gpkhee" path="res://assets/sprites/ui/icon_draw_pile.png" id="17_ryguw"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pile_count"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.85, 0.12, 0.12, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_chyd6"]
 animations = [{
 "frames": [{
@@ -134,7 +145,6 @@ grow_vertical = 2
 script = ExtResource("1_main")
 deck = ExtResource("4_deck")
 card_scene = ExtResource("1_card_visual")
-is_tutorial = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=335792737]
 layout_mode = 1
@@ -152,6 +162,7 @@ theme_override_constants/margin_right = 24
 [node name="CanvasLayer" type="CanvasLayer" parent="MarginContainer" unique_id=721030733]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/CanvasLayer" unique_id=116648833]
+visible = false
 position = Vector2(917, 144)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_chyd6")
@@ -174,6 +185,7 @@ wait_time = 0.3
 wait_time = 0.5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CanvasLayer" unique_id=32164973]
+visible = false
 offset_left = 734.0
 offset_top = 54.0
 offset_right = 1006.0
@@ -185,6 +197,7 @@ text = "hello"
 scroll_active = false
 
 [node name="BubbleButton" type="Button" parent="MarginContainer/CanvasLayer" unique_id=1339568607]
+visible = false
 z_index = 20
 offset_left = 708.0
 offset_top = 30.000002
@@ -240,7 +253,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TaskOverlay" parent="MarginContainer/VBox/HeaderContainer" unique_id=1841878379 instance=ExtResource("9_074og")]
-position = Vector2(919.055, 0)
+position = Vector2(870, -1.5)
 
 [node name="Balance" parent="MarginContainer/VBox/HeaderContainer" unique_id=1899342113 instance=ExtResource("5_efxa6")]
 layout_mode = 2
@@ -266,6 +279,26 @@ position = Vector2(931, 550)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("15_getpj")
 
+[node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DiscardPile"]
+z_index = 5
+custom_minimum_size = Vector2(36, 36)
+offset_left = -90.0
+offset_top = 48.0
+offset_right = -54.0
+offset_bottom = 84.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pile_count")
+
+[node name="DiscardPileCount" type="Label" parent="MarginContainer/VBox/DiscardPile/CountBadge"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DrawMarker" type="Marker2D" parent="MarginContainer/VBox" unique_id=642930984]
 position = Vector2(58, 546.5)
 
@@ -273,6 +306,26 @@ position = Vector2(58, 546.5)
 position = Vector2(60, 550)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("17_ryguw")
+
+[node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DrawPile"]
+z_index = 5
+custom_minimum_size = Vector2(36, 36)
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 84.0
+offset_bottom = 84.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pile_count")
+
+[node name="DrawPileCount" type="Label" parent="MarginContainer/VBox/DrawPile/CountBadge"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBox" unique_id=182627700]
 layout_mode = 2

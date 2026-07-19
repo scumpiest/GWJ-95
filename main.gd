@@ -18,6 +18,8 @@ class_name Main
 @onready var tutorial: CanvasLayer = $MarginContainer/CanvasLayer
 @onready var bubble_button: Button = $MarginContainer/CanvasLayer/BubbleButton
 @onready var text_tutorial: RichTextLabel = $MarginContainer/CanvasLayer/RichTextLabel
+@onready var draw_pile_count: Label = %DrawPileCount
+@onready var discard_pile_count: Label = %DiscardPileCount
 @onready var speech_bubble_pressed: bool = false
 @onready var end_turn_button_pressed: bool = false
 
@@ -29,6 +31,10 @@ var _battle_won: bool = false
 
 func _ready() -> void:
 	GameManager.phase_changed.connect(_on_phase_changed)
+	GameManager.deck_count_changed.connect(_on_deck_count_changed)
+	GameManager.discard_count_changed.connect(_on_discard_count_changed)
+	_on_deck_count_changed(deck.cards.size())
+	_on_discard_count_changed(deck.discard_pile.size())
 
 	shop_container.visibility_changed.connect(func():
 		var tween := create_tween()
@@ -46,6 +52,14 @@ func _ready() -> void:
 	reward_screen.card_chosen.connect(_chosen_card)
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
+
+
+func _on_deck_count_changed(count: int) -> void:
+	draw_pile_count.text = str(count)
+
+
+func _on_discard_count_changed(count: int) -> void:
+	discard_pile_count.text = str(count)
 
 
 func _chosen_card(card_data: CardData) -> void:
@@ -160,8 +174,7 @@ func _finish_battle_won() -> void:
 	var won_chain_cards := clear_chain_slots()
 	if not won_chain_cards.is_empty():
 		AudioManager.play_card_discard()
-	for card_data in won_chain_cards:
-		deck.add_to_discard_pile(card_data)
+		GameManager.discard_cards(won_chain_cards)
 	if LevelManager.current_level.rewards:
 		reward_screen.show_choices(LevelManager.current_level.rewards.cards)
 	else:
