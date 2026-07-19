@@ -11,6 +11,7 @@ enum Phase {
 signal deck_count_changed(count: int)
 signal discard_count_changed(count: int)
 signal phase_changed(phase: Phase)
+signal enemy_intent_changed(move: EnemyMove)
 
 @export var card_db: CardDB
 
@@ -37,13 +38,33 @@ func begin_chain_resolve() -> bool:
 
 func end_player_turn(discarded: Array[CardData], cards_to_draw: int) -> Array[CardData]:
 	_set_phase(Phase.ENEMY_TURN)
-	# TODO: Implement enemy turn actions
+	_resolve_enemy_turn()
 
 	discard_cards(discarded)
 	context.current_turn += 1
 
+	if context.enemy != null and context.enemy.health > 0 and context.player.health > 0:
+		roll_enemy_intent()
+
 	_set_phase(Phase.DRAW)
 	return draw_cards(cards_to_draw)
+
+
+func _resolve_enemy_turn() -> void:
+	if context == null or context.enemy == null or context.enemy.health <= 0:
+		return
+
+	if context.enemy_intent != null:
+		context.enemy_intent.execute(context, context.enemy_data)
+
+
+func roll_enemy_intent() -> EnemyMove:
+	if context == null:
+		return null
+	var move := context.roll_enemy_intent()
+	enemy_intent_changed.emit(move)
+	print("Enemy intent: ", move)
+	return move
 
 
 func draw_cards(count: int) -> Array[CardData]:

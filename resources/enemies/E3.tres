@@ -1,26 +1,30 @@
-[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://cg5ilwxy2fpl"]
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://7wbo2uvptoq3"]
 
-[ext_resource type="Script" uid="uid://72a7l2y26pqx" path="res://script_resources/enemy_resource.gd" id="1_c6fmt"]
+[ext_resource type="Script" uid="uid://72a7l2y26pqx" path="res://script_resources/enemy_resource.gd" id="1_e3"]
 [ext_resource type="Script" uid="uid://cflmc8nwqgkkg" path="res://script_resources/enemy_move.gd" id="2_move"]
 
 [sub_resource type="Resource" id="move_1"]
 script = ExtResource("2_move")
-damage = 10
+damage = 15
+block = 5
 
 [sub_resource type="Resource" id="move_2"]
 script = ExtResource("2_move")
-block = 10
+block = 15
+apply_vulnerable = 1
 
 [sub_resource type="Resource" id="move_3"]
 script = ExtResource("2_move")
-damage = 5
-block = 10
+damage = 15
+apply_weakness = 1
 
 [resource]
-script = ExtResource("1_c6fmt")
-id = 1
-name = "Enemy 1"
-health = 50
-max_health = 50
+script = ExtResource("1_e3")
+id = 3
+name = "Enemy 3"
+description = "Receives twice more damage from Purple Cassettes."
+health = 100
+max_health = 100
 moves = Array[ExtResource("2_move")]([SubResource("move_1"), SubResource("move_2"), SubResource("move_3")])
+purple_damage_multiplier = 2.0
 metadata/_custom_type_script = "uid://72a7l2y26pqx"
