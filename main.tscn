@@ -22,17 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://bg6gdtan8g6fv" path="res://assets/sprites/ui/icon_discard_pile.png" id="15_getpj"]
 [ext_resource type="Texture2D" uid="uid://cysf181gpkhee" path="res://assets/sprites/ui/icon_draw_pile.png" id="17_ryguw"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pile_count"]
-content_margin_left = 4.0
-content_margin_top = 2.0
-content_margin_right = 4.0
-content_margin_bottom = 2.0
-bg_color = Color(0.85, 0.12, 0.12, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_chyd6"]
 animations = [{
 "frames": [{
@@ -135,6 +124,17 @@ _data = {
 &"text": SubResource("Animation_82xsv")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pile_count"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.85, 0.12, 0.12, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
 [node name="Main" type="Control" unique_id=558398176]
 layout_mode = 3
 anchors_preset = 15
@@ -145,14 +145,6 @@ grow_vertical = 2
 script = ExtResource("1_main")
 deck = ExtResource("4_deck")
 card_scene = ExtResource("1_card_visual")
-
-[node name="DiscardMarker" type="Marker2D" parent="." unique_id=1300470750]
-unique_name_in_owner = true
-position = Vector2(956, 547)
-
-[node name="DrawMarker" type="Marker2D" parent="." unique_id=642930984]
-unique_name_in_owner = true
-position = Vector2(82, 549)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=335792737]
 layout_mode = 1
@@ -285,7 +277,7 @@ position = Vector2(931, 550)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("15_getpj")
 
-[node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DiscardPile"]
+[node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DiscardPile" unique_id=765121624]
 z_index = 5
 custom_minimum_size = Vector2(36, 36)
 offset_left = -90.0
@@ -296,7 +288,7 @@ scale = Vector2(2, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pile_count")
 
-[node name="DiscardPileCount" type="Label" parent="MarginContainer/VBox/DiscardPile/CountBadge"]
+[node name="DiscardPileCount" type="Label" parent="MarginContainer/VBox/DiscardPile/CountBadge" unique_id=556030009]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -311,7 +303,7 @@ position = Vector2(60, 550)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("17_ryguw")
 
-[node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DrawPile"]
+[node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DrawPile" unique_id=708288377]
 z_index = 5
 custom_minimum_size = Vector2(36, 36)
 offset_left = 48.0
@@ -322,7 +314,7 @@ scale = Vector2(2, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pile_count")
 
-[node name="DrawPileCount" type="Label" parent="MarginContainer/VBox/DrawPile/CountBadge"]
+[node name="DrawPileCount" type="Label" parent="MarginContainer/VBox/DrawPile/CountBadge" unique_id=1094647244]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)

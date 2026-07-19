@@ -6,6 +6,7 @@ const POSE_COUNT := 7
 @export var starting_health: int = 50
 
 @onready var _sprite: SpineSprite = $SpineSprite
+@onready var _health_bar: ProgressBar = $HealthBar/ProgressBar
 
 var unit: Unit
 var _pose_index: int = 0
@@ -16,11 +17,17 @@ func _ready() -> void:
 	_init_unit()
 	unit.block_changed.connect(_handle_block_changed)
 	unit.health_changed.connect(_health_decreased)
+	unit.health_changed.connect(_update_health_bar)
+	_update_health_bar(unit.health, unit.health)
 	_sprite.get_animation_state().set_animation("idle", true, 0)
 
 func _health_decreased(health: int, old_health: int):
 	if old_health > health:
 		LevelManager.send_task_event(BattleTask.EventType.DAMAGE_TAKEN, old_health - health)
+
+func _update_health_bar(health: int, _old_health: int) -> void:
+	_health_bar.max_value = unit.max_health
+	_health_bar.value = health
 
 func _handle_block_changed(block: int):
 	if block > _last_block:
