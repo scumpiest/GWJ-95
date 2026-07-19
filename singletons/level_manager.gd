@@ -6,16 +6,27 @@ var current_level: Level
 var main: Main
 
 signal next_level
+signal task_state_changed(state: BattleTask.State)
 
 func _ready() -> void:
 	main = get_node("/root/Main")
 	levels = levels_resource.levels
 	next_level.connect(_next_level)
 
+func send_task_event(event, data = null):
+	if current_level and current_level.task:
+		var current_task_state = current_level.task.on_event(event, data)
+		current_level.task.current_state = current_task_state
+		print(current_task_state)
+		task_state_changed.emit(current_task_state)
+
 func _next_level() -> void:
-	# Default reward for next level
+	# Rewards for next level :)
 	if current_level and current_level.type == Level.LevelType.GAME:
-		CurrencyManager.add_money(20)
+		var money_to_add = 20
+		if current_level.task and current_level.task.current_state == BattleTask.State.COMPLETED:
+			money_to_add += 10
+		CurrencyManager.add_money(money_to_add)
 	if !current_level:
 		current_level = levels[0]
 	else:

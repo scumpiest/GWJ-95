@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c1jftv714m1ts"]
+
+[ext_resource type="Script" uid="uid://b8ur618b5c130" path="res://scenes/task/task_overlay.gd" id="1_wq7du"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_074og"]
+font_color = Color(0, 1, 0, 1)
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TaskOverlay" type="Node2D" unique_id=1841878379]
+script = ExtResource("1_wq7du")
+metadata/_edit_vertical_guides_ = [-39.0]
+
+[node name="TaskDescription" type="Label" parent="." unique_id=1965478021]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+custom_maximum_size = Vector2(100, -1)
+offset_right = 40.0
+offset_bottom = 33.0
+label_settings = SubResource("LabelSettings_074og")
+horizontal_alignment = 2
