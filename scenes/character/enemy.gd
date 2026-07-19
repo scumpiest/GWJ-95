@@ -11,7 +11,8 @@ const ICON_VULNERABILITY := preload("res://assets/sprites/icons/vulnerability.pn
 
 @onready var _sprite: SpineSprite = $SpineSprite
 @onready var _health_bar: ProgressBar = get_node_or_null("HealthBar/ProgressBar")
-@onready var _intent_row: HBoxContainer = get_node_or_null("HealthBar/IntentRow")
+@onready var _thought_bubble: Sprite2D = get_node_or_null("ThoughtBubble")
+@onready var _intent_row: HBoxContainer = get_node_or_null("ThoughtBubble/IntentRow")
 @onready var _status_row = get_node_or_null("HealthBar/StatusRow")
 
 var unit: Unit
@@ -58,6 +59,8 @@ func set_intent(move: EnemyMove) -> void:
 		and (move.deals_damage() or move.gains_block() or move.applies_status())
 	)
 	_intent_row.visible = has_intent
+	if _thought_bubble != null:
+		_thought_bubble.visible = has_intent
 	if not has_intent:
 		return
 
@@ -107,24 +110,20 @@ func _ensure_intent_row() -> void:
 	if _intent_row != null:
 		return
 
-	var health_bar_root := get_node_or_null("HealthBar") as Control
 	_intent_row = HBoxContainer.new()
 	_intent_row.name = "IntentRow"
 	_intent_row.alignment = BoxContainer.ALIGNMENT_CENTER
 	_intent_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_intent_row.add_theme_constant_override("separation", 8)
+	_intent_row.custom_minimum_size = Vector2(200, 72)
+	# Centered in the thought bubble texture (404x288, Sprite2D centered at origin).
+	_intent_row.position = Vector2(-100, -50)
 
-	if health_bar_root != null:
-		health_bar_root.add_child(_intent_row)
-		_intent_row.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
-		_intent_row.offset_left = 40.0
-		_intent_row.offset_top = -140.0
-		_intent_row.offset_right = 0.0
-		_intent_row.offset_bottom = -52.0
+	if _thought_bubble != null:
+		_thought_bubble.add_child(_intent_row)
 	else:
 		add_child(_intent_row)
 		_intent_row.position = Vector2(-80, -700)
-		_intent_row.custom_minimum_size = Vector2(160, 64)
 
 
 func _ensure_status_row() -> void:
@@ -175,10 +174,13 @@ func _add_intent_entry(texture: Texture2D, value_text: String) -> void:
 		label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		label.offset_right = 4.0
 		label.offset_bottom = 2.0
-		label.add_theme_font_size_override("font_size", 28)
-		label.add_theme_color_override("font_color", Color.WHITE)
-		label.add_theme_color_override("font_outline_color", Color.BLACK)
-		label.add_theme_constant_override("outline_size", 6)
+		var bold_font := FontVariation.new()
+		bold_font.variation_embolden = 1.2
+		label.add_theme_font_override("font", bold_font)
+		label.add_theme_font_size_override("font_size", 32)
+		label.add_theme_color_override("font_color", Color.BLACK)
+		label.add_theme_color_override("font_outline_color", Color.WHITE)
+		label.add_theme_constant_override("outline_size", 8)
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		entry.add_child(label)
 

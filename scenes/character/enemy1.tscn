@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://c7n4k8m2qaq1r" path="res://scenes/character/enemy.gd" id="1_enemy"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://dh3xq8w2n5k1p" path="res://assets/sprites/characters/enemy1/enemy_data_res.tres" id="2_data"]
 [ext_resource type="Texture2D" uid="uid://cj8t1k6itmjba" path="res://assets/sprites/ui/icon_heart.png" id="3_heart"]
-[ext_resource type="Script" path="res://scenes/ui/status_icon_row.gd" id="4_status_row"]
+[ext_resource type="Script" uid="uid://ujq614oqltyc" path="res://scenes/ui/status_icon_row.gd" id="4_status_row"]
+[ext_resource type="Texture2D" uid="uid://bwic0btrmfn08" path="res://assets/sprites/ui/thought_bubble.png" id="5_edwm4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_healthbar_border"]
 bg_color = Color(0.043137256, 0.023529412, 0.05490196, 1)
@@ -38,18 +39,7 @@ offset_bottom = -434.0
 mouse_filter = 2
 metadata/_edit_group_ = true
 
-[node name="IntentRow" type="HBoxContainer" parent="HealthBar"]
-z_index = 11
-layout_mode = 0
-offset_left = 40.0
-offset_top = -140.0
-offset_right = 300.0
-offset_bottom = -52.0
-mouse_filter = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="StatusRow" type="HBoxContainer" parent="HealthBar"]
+[node name="StatusRow" type="HBoxContainer" parent="HealthBar" unique_id=67937671]
 z_index = 12
 layout_mode = 0
 offset_left = 40.0
@@ -88,3 +78,18 @@ offset_bottom = 51.0
 theme_override_styles/background = SubResource("StyleBoxFlat_bhunq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_33gp4")
 show_percentage = false
+
+[node name="ThoughtBubble" type="Sprite2D" parent="." unique_id=370154532]
+visible = false
+position = Vector2(203, -348)
+scale = Vector2(0.7376238, 0.75)
+texture = ExtResource("5_edwm4")
+
+[node name="IntentRow" type="HBoxContainer" parent="ThoughtBubble" unique_id=370154533]
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = 22.0
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
