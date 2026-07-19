@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bt6vcyblqjfcc" path="res://script_resources/hand.gd" id="8_dg77c"]
 [ext_resource type="PackedScene" uid="uid://cbjhhlo1by5tx" path="res://scenes/shop/shop.tscn" id="8_kek77"]
 [ext_resource type="Script" uid="uid://c23y5t0qwphab" path="res://arrow.gd" id="9_getpj"]
+[ext_resource type="PackedScene" uid="uid://c1jftv714m1ts" path="res://scenes/task/task_overlay.tscn" id="9_074og"]
 [ext_resource type="PackedScene" uid="uid://c7stag3sc3n31" path="res://scenes/stage/stage.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" path="res://scenes/ui/icon_tooltip.tscn" id="11_icon_tooltip"]
 [ext_resource type="PackedScene" uid="uid://dqhivoovq4phj" path="res://scenes/stage/reward_screen.tscn" id="12_reward"]
@@ -180,6 +181,7 @@ offset_right = 1006.0
 offset_bottom = 144.99994
 offset_transform_rotation = -2.5900686
 theme_override_colors/default_color = Color(0.08235294, 0.03529412, 0.101960786, 1)
+bbcode_enabled = true
 text = "hello"
 scroll_active = false
 
@@ -238,6 +240,9 @@ layout_mode = 2
 [node name="Slot4" parent="MarginContainer/VBox/HeaderContainer/Chain" unique_id=860462925 instance=ExtResource("2_slot")]
 layout_mode = 2
 
+[node name="TaskOverlay" parent="MarginContainer/VBox/HeaderContainer" unique_id=1841878379 instance=ExtResource("9_074og")]
+position = Vector2(919.055, 0)
+
 [node name="Balance" parent="MarginContainer/VBox/HeaderContainer" unique_id=1899342113 instance=ExtResource("5_efxa6")]
 layout_mode = 2
 
@@ -255,7 +260,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="DiscardMarker" type="Marker2D" parent="MarginContainer/VBox" unique_id=1300470750]
-position = Vector2(893, 520.5)
+position = Vector2(932, 544.5)
 
 [node name="DiscardPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=428355634]
 position = Vector2(931, 550)
@@ -263,7 +268,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("15_getpj")
 
 [node name="DrawMarker" type="Marker2D" parent="MarginContainer/VBox" unique_id=642930984]
-position = Vector2(893, 520.5)
+position = Vector2(58, 546.5)
 
 [node name="DrawPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=846734872]
 position = Vector2(60, 550)

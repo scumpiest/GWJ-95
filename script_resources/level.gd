@@ -7,3 +7,4 @@ enum LevelType { GAME, BOSS, SHOP }
 @export var enemy_scene: PackedScene
 @export var enemy_data: EnemyResource
 @export var rewards: CardDB
+@export var task: BattleTask

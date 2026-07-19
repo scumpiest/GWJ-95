@@ -13,6 +13,8 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 @onready var _description_label: RichTextLabel = $Paper/MarginContainer3/DescriptionLabel
 @onready var _sticker: TextureRect = $Casette/Sticker
 @onready var _name_label: Label = $Casette/MarginContainer2/CardName
+@onready var discard_marker: Marker2D = $MarginContainer/VBox/DiscardMarker
+@onready var draw_marker: Marker2D = $MarginContainer/VBox/DrawMarker
 
 var owner_slot: Slot
 var shop_card: bool = false
@@ -135,12 +137,14 @@ func activate() -> void:
 	if owner_slot != null:
 		owner_slot.set_activation_highlighted(true)
 	set_activation_highlighted(true)
-	await get_tree().create_timer(ACTIVATION_DURATION).timeout
-	if not is_inside_tree():
-		return
-	set_activation_highlighted(false)
-	if owner_slot != null:
-		owner_slot.set_activation_highlighted(false)
+	# Might already be deleted, as clear can be called before this runs
+	if get_tree():
+		await get_tree().create_timer(ACTIVATION_DURATION).timeout
+		if not is_inside_tree():
+			return
+		set_activation_highlighted(false)
+		if owner_slot != null:
+			owner_slot.set_activation_highlighted(false)
 
 
 func _notification(what: int) -> void:
@@ -196,3 +200,8 @@ func _on_casette_mouse_exited() -> void:
 	var tooltip := get_icon_tooltip()
 	if tooltip != null:
 		tooltip.hide_tooltip()
+		
+
+func discard_animation():
+	print("discard card")
+	
