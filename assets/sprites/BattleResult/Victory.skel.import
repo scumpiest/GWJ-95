@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://byaufxtunr16p"
+path="res://.godot/imported/Victory.skel-1979fa2eba2c078b1c3ce0aac939eaed.spskel"
+
+[deps]
+
+source_file="res://assets/sprites/BattleResult/Victory.skel"
+dest_files=["res://.godot/imported/Victory.skel-1979fa2eba2c078b1c3ce0aac939eaed.spskel"]
+
+[params]
+
