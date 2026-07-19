@@ -189,7 +189,6 @@ func make_slot_jiggle():
 		
 	tween = create_tween()
 	
-	print("yay")
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_SPRING)
 	tween.tween_property(self, "scale:x", scale_x_range, scale_x_duration)
@@ -205,7 +204,8 @@ func stop_slot_jiggle():
 	
 	tween = create_tween()
 	
-	print("nope")
 	tween.tween_property(self, "scale:x", 1.0, scale_x_duration)
 	tween.parallel().tween_property(self, "scale:y", 1.0, scale_y_duration)
 	tween.parallel().tween_property(self, "rotation_degrees", 0.0, rotation_duration)
+
+	

@@ -146,6 +146,14 @@ script = ExtResource("1_main")
 deck = ExtResource("4_deck")
 card_scene = ExtResource("1_card_visual")
 
+[node name="DiscardMarker" type="Marker2D" parent="." unique_id=1300470750]
+unique_name_in_owner = true
+position = Vector2(956, 547)
+
+[node name="DrawMarker" type="Marker2D" parent="." unique_id=642930984]
+unique_name_in_owner = true
+position = Vector2(82, 549)
+
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=335792737]
 layout_mode = 1
 anchors_preset = 15
@@ -271,10 +279,8 @@ scale = Vector2(0.5, 0.5)
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="DiscardMarker" type="Marker2D" parent="MarginContainer/VBox" unique_id=1300470750]
-position = Vector2(932, 544.5)
-
 [node name="DiscardPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=428355634]
+z_index = 20
 position = Vector2(931, 550)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("15_getpj")
@@ -299,10 +305,8 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DrawMarker" type="Marker2D" parent="MarginContainer/VBox" unique_id=642930984]
-position = Vector2(58, 546.5)
-
 [node name="DrawPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=846734872]
+z_index = 20
 position = Vector2(60, 550)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("17_ryguw")
