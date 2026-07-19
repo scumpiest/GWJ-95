@@ -12,6 +12,9 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhunq"]
+bg_color = Color(0.94100165, 0.34064347, 0.38857287, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_238uf"]
 bg_color = Color(0.9411765, 0.34117648, 0.3882353, 1)
 
 [node name="Player" type="Node2D" unique_id=1761150887]
@@ -59,4 +62,5 @@ offset_top = 18.0
 offset_right = 291.0
 offset_bottom = 51.0
 theme_override_styles/background = SubResource("StyleBoxFlat_bhunq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_238uf")
 show_percentage = false
