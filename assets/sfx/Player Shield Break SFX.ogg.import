@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cbnnfe0gqp5ir"
+path="res://.godot/imported/Player Shield Break SFX.ogg-52b8db8ec983a81444ebf69fb4f7da15.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Player Shield Break SFX.ogg"
+dest_files=["res://.godot/imported/Player Shield Break SFX.ogg-52b8db8ec983a81444ebf69fb4f7da15.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

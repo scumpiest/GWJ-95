@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dufj5kcuthwqn"
+path="res://.godot/imported/Card Click SFX.ogg-539add594709a730aed8d754742a42a7.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Card Click SFX.ogg"
+dest_files=["res://.godot/imported/Card Click SFX.ogg-539add594709a730aed8d754742a42a7.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

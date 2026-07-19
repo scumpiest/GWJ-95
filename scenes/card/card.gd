@@ -13,12 +13,9 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 @onready var _description_label: RichTextLabel = $Paper/MarginContainer3/DescriptionLabel
 @onready var _sticker: TextureRect = $Casette/Sticker
 @onready var _name_label: Label = $Casette/MarginContainer2/CardName
-@onready var discard_marker: Marker2D = $MarginContainer/VBox/DiscardMarker
-@onready var draw_marker: Marker2D = $MarginContainer/VBox/DrawMarker
 
 var owner_slot: Slot
 var shop_card: bool = false
-var reward_card: bool = false
 var cost_label: Label
 var tween: Tween
 var img_metadata_regex: RegEx
@@ -26,9 +23,10 @@ var start_x: int
 
 signal clicked_card(CardVisual)
 
+
 func _ready() -> void:
 	# Pivot point is for the animation so it's centered
-	self.pivot_offset = self.get_rect().size/2
+	self.pivot_offset = self.get_rect().size / 2
 	cost_label = get_node("CostLabel")
 	if shop_card:
 		cost_label.text = str(card_data.cost) + "$"
@@ -40,22 +38,27 @@ func _ready() -> void:
 	_apply_display_mode(false)
 	casette.mouse_entered.connect(_on_casette_mouse_entered)
 	casette.mouse_exited.connect(_on_casette_mouse_exited)
-	casette.gui_input.connect(_on_casette_gui_input)
 	_description_label.meta_hover_started.connect(_on_description_meta_hover_started)
 	_description_label.meta_hover_ended.connect(_on_description_meta_hover_ended)
 
+
 func set_shop_card(is_shop_card: bool):
 	shop_card = is_shop_card
-	if !is_shop_card:
+	if ! is_shop_card:
 		cost_label.visible = false
 	else:
 		cost_label.visible = true
 
 
-func _on_casette_gui_input(event: InputEvent) -> void:
-	if (shop_card or reward_card) and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+func _gui_input(event):
+	if (
+		shop_card and event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()
+	):
+		AudioManager.play_card_click()
 		clicked_card.emit(self)
 		set_casette_highlighted(true)
+
 
 func _bind_card_data() -> void:
 	if card_data == null:
@@ -106,8 +109,9 @@ func _apply_display_mode(in_chain: bool) -> void:
 
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
-	if shop_card or reward_card:
+	if (shop_card):
 		return
+	AudioManager.play_card_click()
 	var preview := duplicate() as CardVisual
 	preview.modulate.a = 0.75
 	preview.set_owner_slot(owner_slot)
@@ -132,19 +136,14 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 
 
 func activate() -> void:
-	if not is_inside_tree():
-		return
+	AudioManager.play_card_trigger()
 	if owner_slot != null:
 		owner_slot.set_activation_highlighted(true)
 	set_activation_highlighted(true)
-	# Might already be deleted, as clear can be called before this runs
-	if get_tree():
-		await get_tree().create_timer(ACTIVATION_DURATION).timeout
-		if not is_inside_tree():
-			return
-		set_activation_highlighted(false)
-		if owner_slot != null:
-			owner_slot.set_activation_highlighted(false)
+	await get_tree().create_timer(ACTIVATION_DURATION).timeout
+	set_activation_highlighted(false)
+	if owner_slot != null:
+		owner_slot.set_activation_highlighted(false)
 
 
 func _notification(what: int) -> void:
@@ -172,6 +171,7 @@ func set_activation_highlighted(active: bool) -> void:
 
 
 func _on_casette_mouse_entered() -> void:
+	AudioManager.play_card_hover()
 	if owner_slot != null:
 		paper.visible = true
 	if tween:
@@ -200,8 +200,3 @@ func _on_casette_mouse_exited() -> void:
 	var tooltip := get_icon_tooltip()
 	if tooltip != null:
 		tooltip.hide_tooltip()
-		
-
-func discard_animation():
-	print("discard card")
-	

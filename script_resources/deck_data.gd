@@ -6,6 +6,8 @@ extends Resource
 @export var discard_pile: Array[CardData] = []
 
 func shuffle() -> void:
+	if cards.size() > 1:
+		AudioManager.play_card_deck_shuffle()
 	for i in range(cards.size() - 1, 0, -1):
 		var j := randi_range(0, i)
 		var temp := cards[i]

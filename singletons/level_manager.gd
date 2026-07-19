@@ -26,6 +26,7 @@ func _next_level() -> void:
 		var money_to_add = 20
 		if current_level.task and current_level.task.current_state == BattleTask.State.COMPLETED:
 			money_to_add += 10
+			AudioManager.play_task_completed()
 		CurrencyManager.add_money(money_to_add)
 	if !current_level:
 		current_level = levels[0]
@@ -34,6 +35,8 @@ func _next_level() -> void:
 		var new_level_index = current_level_index + 1
 		if current_level_index != -1 and new_level_index < (levels.size() + 1):
 			current_level = levels[new_level_index]
+
+	AudioManager.play_music_for_level(current_level.type)
 
 func get_current_enemy() -> Unit:
 	var enemy_data := current_level.enemy_data

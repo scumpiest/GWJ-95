@@ -9,6 +9,7 @@ const POSE_COUNT := 7
 
 var unit: Unit
 var _pose_index: int = 0
+var _last_block: int = 0
 
 
 func _ready() -> void:
@@ -22,6 +23,9 @@ func _health_decreased(health: int, old_health: int):
 		LevelManager.send_task_event(BattleTask.EventType.DAMAGE_TAKEN, old_health - health)
 
 func _handle_block_changed(block: int):
+	if block > _last_block:
+		AudioManager.play_player_shield_activate()
+	_last_block = block
 	LevelManager.send_task_event(BattleTask.EventType.BLOCK_GAINED, block)
 
 

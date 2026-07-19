@@ -35,6 +35,7 @@ func resolve(
 		if next_color in pierce_if_next_is_color:
 			pierce_block = true
 
+	AudioManager.play_player_attack()
 	match target:
 		Target.ENEMY:
 			slot.last_damage_dealt = CombatCalculation.apply_damage(

@@ -140,6 +140,11 @@ func _apply_drop(
 ) -> void:
 	set_card(card)
 
+	if displaced:
+		AudioManager.play_card_swapped()
+	else:
+		AudioManager.play_card_placed()
+
 	if from_slot:
 		if displaced:
 			from_slot.set_card(displaced)

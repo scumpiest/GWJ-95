@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://id07s5xq7g7x"
+path="res://.godot/imported/Shop No Money SFX.ogg-e4b4440acc1c20afd267f1512236af20.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Shop No Money SFX.ogg"
+dest_files=["res://.godot/imported/Shop No Money SFX.ogg-e4b4440acc1c20afd267f1512236af20.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

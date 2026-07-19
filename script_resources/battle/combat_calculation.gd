@@ -23,8 +23,16 @@ static func apply_damage(
 		var absorbed_damage = mini(defender.block, damage)
 		defender.lose_block(absorbed_damage)
 		damage -= absorbed_damage
+		if absorbed_damage > 0 and _is_player(defender):
+			AudioManager.play_player_shield_block()
+			if defender.block <= 0:
+				AudioManager.play_player_shield_break()
 
 	if damage > 0:
 		defender.take_damage(damage)
 
 	return damage
+
+
+static func _is_player(unit: Unit) -> bool:
+	return GameManager.context != null and unit == GameManager.context.player

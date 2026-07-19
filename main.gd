@@ -41,6 +41,8 @@ func _ready() -> void:
 	#deck_button.pressed.connect(_on_deck_pressed)
 
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
+	end_turn.mouse_entered.connect(AudioManager.play_ui_hover)
+	bubble_button.mouse_entered.connect(AudioManager.play_ui_hover)
 	reward_screen.card_chosen.connect(_chosen_card)
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
@@ -95,6 +97,9 @@ func next_level() -> void:
 
 # TODO: add animation to spawn cards
 func _spawn_cards(cards: Array[CardData]) -> void:
+	if cards.is_empty():
+		return
+	AudioManager.play_card_draw()
 	for card_data in cards:
 		var card_visual := card_scene.instantiate() as CardVisual
 		card_visual.card_data = card_data
@@ -113,6 +118,7 @@ func _return_previous_cards_to_deck() -> void:
 
 
 func _on_end_turn_button_pressed() -> void:
+	AudioManager.play_ui_click()
 	end_turn.disabled = true
 	if not GameManager.begin_chain_resolve():
 		end_turn.disabled = false
@@ -130,6 +136,8 @@ func _on_end_turn_button_pressed() -> void:
 	for card in hand.get_children():
 		discarded.append(card.card_data)
 		card.queue_free()
+	if not discarded.is_empty():
+		AudioManager.play_card_discard()
 	var drawn := GameManager.end_player_turn(discarded, cards_per_draw)
 	_spawn_cards(drawn)
 	end_turn.disabled = false
@@ -139,6 +147,7 @@ func _on_enemy_damage_taken(health: int, old_health: int):
 		LevelManager.send_task_event(BattleTask.EventType.DEAL_DAMAGE, old_health - health)
 
 func _on_enemy_died() -> void:
+	AudioManager.play_enemy_dies()
 	_battle_won = true
 	# Clearing cards mid-resolve frees CardVisuals while activations still await timers.
 	if GameManager.phase != GameManager.Phase.CHAIN_RESOLVING:
@@ -148,7 +157,10 @@ func _on_enemy_died() -> void:
 func _finish_battle_won() -> void:
 	LevelManager.send_task_event(BattleTask.EventType.TURN_END, null)
 	LevelManager.send_task_event(BattleTask.EventType.BATTLE_END, null)
-	for card_data in clear_chain_slots():
+	var won_chain_cards := clear_chain_slots()
+	if not won_chain_cards.is_empty():
+		AudioManager.play_card_discard()
+	for card_data in won_chain_cards:
 		deck.add_to_discard_pile(card_data)
 	if LevelManager.current_level.rewards:
 		reward_screen.show_choices(LevelManager.current_level.rewards.cards)
@@ -234,4 +246,5 @@ func _process(_delta: float) -> void:
 		tutorial.visible = false
 
 func _on_speech_bubble_pressed() -> void:
+	AudioManager.play_ui_click()
 	speech_bubble_pressed = true

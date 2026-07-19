@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d2odu1sutahy2"
+path="res://.godot/imported/GameCard Boss.ogg-9940be377df5a50d1210e84bef34e428.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/musics/GameCard Boss.ogg"
+dest_files=["res://.godot/imported/GameCard Boss.ogg-9940be377df5a50d1210e84bef34e428.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

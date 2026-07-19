@@ -73,6 +73,7 @@ layout_mode = 2
 text = "+50% Health $10"
 
 [node name="LeaveButton" type="Button" parent="MainContainer/RightContainer/ButtonContainer" unique_id=445792254]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Leave shop"
 

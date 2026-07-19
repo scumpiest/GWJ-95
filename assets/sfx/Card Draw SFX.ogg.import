@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c4d31pbm8tvq1"
+path="res://.godot/imported/Card Draw SFX.ogg-dce52bd99449b5b929bdf4802833acbd.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Card Draw SFX.ogg"
+dest_files=["res://.godot/imported/Card Draw SFX.ogg-dce52bd99449b5b929bdf4802833acbd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
