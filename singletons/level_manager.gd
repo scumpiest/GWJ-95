@@ -3,6 +3,10 @@ extends Node
 var levels_resource: Levels = load("res://resources/levels/levels.tres")
 var levels: Array[Level]
 var current_level: Level
+# Tracks progress by index rather than relying on Array.find(current_level),
+# since the same shop Level resource is reused for multiple slots and
+# find() would always resolve back to its first occurrence.
+var current_level_index: int = -1
 var main: Main
 
 # Set by the main menu right before switching to the game scene so the first
@@ -22,6 +26,7 @@ func _ready() -> void:
 # run starts back at the first level instead of indexing past LBOSS.
 func reset() -> void:
 	current_level = null
+	current_level_index = -1
 
 func send_task_event(event, data = null):
 	if current_level and current_level.task:
@@ -39,12 +44,13 @@ func _next_level() -> void:
 			AudioManager.play_task_completed()
 		CurrencyManager.add_money(money_to_add)
 	if !current_level:
-		current_level = levels[0]
+		current_level_index = 0
+		current_level = levels[current_level_index]
 	else:
-		var current_level_index := levels.find(current_level)
 		var new_level_index = current_level_index + 1
-		if current_level_index != -1 and new_level_index < (levels.size() + 1):
-			current_level = levels[new_level_index]
+		if new_level_index < levels.size():
+			current_level_index = new_level_index
+			current_level = levels[current_level_index]
 
 	AudioManager.play_music_for_level(current_level.type)
 

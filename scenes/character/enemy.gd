@@ -22,7 +22,7 @@ var enemy_data: EnemyResource
 # level showing two enemy visuals sharing one health pool) may have several;
 # these are collected from all descendants rather than a fixed node path.
 var _sprites: Array[SpineSprite] = []
-var _pose_index: int = 0
+var _last_pose_order: Array[int] = []
 var _last_block: int = 0
 
 
@@ -114,15 +114,30 @@ func play_idle_pose() -> void:
 
 
 func play_next_pose() -> void:
-	var next_pose := randi_range(1, POSE_COUNT)
-	while POSE_COUNT > 1 and next_pose == _pose_index:
-		next_pose = randi_range(1, POSE_COUNT)
-	_pose_index = next_pose
+	var order := _roll_pose_order()
 	for sprite in _sprites:
-		if sprite.skeleton_data_res and not sprite.skeleton_data_res.find_animation("pose%d" % _pose_index):
+		var pose_names: Array[String] = []
+		for pose_num in order:
+			var anim_name := "pose%d" % pose_num
+			if sprite.skeleton_data_res == null or sprite.skeleton_data_res.find_animation(anim_name):
+				pose_names.append(anim_name)
+		if pose_names.is_empty():
 			continue
-		sprite.get_animation_state().set_animation("pose%d" % _pose_index, false, 0)
+		sprite.get_animation_state().set_animation(pose_names[0], false, 0)
+		for i in range(1, pose_names.size()):
+			sprite.get_animation_state().add_animation(pose_names[i], 0, false, 0)
 		sprite.get_animation_state().add_animation("idle", 0, true, 0)
+
+
+func _roll_pose_order() -> Array[int]:
+	var order: Array[int] = []
+	for i in range(1, POSE_COUNT + 1):
+		order.append(i)
+	order.shuffle()
+	while POSE_COUNT > 1 and order == _last_pose_order:
+		order.shuffle()
+	_last_pose_order = order.duplicate()
+	return order
 
 
 func play_defeat_pose() -> void:

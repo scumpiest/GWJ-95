@@ -79,7 +79,7 @@ func _clear_icon_marks() -> void:
 func _update_progress_icon() -> void:
 	var progress := 0
 	if LevelManager.current_level:
-		progress = mini(LevelManager.levels.find(LevelManager.current_level), MAX_PROGRESS)
+		progress = mini(LevelManager.current_level_index, MAX_PROGRESS)
 	set_progress(progress)
 
 

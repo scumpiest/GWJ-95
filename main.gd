@@ -78,6 +78,20 @@ func _ready() -> void:
 		run_tutorial()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("debug_kill_enemy"):
+		_debug_kill_enemy()
+
+
+# Debug cheat: instantly defeats the current enemy (bound to F9).
+func _debug_kill_enemy() -> void:
+	if current_enemy == null or current_enemy.unit == null:
+		return
+	if current_enemy.unit.health <= 0:
+		return
+	current_enemy.unit.take_damage(current_enemy.unit.health)
+
+
 func _on_reward_visibility_changed() -> void:
 	_set_battle_ui_visible(not reward_screen.visible)
 

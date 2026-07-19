@@ -5,17 +5,17 @@
 
 [sub_resource type="Resource" id="move_1"]
 script = ExtResource("2_move")
-damage = 15
+damage = 10
 block = 5
 
 [sub_resource type="Resource" id="move_2"]
 script = ExtResource("2_move")
-block = 15
+block = 10
 apply_vulnerable = 1
 
 [sub_resource type="Resource" id="move_3"]
 script = ExtResource("2_move")
-damage = 15
+damage = 10
 apply_weakness = 1
 
 [resource]

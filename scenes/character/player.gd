@@ -4,7 +4,7 @@ extends Node2D
 const POSE_COUNT := 7
 const StatusIconRowScene := preload("res://scenes/ui/status_icon_row.gd")
 
-@export var starting_health: int = 50
+@export var starting_health: int = 80
 
 @onready var _sprite: SpineSprite = $SpineSprite
 @onready var _health_bar: ProgressBar = $HealthBar/ProgressBar
