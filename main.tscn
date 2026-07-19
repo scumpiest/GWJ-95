@@ -17,7 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://c1jftv714m1ts" path="res://scenes/task/task_overlay.tscn" id="9_074og"]
 [ext_resource type="Script" uid="uid://c23y5t0qwphab" path="res://arrow.gd" id="9_getpj"]
 [ext_resource type="PackedScene" uid="uid://c7stag3sc3n31" path="res://scenes/stage/stage.tscn" id="10_4c57u"]
+[ext_resource type="Texture2D" uid="uid://gd2jm5rat5aj" path="res://assets/sprites/ui/small_arrow_2.png" id="11_d13ii"]
 [ext_resource type="PackedScene" path="res://scenes/ui/icon_tooltip.tscn" id="11_icon_tooltip"]
+[ext_resource type="Texture2D" uid="uid://3vyp67a46w27" path="res://assets/sprites/ui/small_arrow_1.png" id="12_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://dqhivoovq4phj" path="res://scenes/stage/reward_screen.tscn" id="12_reward"]
 [ext_resource type="Texture2D" uid="uid://bg6gdtan8g6fv" path="res://assets/sprites/ui/icon_discard_pile.png" id="15_getpj"]
 [ext_resource type="Texture2D" uid="uid://cysf181gpkhee" path="res://assets/sprites/ui/icon_draw_pile.png" id="17_ryguw"]
@@ -65,6 +67,34 @@ animations = [{
 [sub_resource type="Animation" id="Animation_cegan"]
 length = 0.001
 
+[sub_resource type="Animation" id="Animation_0odxb"]
+resource_name = "speech_button"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/CanvasLayer/SpeechButton:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.499, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.03490658503988659, 0.03490658503988659]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/CanvasLayer/SpeechButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.499, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(734, 54), Vector2(734, 54), Vector2(734, 50), Vector2(734, 50)]
+}
+
 [sub_resource type="Animation" id="Animation_82xsv"]
 resource_name = "text"
 loop_mode = 1
@@ -79,7 +109,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.499, 0.5, 0.999, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.03490658503988659, 0.03490658503988659, 0.0]
+"values": [0.0, 0.0, 0.03490658503988659, 0.03490658503988659, 0.03490658503988659]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -97,8 +127,18 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_getpj"]
 _data = {
 &"RESET": SubResource("Animation_cegan"),
+&"speech_button": SubResource("Animation_0odxb"),
 &"text": SubResource("Animation_82xsv")
 }
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_chyd6"]
+texture = ExtResource("11_d13ii")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h1tde"]
+texture = ExtResource("11_d13ii")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kgoo1"]
+texture = ExtResource("12_1u8w0")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vjlc"]
 bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
@@ -202,6 +242,16 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_e3exj")
 root_node = NodePath("../../..")
 libraries/ = SubResource("AnimationLibrary_getpj")
 script = ExtResource("8_074og")
+
+[node name="SpeechButton" type="Button" parent="MarginContainer/CanvasLayer" unique_id=1255224049]
+custom_minimum_size = Vector2(30, 30)
+offset_left = 734.0
+offset_top = 54.0
+offset_right = 764.0
+offset_bottom = 84.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_chyd6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_h1tde")
+theme_override_styles/hover = SubResource("StyleBoxTexture_kgoo1")
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer" unique_id=788442826]
 layout_mode = 2
