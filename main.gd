@@ -66,12 +66,13 @@ func next_level() -> void:
 		current_enemy = null
 
 	var current_level := LevelManager.current_level
-	var enemy_scene = current_level.enemy_scene.instantiate()
+	var enemy_scene: Enemy = current_level.enemy_scene.instantiate()
 	enemy_scene.position = Vector2(910, 314)
 	enemy_scene.scale = Vector2(0.5,0.5)
 
 	enemy_scene.unit = LevelManager.get_current_enemy()
 	enemy_container.add_child(enemy_scene)
+	enemy_scene.unit.health_changed.connect(_on_enemy_damage_taken)
 	enemy_scene.unit.died.connect(_on_enemy_died)
 	current_enemy = enemy_scene
 	_battle_won = false
@@ -117,6 +118,7 @@ func _on_end_turn_button_pressed() -> void:
 		end_turn.disabled = false
 		return
 
+	LevelManager.send_task_event(BattleTask.EventType.TURN_START, get_tree().get_nodes_in_group("card_slots"))
 	await _trigger_chain_sequentially()
 	if _battle_won:
 		_finish_battle_won()
@@ -132,6 +134,9 @@ func _on_end_turn_button_pressed() -> void:
 	_spawn_cards(drawn)
 	end_turn.disabled = false
 
+func _on_enemy_damage_taken(health: int, old_health: int):
+	if old_health > health:
+		LevelManager.send_task_event(BattleTask.EventType.DEAL_DAMAGE, old_health - health)
 
 func _on_enemy_died() -> void:
 	_battle_won = true
@@ -141,6 +146,8 @@ func _on_enemy_died() -> void:
 
 
 func _finish_battle_won() -> void:
+	LevelManager.send_task_event(BattleTask.EventType.TURN_END, null)
+	LevelManager.send_task_event(BattleTask.EventType.BATTLE_END, null)
 	for card_data in clear_chain_slots():
 		deck.add_to_discard_pile(card_data)
 	if LevelManager.current_level.rewards:

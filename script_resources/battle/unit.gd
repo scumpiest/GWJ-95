@@ -3,7 +3,7 @@ extends RefCounted
 class_name Unit
 
 signal died
-signal health_changed(health: int)
+signal health_changed(health: int, old_health: int)
 signal block_changed(block: int)
 signal status_changed(status: String, stacks: int)
 
@@ -23,13 +23,16 @@ func add_health_percentage(health_percentage: float):
     var health_to_add = (float(max_health) / 100) * health_percentage
     if (health_to_add + health) < max_health:
         health += health_to_add
+        emit_signal("health_changed", health, (health - health_to_add))
     else:
+        emit_signal("health_changed", max_health, health)
         health = max_health
+
 
 
 func take_damage(damage: int):
     health -= damage
-    emit_signal("health_changed", health)
+    emit_signal("health_changed", health, (health + damage))
     if health <= 0:
         die()
 

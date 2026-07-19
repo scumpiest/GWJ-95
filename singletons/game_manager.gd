@@ -50,6 +50,7 @@ func draw_cards(count: int) -> Array[CardData]:
 	var drawn := context.deck.draw(count)
 	_emit_deck_counts()
 	_set_phase(Phase.PLAN)
+	LevelManager.send_task_event(BattleTask.EventType.TURN_END, null)
 	return drawn
 
 
