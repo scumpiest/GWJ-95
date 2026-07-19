@@ -1,61 +1,187 @@
 class_name Enemy
 extends Node2D
 
-@export var move_list: Dictionary = { "damage": 10, "block": 3 }
-@export var move_chance: Dictionary = {
-	"damage": 0.75,
-	"block": 0.25,
-}
+const INTENT_ICON_SIZE := Vector2(72, 72)
+const StatusIconRowScene := preload("res://scenes/ui/status_icon_row.gd")
+
+const ICON_DAMAGE := preload("res://assets/sprites/icons/damage.png")
+const ICON_BLOCK := preload("res://assets/sprites/icons/block.png")
+const ICON_WEAKNESS := preload("res://assets/sprites/icons/weakness.png")
+const ICON_VULNERABILITY := preload("res://assets/sprites/icons/vulnerability.png")
 
 @onready var _sprite: SpineSprite = $SpineSprite
-@onready var _hp: Label = $HP
+@onready var _health_bar: ProgressBar = get_node_or_null("HealthBar/ProgressBar")
+@onready var _thought_bubble: Sprite2D = get_node_or_null("ThoughtBubble")
+@onready var _intent_row: HBoxContainer = get_node_or_null("ThoughtBubble/IntentRow")
+@onready var _status_row = get_node_or_null("HealthBar/StatusRow")
 
 var unit: Unit
+var enemy_data: EnemyResource
 
 
 func _ready() -> void:
 	unit.health_changed.connect(_on_health_changed)
-	unit.status_changed.connect(_on_status_changed)
-	unit.block_changed.connect(_on_block_changed)
+	_ensure_intent_row()
+	_ensure_status_row()
+	_status_row.bind_unit(unit)
+	GameManager.enemy_intent_changed.connect(set_intent)
 
 	if _sprite.skeleton_data_res.find_animation("appear"):
 		_sprite.get_animation_state().set_animation("appear", false, 0)
 		_sprite.get_animation_state().add_animation("idle", 4, true, 0)
 	else:
 		_sprite.get_animation_state().set_animation("idle", true, 0)
-	_update_hp_display()
+	_update_health_bar()
 
-func roll_intent() -> String:
-	var roll: float = randf()
-	var accumulator: float = 0.0
-	for intent: String in move_list:
-		accumulator += move_chance[intent]
-		if roll <= accumulator:
-			return intent
-	return "damage"
+	if GameManager.context != null:
+		set_intent(GameManager.context.enemy_intent)
+
+
+func _exit_tree() -> void:
+	if GameManager.enemy_intent_changed.is_connected(set_intent):
+		GameManager.enemy_intent_changed.disconnect(set_intent)
+
+
+func roll_intent() -> EnemyMove:
+	if enemy_data == null:
+		return null
+	return enemy_data.roll_move()
+
+
+func set_intent(move: EnemyMove) -> void:
+	_ensure_intent_row()
+	_clear_intent_icons()
+	if _intent_row == null:
+		return
+
+	var has_intent := (
+		move != null
+		and (move.deals_damage() or move.gains_block() or move.applies_status())
+	)
+	_intent_row.visible = has_intent
+	if _thought_bubble != null:
+		_thought_bubble.visible = has_intent
+	if not has_intent:
+		return
+
+	var turn: int = GameManager.context.current_turn if GameManager.context else 1
+	var damage_bonus: int = enemy_data.get_turn_damage_bonus(turn) if enemy_data else 0
+	var block_bonus: int = enemy_data.get_turn_block_bonus(turn) if enemy_data else 0
+
+	if move.deals_damage():
+		var hit_damage: int = move.damage + damage_bonus
+		var label := str(hit_damage)
+		if move.hit_count > 1:
+			label = "%sx%d" % [hit_damage, move.hit_count]
+		_add_intent_entry(ICON_DAMAGE, label)
+
+	if move.gains_block():
+		_add_intent_entry(ICON_BLOCK, str(move.block + block_bonus))
+
+	if move.apply_weakness > 0:
+		var weakness_label := str(move.apply_weakness) if move.apply_weakness > 1 else ""
+		_add_intent_entry(ICON_WEAKNESS, weakness_label)
+
+	if move.apply_vulnerable > 0:
+		var vulnerable_label := str(move.apply_vulnerable) if move.apply_vulnerable > 1 else ""
+		_add_intent_entry(ICON_VULNERABILITY, vulnerable_label)
+
 
 func play_idle_pose() -> void:
 	_sprite.get_animation_state().set_animation("idle", true, 0)
 
 
 func _on_health_changed(_health: int, _old_health: int) -> void:
-	_update_hp_display()
+	_update_health_bar()
 
 
-func _on_status_changed(_status: String, _stacks: int) -> void:
-	_update_hp_display()
+func _update_health_bar() -> void:
+	if _health_bar != null:
+		_health_bar.max_value = unit.max_health
+		_health_bar.value = unit.health
+		return
+
+	var hp_label := get_node_or_null("HP") as Label
+	if hp_label != null:
+		hp_label.text = "HP: %d/%d" % [unit.health, unit.max_health]
 
 
-func _on_block_changed(_block: int) -> void:
-	_update_hp_display()
+func _ensure_intent_row() -> void:
+	if _intent_row != null:
+		return
+
+	_intent_row = HBoxContainer.new()
+	_intent_row.name = "IntentRow"
+	_intent_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_intent_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_intent_row.add_theme_constant_override("separation", 8)
+	_intent_row.custom_minimum_size = Vector2(200, 72)
+	# Centered in the thought bubble texture (404x288, Sprite2D centered at origin).
+	_intent_row.position = Vector2(-100, -50)
+
+	if _thought_bubble != null:
+		_thought_bubble.add_child(_intent_row)
+	else:
+		add_child(_intent_row)
+		_intent_row.position = Vector2(-80, -700)
 
 
-func _update_hp_display() -> void:
-	var lines: PackedStringArray = ["HP: %s/%s" % [unit.health, unit.max_health]]
-	if unit.block > 0:
-		lines.append("BLK: %s" % unit.block)
-	for status_name: String in unit.statuses:
-		var stacks: int = unit.statuses[status_name]
-		if stacks > 0:
-			lines.append("%s: %s" % [status_name.substr(0, 3).to_upper(), stacks])
-	_hp.text = "\n".join(lines)
+func _ensure_status_row() -> void:
+	if _status_row != null:
+		return
+
+	_status_row = StatusIconRowScene.new()
+	_status_row.name = "StatusRow"
+	var health_bar_root := get_node_or_null("HealthBar") as Control
+	if health_bar_root != null:
+		health_bar_root.add_child(_status_row)
+		_status_row.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+		_status_row.offset_left = 40.0
+		_status_row.offset_top = -44.0
+		_status_row.offset_right = 0.0
+		_status_row.offset_bottom = 8.0
+	else:
+		add_child(_status_row)
+		_status_row.position = Vector2(-80, -560)
+		_status_row.custom_minimum_size = Vector2(160, 48)
+
+
+func _clear_intent_icons() -> void:
+	if _intent_row == null:
+		return
+	for child in _intent_row.get_children():
+		child.free()
+
+
+func _add_intent_entry(texture: Texture2D, value_text: String) -> void:
+	var entry := Control.new()
+	entry.custom_minimum_size = INTENT_ICON_SIZE
+	entry.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var icon := TextureRect.new()
+	icon.texture = texture
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	entry.add_child(icon)
+
+	if not value_text.is_empty():
+		var label := Label.new()
+		label.text = value_text
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+		label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		label.offset_right = 4.0
+		label.offset_bottom = 2.0
+		var bold_font := FontVariation.new()
+		bold_font.variation_embolden = 1.2
+		label.add_theme_font_override("font", bold_font)
+		label.add_theme_font_size_override("font_size", 32)
+		label.add_theme_color_override("font_color", Color.BLACK)
+		label.add_theme_color_override("font_outline_color", Color.WHITE)
+		label.add_theme_constant_override("outline_size", 8)
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		entry.add_child(label)
+
+	_intent_row.add_child(entry)

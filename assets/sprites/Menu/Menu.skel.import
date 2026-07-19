@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bflsyxq051rwq"
+path="res://.godot/imported/Menu.skel-a249625465c3fbdc398f397e876c6ff9.spskel"
+
+[deps]
+
+source_file="res://assets/sprites/Menu/Menu.skel"
+dest_files=["res://.godot/imported/Menu.skel-a249625465c3fbdc398f397e876c6ff9.spskel"]
+
+[params]
+

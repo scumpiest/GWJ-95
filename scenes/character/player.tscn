@@ -1,7 +1,22 @@
 [gd_scene format=3 uid="uid://cx6g6j2lx7aow"]
 
-[ext_resource type="Script" path="res://scenes/character/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://tfsbmn2bbyt5" path="res://scenes/character/player.gd" id="1_player"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://8qyj3rrayo57" path="res://assets/sprites/characters/main_character/char_data_res.tres" id="1_swkfo"]
+[ext_resource type="Texture2D" uid="uid://cj8t1k6itmjba" path="res://assets/sprites/ui/icon_heart.png" id="4_heart"]
+[ext_resource type="Script" path="res://scenes/ui/status_icon_row.gd" id="5_status_row"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_healthbar_border"]
+bg_color = Color(0.043137256, 0.023529412, 0.05490196, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhunq"]
+bg_color = Color(0.94100165, 0.34064347, 0.38857287, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_238uf"]
+bg_color = Color(0.9411765, 0.34117648, 0.3882353, 1)
 
 [node name="Player" type="Node2D" unique_id=1761150887]
 script = ExtResource("1_player")
@@ -12,3 +27,53 @@ preview_skin = "Default"
 preview_animation = "-- Empty --"
 preview_frame = false
 preview_time = 0.0
+
+[node name="HealthBar" type="Control" parent="." unique_id=511762034]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -160.0
+offset_top = -464.0
+offset_right = 140.0
+offset_bottom = -394.0
+mouse_filter = 2
+metadata/_edit_group_ = true
+
+[node name="StatusRow" type="HBoxContainer" parent="HealthBar"]
+z_index = 12
+layout_mode = 0
+offset_left = 40.0
+offset_top = -44.0
+offset_right = 300.0
+offset_bottom = 8.0
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 1
+script = ExtResource("5_status_row")
+
+[node name="HeartIcon" type="TextureRect" parent="HealthBar" unique_id=511762035]
+z_index = 10
+layout_mode = 0
+offset_top = 3.0
+offset_right = 64.0
+offset_bottom = 67.0
+texture = ExtResource("4_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BarBorder" type="Panel" parent="HealthBar" unique_id=511762036]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 15.0
+offset_right = 300.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_healthbar_border")
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthBar" unique_id=2010325736]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 18.0
+offset_right = 291.0
+offset_bottom = 51.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bhunq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_238uf")
+show_percentage = false

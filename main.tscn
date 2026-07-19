@@ -100,6 +100,9 @@ _data = {
 &"text": SubResource("Animation_82xsv")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vjlc"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pile_count"]
 content_margin_left = 4.0
 content_margin_top = 2.0
@@ -245,6 +248,7 @@ layout_mode = 2
 [node name="Container" type="PanelContainer" parent="MarginContainer/VBox" unique_id=2066776690]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0vjlc")
 
 [node name="Player" parent="MarginContainer/VBox/Container" unique_id=1761150887 instance=ExtResource("6_7mycd")]
 unique_name_in_owner = true

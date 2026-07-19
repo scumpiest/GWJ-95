@@ -8,17 +8,25 @@ var is_player_turn: bool
 var is_battle_over: bool
 var player_won: bool
 
-var enemy_intent: String = ""
+var enemy_data: EnemyResource
+var enemy_intent: EnemyMove
 
 var chain_slot_states: Array[ChainSlotState] = []
 
 var deck: DeckData
 
 
-func _init(p_player: Unit, p_enemy: Unit, p_deck: DeckData, chain_size: int = 5) -> void:
+func _init(
+		p_player: Unit,
+		p_enemy: Unit,
+		p_deck: DeckData,
+		chain_size: int = 5,
+		p_enemy_data: EnemyResource = null,
+) -> void:
 	player = p_player
 	enemy = p_enemy
 	deck = p_deck
+	enemy_data = p_enemy_data
 	current_turn = 1
 	is_player_turn = true
 	is_battle_over = false
@@ -133,7 +141,16 @@ func _is_valid_slot_index(slot_index: int) -> bool:
 
 
 func enemy_intents_damage() -> bool:
-	return enemy_intent == "damage"
+	return enemy_intent != null and enemy_intent.deals_damage()
+
 
 func enemy_intents_block() -> bool:
-	return enemy_intent == "block"
+	return enemy_intent != null and enemy_intent.gains_block()
+
+
+func roll_enemy_intent() -> EnemyMove:
+	if enemy_data == null:
+		enemy_intent = null
+		return null
+	enemy_intent = enemy_data.roll_move()
+	return enemy_intent
