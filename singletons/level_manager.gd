@@ -13,7 +13,9 @@ func _ready() -> void:
 	next_level.connect(_next_level)
 
 func _next_level() -> void:
-	print('called wooo')
+	# Default reward for next level
+	if current_level and current_level.type == Level.LevelType.GAME:
+		CurrencyManager.add_money(20)
 	if !current_level:
 		current_level = levels[0]
 	else:
