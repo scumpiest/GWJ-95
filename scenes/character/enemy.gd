@@ -18,9 +18,6 @@ const ICON_VULNERABILITY := preload("res://assets/sprites/icons/vulnerability.pn
 var unit: Unit
 var enemy_data: EnemyResource
 
-# Most enemies have a single SpineSprite, but composite encounters (e.g. a
-# level showing two enemy visuals sharing one health pool) may have several;
-# these are collected from all descendants rather than a fixed node path.
 var _sprites: Array[SpineSprite] = []
 var _last_pose_order: Array[int] = []
 var _last_block: int = 0
@@ -118,8 +115,8 @@ func play_next_pose() -> void:
 	for sprite in _sprites:
 		var pose_names: Array[String] = []
 		for pose_num in order:
-			var anim_name := "pose%d" % pose_num
-			if sprite.skeleton_data_res == null or sprite.skeleton_data_res.find_animation(anim_name):
+			var anim_name := _resolve_animation_name(sprite.skeleton_data_res, "pose%d" % pose_num)
+			if not anim_name.is_empty():
 				pose_names.append(anim_name)
 		if pose_names.is_empty():
 			continue
@@ -127,6 +124,19 @@ func play_next_pose() -> void:
 		for i in range(1, pose_names.size()):
 			sprite.get_animation_state().add_animation(pose_names[i], 0, false, 0)
 		sprite.get_animation_state().add_animation("idle", 0, true, 0)
+
+
+# enemy2/enemy3 skeletons export poses as "Pose1" while enemy1/Boss use "pose1".
+# Spine's find_animation is case-sensitive, so try both casings.
+func _resolve_animation_name(skeleton_data_res: SpineSkeletonDataResource, target: String) -> String:
+	if skeleton_data_res == null:
+		return target
+	if skeleton_data_res.find_animation(target):
+		return target
+	var capitalized := target[0].to_upper() + target.substr(1)
+	if skeleton_data_res.find_animation(capitalized):
+		return capitalized
+	return ""
 
 
 func _roll_pose_order() -> Array[int]:

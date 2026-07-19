@@ -403,16 +403,16 @@ max_width_set = 702
 [node name="Shop" parent="." unique_id=827335244 instance=ExtResource("8_kek77")]
 visible = true
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 24.0
-offset_top = 2.5
-offset_right = 1128.0
-offset_bottom = 645.5
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Stage" parent="." unique_id=1598227722 instance=ExtResource("10_4c57u")]
 z_index = -99

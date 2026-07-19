@@ -3,14 +3,10 @@ extends Node
 var levels_resource: Levels = load("res://resources/levels/levels.tres")
 var levels: Array[Level]
 var current_level: Level
-# Tracks progress by index rather than relying on Array.find(current_level),
-# since the same shop Level resource is reused for multiple slots and
-# find() would always resolve back to its first occurrence.
+
 var current_level_index: int = -1
 var main: Main
 
-# Set by the main menu right before switching to the game scene so the first
-# level starts in tutorial mode.
 var start_as_tutorial: bool = false
 
 signal next_level
@@ -21,9 +17,6 @@ func _ready() -> void:
 	levels = levels_resource.levels
 	next_level.connect(_next_level)
 
-
-# Called when returning to the main menu (after a win or a loss) so the next
-# run starts back at the first level instead of indexing past LBOSS.
 func reset() -> void:
 	current_level = null
 	current_level_index = -1
