@@ -26,7 +26,7 @@ var current_enemy: Node2D
 @onready var speech_bubble_pressed: bool = false
 @onready var end_turn_button_pressed: bool = false
 
-@onready var step = 0
+var step = 0
 var scene_animation_duration: float = .4
 
 func _ready() -> void:
