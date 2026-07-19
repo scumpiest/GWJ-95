@@ -23,6 +23,14 @@ class_name Main
 @onready var speech_bubble_pressed: bool = false
 @onready var end_turn_button_pressed: bool = false
 @onready var timer_arrow: Timer = $MarginContainer/CanvasLayer/TimerArrow
+@onready var _battle_ui_nodes: Array[CanvasItem] = [
+	main_container.get_node("VBox/ChainLabel"),
+	main_container.get_node("VBox/HeaderContainer"),
+	main_container.get_node("VBox/DiscardPile"),
+	main_container.get_node("VBox/DrawPile"),
+	main_container.get_node("VBox/MarginContainer"),
+	enemy_container,
+]
 
 
 var step = 0
@@ -53,10 +61,23 @@ func _ready() -> void:
 	end_turn.mouse_entered.connect(AudioManager.play_ui_hover)
 	bubble_button.mouse_entered.connect(AudioManager.play_ui_hover)
 	reward_screen.card_chosen.connect(_chosen_card)
+	reward_screen.visibility_changed.connect(_on_reward_visibility_changed)
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
 	
 	timer_arrow.start()
+
+
+func _on_reward_visibility_changed() -> void:
+	_set_battle_ui_visible(not reward_screen.visible)
+
+
+func _set_battle_ui_visible(is_visible: bool) -> void:
+	var target_alpha := 1.0 if is_visible else 0.0
+	var tween := create_tween()
+	tween.set_parallel(true)
+	for node in _battle_ui_nodes:
+		tween.tween_property(node, "modulate:a", target_alpha, scene_animation_duration)
 
 
 func _on_deck_count_changed(count: int) -> void:
