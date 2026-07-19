@@ -14,11 +14,21 @@ func shuffle() -> void:
 
 func draw(count: int) -> Array[CardData]:
 	var drawn: Array[CardData] = []
-	var to_draw := mini(count, cards.size())
-
-	for i in range(to_draw):
+	for i in range(count):
+		if cards.is_empty() and not reshuffle_discard_into_draw():
+			break
 		drawn.append(cards.pop_front())
 	return drawn
+
+func reshuffle_discard_into_draw() -> bool:
+	if discard_pile.is_empty():
+		return false
+	cards.clear()
+	for card in discard_pile:
+		cards.append(card)
+	discard_pile.clear()
+	shuffle()
+	return true
 
 func add_to_discard_pile(card: CardData) -> void:
 	discard_pile.append(card)

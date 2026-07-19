@@ -40,7 +40,6 @@ func end_player_turn(discarded: Array[CardData], cards_to_draw: int) -> Array[Ca
 	# TODO: Implement enemy turn actions
 
 	discard_cards(discarded)
-	_reshuffle_deck()
 	context.current_turn += 1
 
 	_set_phase(Phase.DRAW)
@@ -49,7 +48,7 @@ func end_player_turn(discarded: Array[CardData], cards_to_draw: int) -> Array[Ca
 
 func draw_cards(count: int) -> Array[CardData]:
 	var drawn := context.deck.draw(count)
-	deck_count_changed.emit(context.deck.cards.size())
+	_emit_deck_counts()
 	_set_phase(Phase.PLAN)
 	return drawn
 
@@ -63,15 +62,6 @@ func discard_cards(cards: Array[CardData]) -> void:
 func add_card_to_deck(card: CardData) -> void:
 	context.deck.cards.append(card)
 	deck_count_changed.emit(context.deck.cards.size())
-
-
-func _reshuffle_deck() -> void:
-	if not context.deck.cards.is_empty():
-		return
-	context.deck.cards.assign(context.deck.discard_pile)
-	context.deck.discard_pile.clear()
-	context.deck.shuffle()
-	_emit_deck_counts()
 
 
 func _set_phase(new_phase: Phase) -> void:
