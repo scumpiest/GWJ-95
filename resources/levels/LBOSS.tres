@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Level" format=3 uid="uid://gyg2irn5c7ug"]
 
-[ext_resource type="Resource" uid="uid://ci4vvju8bpj7y" path="res://resources/enemies/EBOSS.tres" id="1_b6hpr"]
+[ext_resource type="Resource" uid="uid://qq5lhybj8gsd" path="res://resources/enemies/E2.tres" id="1_b6hpr"]
 [ext_resource type="PackedScene" uid="uid://te5fg8wdiq0t" path="res://scenes/character/boss.tscn" id="2_0kt5n"]
 [ext_resource type="Script" uid="uid://dyvq2g50fm40e" path="res://script_resources/level.gd" id="3_ebdeo"]
 

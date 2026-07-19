@@ -13,6 +13,8 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 @onready var _description_label: RichTextLabel = $Paper/MarginContainer3/DescriptionLabel
 @onready var _sticker: TextureRect = $Casette/Sticker
 @onready var _name_label: Label = $Casette/MarginContainer2/CardName
+@onready var discard_marker: Marker2D = %DiscardMarker
+@onready var draw_marker: Marker2D = %DrawMarker
 
 var owner_slot: Slot
 var shop_card: bool = false

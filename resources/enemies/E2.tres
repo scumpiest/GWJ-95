@@ -1,24 +1,13 @@
 [gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://qq5lhybj8gsd"]
 
 [ext_resource type="Script" uid="uid://72a7l2y26pqx" path="res://script_resources/enemy_resource.gd" id="1_m04ye"]
-[ext_resource type="Script" uid="uid://cflmc8nwqgkkg" path="res://script_resources/enemy_move.gd" id="2_move"]
-
-[sub_resource type="Resource" id="move_1"]
-script = ExtResource("2_move")
-damage = 12
-
-[sub_resource type="Resource" id="move_2"]
-script = ExtResource("2_move")
-block = 12
 
 [resource]
 script = ExtResource("1_m04ye")
 id = 2
 name = "Enemy 2"
-description = "Deals 1 more damage and gains 1 more block with every turn."
-health = 80
-max_health = 80
-moves = Array[ExtResource("2_move")]([SubResource("move_1"), SubResource("move_2")])
-damage_per_turn = 1
-block_per_turn = 1
+description = "blabla"
+health = 100
+max_health = 100
+block = 5
 metadata/_custom_type_script = "uid://72a7l2y26pqx"

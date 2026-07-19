@@ -149,6 +149,14 @@ script = ExtResource("1_main")
 deck = ExtResource("4_deck")
 card_scene = ExtResource("1_card_visual")
 
+[node name="DiscardMarker" type="Marker2D" parent="." unique_id=1300470750]
+unique_name_in_owner = true
+position = Vector2(956, 547)
+
+[node name="DrawMarker" type="Marker2D" parent="." unique_id=642930984]
+unique_name_in_owner = true
+position = Vector2(82, 549)
+
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=335792737]
 layout_mode = 1
 anchors_preset = 15
@@ -281,7 +289,7 @@ position = Vector2(931, 550)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("15_getpj")
 
-[node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DiscardPile" unique_id=765121624]
+[node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DiscardPile" unique_id=1598226258]
 z_index = 5
 custom_minimum_size = Vector2(36, 36)
 offset_left = -90.0
@@ -292,7 +300,7 @@ scale = Vector2(2, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pile_count")
 
-[node name="DiscardPileCount" type="Label" parent="MarginContainer/VBox/DiscardPile/CountBadge" unique_id=556030009]
+[node name="DiscardPileCount" type="Label" parent="MarginContainer/VBox/DiscardPile/CountBadge" unique_id=1982636637]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -307,7 +315,7 @@ position = Vector2(60, 550)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("17_ryguw")
 
-[node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DrawPile" unique_id=708288377]
+[node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DrawPile" unique_id=485554037]
 z_index = 5
 custom_minimum_size = Vector2(36, 36)
 offset_left = 48.0
@@ -318,7 +326,7 @@ scale = Vector2(2, 2)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pile_count")
 
-[node name="DrawPileCount" type="Label" parent="MarginContainer/VBox/DrawPile/CountBadge" unique_id=1094647244]
+[node name="DrawPileCount" type="Label" parent="MarginContainer/VBox/DrawPile/CountBadge" unique_id=954661062]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
