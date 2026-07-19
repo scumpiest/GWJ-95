@@ -1,12 +1,9 @@
 extends Node
 
-@export var player_hand: Node
-@export var max_hand_size: int = 5
-
 @onready var player: Player = %Player
 @onready var buy_health_button: Button = %BuyHealthButton
 @export var card_scene: PackedScene
-@export var card_container: HFlowContainer;
+@export var card_container: HFlowContainer
 @export var shop_cards: CardDB
 
 @export var shop_backdrop: SpineSprite
@@ -27,15 +24,12 @@ func _draw_cards() -> void:
 		card_visual.clicked_card.connect(on_card_clicked)
 		card_visual.card_data = card
 		card_container.add_child(card_visual)
-	pass
 
 func on_card_clicked(card: CardVisual) -> void:
 	_buy_and_handle_animation(
 		func():
-			card.set_shop_card(false)
-			card.set_casette_highlighted(false)
-			card.clicked_card.disconnect(on_card_clicked)
-			card.reparent(player_hand),
+			GameManager.add_card_to_deck(card.card_data)
+			card.queue_free(),
 		card.card_data.cost,
 		func():
 			if tween:

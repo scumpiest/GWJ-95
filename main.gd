@@ -46,7 +46,7 @@ func _ready() -> void:
 
 
 func _chosen_card(card_data: CardData) -> void:
-	_spawn_cards([card_data])
+	GameManager.add_card_to_deck(card_data)
 	LevelManager.next_level.emit()
 
 
@@ -72,14 +72,16 @@ func next_level() -> void:
 	enemy_scene.unit = LevelManager.get_current_enemy()
 	enemy_container.add_child(enemy_scene)
 	enemy_scene.unit.died.connect(func():
-		clear_chain_slots()
+		for card_data in clear_chain_slots():
+			deck.add_to_discard_pile(card_data)
 		if LevelManager.current_level.rewards:
 			reward_screen.show_choices(LevelManager.current_level.rewards.cards)
 		else:
 			LevelManager.next_level.emit()
 		)
-	enemy_scene.unit.died.connect(func(): LevelManager.next_level.emit())
 	current_enemy = enemy_scene
+
+	_return_previous_cards_to_deck()
 
 	var battle_context := BattleContext.new(
 		player.unit,
@@ -91,7 +93,6 @@ func next_level() -> void:
 
 	# TODO: delete after testing
 	GameManager.context.enemy_intent = enemy_scene.roll_intent()
-	# TODO: This might need moving? It fucks with the state currently as you're getting a lot of cards now
 	_spawn_cards(GameManager.draw_cards(initial_hand_size))
 	print("Enemy intent: ", GameManager.context.enemy_intent)
 
@@ -102,6 +103,17 @@ func _spawn_cards(cards: Array[CardData]) -> void:
 		var card_visual := card_scene.instantiate() as CardVisual
 		card_visual.card_data = card_data
 		hand.add_child(card_visual)
+
+
+func _return_previous_cards_to_deck() -> void:
+	for card in hand.get_children():
+		deck.cards.append(card.card_data)
+		card.queue_free()
+	for card_data in clear_chain_slots():
+		deck.cards.append(card_data)
+	for card_data in deck.discard_pile:
+		deck.cards.append(card_data)
+	deck.discard_pile.clear()
 
 
 func _on_end_turn_button_pressed() -> void:

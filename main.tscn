@@ -299,7 +299,7 @@ alignment = 1
 script = ExtResource("8_dg77c")
 max_width_set = 702
 
-[node name="Shop" parent="." unique_id=827335244 node_paths=PackedStringArray("player_hand") instance=ExtResource("8_kek77")]
+[node name="Shop" parent="." unique_id=827335244 instance=ExtResource("8_kek77")]
 visible = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -312,7 +312,6 @@ offset_right = 1128.0
 offset_bottom = 645.5
 grow_horizontal = 1
 grow_vertical = 1
-player_hand = NodePath("../MarginContainer/VBox/MarginContainer/HBoxContainer/Hand")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=279445689]
 stream = ExtResource("7_272bh")
