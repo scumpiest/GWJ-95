@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ddiad0xlp5jrf"
+path="res://.godot/imported/Game Card Lose Song.ogg-106d13087597fcf87d058d981e00d872.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Game Card Lose Song.ogg"
+dest_files=["res://.godot/imported/Game Card Lose Song.ogg-106d13087597fcf87d058d981e00d872.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

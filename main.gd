@@ -23,17 +23,27 @@ class_name Main
 @onready var speech_bubble_pressed: bool = false
 @onready var end_turn_button_pressed: bool = false
 @onready var timer_arrow: Timer = $MarginContainer/CanvasLayer/TimerArrow
+@onready var _battle_ui_nodes: Array[CanvasItem] = [
+	main_container.get_node("VBox/ChainLabel"),
+	main_container.get_node("VBox/HeaderContainer"),
+	main_container.get_node("VBox/DiscardPile"),
+	main_container.get_node("VBox/DrawPile"),
+	main_container.get_node("VBox/MarginContainer"),
+	enemy_container,
+]
 
 
 var step = 0
 var scene_animation_duration: float = 0.4
 var current_enemy: Node2D
 var _battle_won: bool = false
+var _battle_lost: bool = false
 
 func _ready() -> void:
 	GameManager.phase_changed.connect(_on_phase_changed)
 	GameManager.deck_count_changed.connect(_on_deck_count_changed)
 	GameManager.discard_count_changed.connect(_on_discard_count_changed)
+	player.unit.died.connect(_on_player_died)
 	_on_deck_count_changed(deck.cards.size())
 	_on_discard_count_changed(deck.discard_pile.size())
 
@@ -51,10 +61,23 @@ func _ready() -> void:
 	end_turn.mouse_entered.connect(AudioManager.play_ui_hover)
 	bubble_button.mouse_entered.connect(AudioManager.play_ui_hover)
 	reward_screen.card_chosen.connect(_chosen_card)
+	reward_screen.visibility_changed.connect(_on_reward_visibility_changed)
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
 	
 	timer_arrow.start()
+
+
+func _on_reward_visibility_changed() -> void:
+	_set_battle_ui_visible(not reward_screen.visible)
+
+
+func _set_battle_ui_visible(is_visible: bool) -> void:
+	var target_alpha := 1.0 if is_visible else 0.0
+	var tween := create_tween()
+	tween.set_parallel(true)
+	for node in _battle_ui_nodes:
+		tween.tween_property(node, "modulate:a", target_alpha, scene_animation_duration)
 
 
 func _on_deck_count_changed(count: int) -> void:
@@ -96,6 +119,7 @@ func next_level() -> void:
 	enemy_scene.unit.died.connect(_on_enemy_died)
 	current_enemy = enemy_scene
 	_battle_won = false
+	_battle_lost = false
 
 	_return_previous_cards_to_deck()
 
@@ -137,6 +161,8 @@ func _return_previous_cards_to_deck() -> void:
 func _on_end_turn_button_pressed() -> void:
 	AudioManager.play_ui_click()
 	end_turn.disabled = true
+	if _battle_lost:
+		return
 	if not GameManager.begin_chain_resolve():
 		end_turn.disabled = false
 		return
@@ -147,6 +173,8 @@ func _on_end_turn_button_pressed() -> void:
 		_finish_battle_won()
 		end_turn.disabled = false
 		return
+	if _battle_lost:
+		return
 
 	var discarded := clear_chain_slots()
 	#discard cards leftover in hand
@@ -156,6 +184,8 @@ func _on_end_turn_button_pressed() -> void:
 	if not discarded.is_empty():
 		AudioManager.play_card_discard()
 	var drawn := GameManager.end_player_turn(discarded, cards_per_draw)
+	if _battle_lost:
+		return
 	_spawn_cards(drawn)
 	end_turn.disabled = false
 
@@ -171,7 +201,17 @@ func _on_enemy_died() -> void:
 		_finish_battle_won()
 
 
+func _on_player_died() -> void:
+	if _battle_lost or _battle_won:
+		return
+	_battle_lost = true
+	end_turn.disabled = true
+	AudioManager.stop_music()
+	AudioManager.play_lose_song()
+
+
 func _finish_battle_won() -> void:
+	AudioManager.play_win_song()
 	LevelManager.send_task_event(BattleTask.EventType.TURN_END, null)
 	LevelManager.send_task_event(BattleTask.EventType.BATTLE_END, null)
 	var won_chain_cards := clear_chain_slots()

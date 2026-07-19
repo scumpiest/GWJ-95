@@ -27,6 +27,8 @@ func _ready() -> void:
 	GameManager.enemy_intent_changed.connect(set_intent)
 
 	if _sprite.skeleton_data_res.find_animation("appear"):
+		if LevelManager.current_level != null and LevelManager.current_level.type == Level.LevelType.BOSS:
+			AudioManager.play_enemy_ground_hit()
 		_sprite.get_animation_state().set_animation("appear", false, 0)
 		_sprite.get_animation_state().add_animation("idle", 4, true, 0)
 	else:
