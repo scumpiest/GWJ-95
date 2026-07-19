@@ -16,6 +16,7 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 
 var owner_slot: Slot
 var shop_card: bool = false
+var reward_card: bool = false
 var cost_label: Label
 var tween: Tween
 var img_metadata_regex: RegEx
@@ -30,8 +31,9 @@ func _ready() -> void:
 	cost_label = get_node("CostLabel")
 	if shop_card:
 		cost_label.text = str(card_data.cost) + "$"
+		cost_label.visible = true
 	else:
-		set_shop_card(false)
+		cost_label.visible = false
 
 	add_to_group("cards")
 	_bind_card_data()
@@ -44,15 +46,18 @@ func _ready() -> void:
 
 func set_shop_card(is_shop_card: bool):
 	shop_card = is_shop_card
-	if ! is_shop_card:
-		cost_label.visible = false
-	else:
-		cost_label.visible = true
+	if cost_label == null:
+		return
+	cost_label.visible = is_shop_card
+
+
+func _is_selectable() -> bool:
+	return shop_card or reward_card
 
 
 func _gui_input(event):
 	if (
-		shop_card and event is InputEventMouseButton
+		_is_selectable() and event is InputEventMouseButton
 		and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()
 	):
 		AudioManager.play_card_click()
@@ -109,7 +114,7 @@ func _apply_display_mode(in_chain: bool) -> void:
 
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
-	if (shop_card):
+	if _is_selectable():
 		return
 	AudioManager.play_card_click()
 	var preview := duplicate() as CardVisual
