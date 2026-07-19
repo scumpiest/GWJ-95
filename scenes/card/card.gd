@@ -13,14 +13,33 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 @onready var _description_label: RichTextLabel = $Paper/MarginContainer3/DescriptionLabel
 @onready var _sticker: TextureRect = $Casette/Sticker
 @onready var _name_label: Label = $Casette/MarginContainer2/CardName
+@onready var discard_marker: Marker2D = %DiscardMarker
+@onready var draw_marker: Marker2D = %DrawMarker
 
 var owner_slot: Slot
 var shop_card: bool = false
 var reward_card: bool = false
 var cost_label: Label
-var tween: Tween
 var img_metadata_regex: RegEx
 var start_x: int
+
+#tweens
+var tween: Tween
+var scale_x_range: float = 1.5 #range?
+var scale_x_duration: float = 0.2 #seconds?
+var scale_y_range: float = 1.5 #range?
+var scale_y_duration: float = 0.2 #seconds?
+var rotation_degrees_1: float = 5.0 #degrees
+var rotation_degrees_2: float = 1.0 #degrees
+var rotation_duration: float = 0.2 #seconds?
+var discard_delay: float = 0.3 #seconds
+var draw_delay: float = 0.3 #seconds
+var position_discard: Vector2 = Vector2(956, 547) 
+var position_duration: float = 1 #seconds
+var start_position_draw: Vector2 = Vector2(82, 547)
+
+#TODO: calculate the position plsss
+var end_position_draw: Vector2 = Vector2(555, 547) #this needs to be calculated individually idk how
 
 signal clicked_card(CardVisual)
 
@@ -205,3 +224,47 @@ func _on_casette_mouse_exited() -> void:
 	var tooltip := get_icon_tooltip()
 	if tooltip != null:
 		tooltip.hide_tooltip()
+		
+
+func discard_animation():
+	if tween and tween.is_running():
+		tween.kill()
+		
+		
+	tween = create_tween()
+	
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(self, "scale:x", scale_x_range, scale_x_duration)
+	tween.parallel().tween_property(self, "scale:y", scale_y_range, scale_y_duration)
+	tween.parallel().tween_property(self, "rotation_degrees", rotation_degrees_1 * rotation_degrees_2 * [-1,0, 1.0].pick_random(), rotation_duration)
+	
+	tween.set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(self, "scale:x", 0.25, scale_x_duration).set_delay(discard_delay)
+	tween.parallel().tween_property(self, "scale:y", 0.25, scale_y_duration).set_delay(discard_delay)
+	tween.parallel().tween_property(self, "global_position",  position_discard, position_duration).set_delay(discard_delay)
+
+
+func draw_animation():
+	self.set_global_position(start_position_draw)
+	
+	if tween and tween.is_running():
+		tween.kill()
+		
+		
+	tween = create_tween()
+	
+	tween.set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(self, "scale:x", 0.25, 0.01)
+	tween.parallel().tween_property(self, "scale:y", 0.25, 0.01)
+	
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(self, "scale:x", 1, scale_x_duration)
+	tween.parallel().tween_property(self, "scale:y", 1, scale_y_duration)
+	tween.parallel().tween_property(self, "global_position", end_position_draw, position_duration)
+
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(self, "scale:x", scale_x_range, scale_x_duration).set_delay(draw_delay)
+	tween.parallel().tween_property(self, "scale:y", scale_y_range, scale_y_duration).set_delay(draw_delay)
+	tween.parallel().tween_property(self, "rotation_degrees", rotation_degrees_1 * rotation_degrees_2 * [-1,0, 1.0].pick_random(), rotation_duration).set_delay(draw_delay)
