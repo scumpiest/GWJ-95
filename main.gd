@@ -87,6 +87,7 @@ func next_level() -> void:
 	enemy_scene.scale = Vector2(0.5,0.5)
 
 	enemy_scene.unit = LevelManager.get_current_enemy()
+	enemy_scene.enemy_data = current_level.enemy_data
 	enemy_container.add_child(enemy_scene)
 	enemy_scene.unit.health_changed.connect(_on_enemy_damage_taken)
 	enemy_scene.unit.died.connect(_on_enemy_died)
@@ -100,13 +101,12 @@ func next_level() -> void:
 		enemy_scene.unit,
 		deck,
 		chain.get_child_count(),
+		current_level.enemy_data,
 	)
 	GameManager.start_battle(battle_context)
 
-	# TODO: delete after testing
-	GameManager.context.enemy_intent = enemy_scene.roll_intent()
+	GameManager.roll_enemy_intent()
 	_spawn_cards(GameManager.draw_cards(initial_hand_size))
-	print("Enemy intent: ", GameManager.context.enemy_intent)
 
 
 # TODO: add animation to spawn cards

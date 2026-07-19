@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://tfsbmn2bbyt5" path="res://scenes/character/player.gd" id="1_player"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://8qyj3rrayo57" path="res://assets/sprites/characters/main_character/char_data_res.tres" id="1_swkfo"]
 [ext_resource type="Texture2D" uid="uid://cj8t1k6itmjba" path="res://assets/sprites/ui/icon_heart.png" id="4_heart"]
+[ext_resource type="Script" path="res://scenes/ui/status_icon_row.gd" id="5_status_row"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_healthbar_border"]
 bg_color = Color(0.043137256, 0.023529412, 0.05490196, 1)
@@ -36,6 +37,18 @@ offset_right = 140.0
 offset_bottom = -394.0
 mouse_filter = 2
 metadata/_edit_group_ = true
+
+[node name="StatusRow" type="HBoxContainer" parent="HealthBar"]
+z_index = 12
+layout_mode = 0
+offset_left = 40.0
+offset_top = -44.0
+offset_right = 300.0
+offset_bottom = 8.0
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 1
+script = ExtResource("5_status_row")
 
 [node name="HeartIcon" type="TextureRect" parent="HealthBar" unique_id=511762035]
 z_index = 10
