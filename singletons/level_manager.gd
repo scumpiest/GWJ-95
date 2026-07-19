@@ -31,7 +31,7 @@ func send_task_event(event, data = null):
 func _next_level() -> void:
 	# Rewards for next level :)
 	if current_level and current_level.type == Level.LevelType.GAME:
-		var money_to_add = 20
+		var money_to_add = 40
 		if current_level.task and current_level.task.current_state == BattleTask.State.COMPLETED:
 			money_to_add += 10
 			AudioManager.play_task_completed()
