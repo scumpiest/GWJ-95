@@ -65,6 +65,10 @@ animations = [{
 [sub_resource type="Animation" id="Animation_cegan"]
 length = 0.001
 
+[sub_resource type="Animation" id="Animation_0odxb"]
+resource_name = "speech_button"
+step = 0.1
+
 [sub_resource type="Animation" id="Animation_82xsv"]
 resource_name = "text"
 loop_mode = 1
@@ -79,7 +83,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.499, 0.5, 0.999, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.03490658503988659, 0.03490658503988659, 0.0]
+"values": [0.0, 0.0, 0.03490658503988659, 0.03490658503988659, 0.03490658503988659]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -97,6 +101,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_getpj"]
 _data = {
 &"RESET": SubResource("Animation_cegan"),
+&"speech_button": SubResource("Animation_0odxb"),
 &"text": SubResource("Animation_82xsv")
 }
 
@@ -128,7 +133,7 @@ is_tutorial = true
 
 [node name="DiscardMarker" type="Marker2D" parent="." unique_id=1300470750]
 unique_name_in_owner = true
-position = Vector2(956, 547)
+position = Vector2(955, 564)
 
 [node name="DrawMarker" type="Marker2D" parent="." unique_id=642930984]
 unique_name_in_owner = true
@@ -261,8 +266,8 @@ layout_mode = 2
 
 [node name="DiscardPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=428355634]
 z_index = 20
-position = Vector2(931, 550)
-scale = Vector2(0.5, 0.5)
+position = Vector2(931, 562.5)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("15_getpj")
 
 [node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DiscardPile" unique_id=2105560111]
@@ -287,8 +292,8 @@ vertical_alignment = 1
 
 [node name="DrawPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=846734872]
 z_index = 20
-position = Vector2(60, 550)
-scale = Vector2(0.5, 0.5)
+position = Vector2(60, 562.5)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("17_ryguw")
 
 [node name="CountBadge" type="PanelContainer" parent="MarginContainer/VBox/DrawPile" unique_id=1992348601]

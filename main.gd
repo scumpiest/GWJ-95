@@ -2,8 +2,8 @@ extends Control
 class_name Main
 
 @export var deck: DeckData
-@export var cards_per_draw: int = 5
-@export var initial_hand_size: int = 5
+@export var cards_per_draw: int = 6
+@export var initial_hand_size: int = 6
 @export var card_scene: PackedScene
 @export var is_tutorial: bool = false
 
@@ -35,7 +35,6 @@ class_name Main
 
 var step = 0
 var scene_animation_duration: float = 0.4
-var draw_stagger_delay: float = 0.08
 var discard_stagger_delay: float = 0.05
 var current_enemy: Node2D
 var _battle_won: bool = false
@@ -142,26 +141,12 @@ func _spawn_cards(cards: Array[CardData]) -> void:
 	if cards.is_empty():
 		return
 
-	var card_visuals: Array[CardVisual] = []
 	for card_data in cards:
 		var card_visual := card_scene.instantiate() as CardVisual
 		card_visual.card_data = card_data
-		card_visual.modulate.a = 0.0
 		hand.add_child(card_visual)
-		card_visuals.append(card_visual)
-
-	# Let the HBoxContainer sort the newly added cards so each one knows its
-	# resting position in hand before it animates towards it.
-	await get_tree().process_frame
 
 	AudioManager.play_card_draw()
-	for card_visual in card_visuals:
-		card_visual.draw_animation()
-		await get_tree().create_timer(draw_stagger_delay).timeout
-
-	for card_visual in card_visuals:
-		if is_instance_valid(card_visual):
-			await card_visual.animation_finished
 
 
 func _return_previous_cards_to_deck() -> void:
