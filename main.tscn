@@ -180,6 +180,7 @@ offset_right = 1006.0
 offset_bottom = 144.99994
 offset_transform_rotation = -2.5900686
 theme_override_colors/default_color = Color(0.08235294, 0.03529412, 0.101960786, 1)
+bbcode_enabled = true
 text = "hello"
 scroll_active = false
 
