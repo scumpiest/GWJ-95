@@ -1,33 +1,22 @@
 [gd_scene format=3 uid="uid://bvy8ua03rmgwl"]
 
 [ext_resource type="Script" uid="uid://dlwiwx1koqm4d" path="res://scenes/balance/balance.gd" id="1_n14ff"]
+[ext_resource type="Texture2D" uid="uid://cur7818unfr74" path="res://assets/sprites/ui/icon_dollars.png" id="2_wm4fx"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_efxa6"]
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_n14ff"]
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_wm4fx"]
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
-
-[node name="Balance" type="HBoxContainer" unique_id=1899342113 node_paths=PackedStringArray("balance_label")]
+[node name="Balance" type="HBoxContainer" unique_id=1899342113]
+custom_maximum_size = Vector2(-1, 37)
+theme_override_constants/separation = 14
 script = ExtResource("1_n14ff")
-balance_label = NodePath("BalanceAmount")
 
-[node name="Balance" type="Label" parent="." unique_id=1057535273]
+[node name="BalanceAmount" type="Label" parent="." unique_id=1051487855]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Balance: "
-label_settings = SubResource("LabelSettings_efxa6")
+text = "100"
 
-[node name="BalanceAmount" type="Label" parent="." unique_id=1099960619]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=159317510]
+custom_minimum_size = Vector2(35, 0)
+custom_maximum_size = Vector2(-1, 37)
 layout_mode = 2
-label_settings = SubResource("LabelSettings_n14ff")
-
-[node name="DollarSign" type="Label" parent="." unique_id=1443205294]
-layout_mode = 2
-text = "$"
-label_settings = SubResource("LabelSettings_wm4fx")
+texture = ExtResource("2_wm4fx")
+expand_mode = 1
+stretch_mode = 4

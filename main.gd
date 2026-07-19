@@ -5,34 +5,57 @@ class_name Main
 @export var cards_per_draw: int = 5
 @export var initial_hand_size: int = 5
 @export var card_scene: PackedScene
+@export var is_tutorial: bool = false
 
-@onready var deck_button: TextureButton = %Deck
 @onready var hand: HBoxContainer = %Hand
 @onready var chain: HBoxContainer = %Chain
 @onready var end_turn: Button = %EndTurnButton
-@onready var discard_pile_label: Label = %DiscardPileLabel
-@onready var deck_card_label: Label = %DeckCardLabel
 @onready var player: Player = %Player
 @onready var shop_container: MarginContainer = self.get_node("Shop");
 @onready var main_container: MarginContainer = self.get_node("MarginContainer");
 @onready var enemy_container: Control = %EnemyContainer
+@onready var reward_screen: RewardScreen = %RewardScreen
+@onready var tutorial: CanvasLayer = $MarginContainer/CanvasLayer
+@onready var bubble_button: Button = $MarginContainer/CanvasLayer/BubbleButton
+@onready var text_tutorial: RichTextLabel = $MarginContainer/CanvasLayer/RichTextLabel
+@onready var speech_bubble_pressed: bool = false
+@onready var end_turn_button_pressed: bool = false
 
+
+var step = 0
+var scene_animation_duration: float = 0.4
 var current_enemy: Node2D
+var _battle_won: bool = false
 
 func _ready() -> void:
-	GameManager.deck_count_changed.connect(_on_deck_count_changed)
-	GameManager.discard_count_changed.connect(_on_discard_count_changed)
 	GameManager.phase_changed.connect(_on_phase_changed)
 
-	shop_container.visibility_changed.connect(func(): main_container.visible = !shop_container.visible)
+	shop_container.visibility_changed.connect(func():
+		var tween := create_tween()
+		if !shop_container.visible:
+			tween.tween_property(main_container, "modulate:a", 1.0, scene_animation_duration)
+		else:
+			tween.tween_property(main_container, "modulate:a", 0.0, scene_animation_duration)
+		main_container.visible = !shop_container.visible
+		)
+	#deck_button.pressed.connect(_on_deck_pressed)
 
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
+	reward_screen.card_chosen.connect(_chosen_card)
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
+
+
+func _chosen_card(card_data: CardData) -> void:
+	GameManager.add_card_to_deck(card_data)
+	LevelManager.next_level.emit()
+
 
 func next_level() -> void:
 	if LevelManager.current_level.type == Level.LevelType.SHOP:
 		shop_container.visible = true
+		var tween := create_tween()
+		tween.tween_property(shop_container, "modulate:a", 1.0, scene_animation_duration)
 		shop_container.health_bought = false
 		return
 	else:
@@ -47,13 +70,13 @@ func next_level() -> void:
 	enemy_scene.position = Vector2(910, 314)
 	enemy_scene.scale = Vector2(0.5,0.5)
 
-	enemy_scene.unit = LevelManager._get_current_enemy()
+	enemy_scene.unit = LevelManager.get_current_enemy()
 	enemy_container.add_child(enemy_scene)
-	enemy_scene.unit.died.connect(func():
-		clear_chain_slots()
-		LevelManager.next_level.emit()
-		)
+	enemy_scene.unit.died.connect(_on_enemy_died)
 	current_enemy = enemy_scene
+	_battle_won = false
+
+	_return_previous_cards_to_deck()
 
 	var battle_context := BattleContext.new(
 		player.unit,
@@ -65,7 +88,6 @@ func next_level() -> void:
 
 	# TODO: delete after testing
 	GameManager.context.enemy_intent = enemy_scene.roll_intent()
-	# TODO: This might need moving? It fucks with the state currently as you're getting a lot of cards now
 	_spawn_cards(GameManager.draw_cards(initial_hand_size))
 	print("Enemy intent: ", GameManager.context.enemy_intent)
 
@@ -78,6 +100,17 @@ func _spawn_cards(cards: Array[CardData]) -> void:
 		hand.add_child(card_visual)
 
 
+func _return_previous_cards_to_deck() -> void:
+	for card in hand.get_children():
+		deck.cards.append(card.card_data)
+		card.queue_free()
+	for card_data in clear_chain_slots():
+		deck.cards.append(card_data)
+	for card_data in deck.discard_pile:
+		deck.cards.append(card_data)
+	deck.discard_pile.clear()
+
+
 func _on_end_turn_button_pressed() -> void:
 	end_turn.disabled = true
 	if not GameManager.begin_chain_resolve():
@@ -85,13 +118,35 @@ func _on_end_turn_button_pressed() -> void:
 		return
 
 	await _trigger_chain_sequentially()
+	if _battle_won:
+		_finish_battle_won()
+		end_turn.disabled = false
+		return
+
 	var discarded := clear_chain_slots()
+	#discard cards leftover in hand
 	for card in hand.get_children():
 		discarded.append(card.card_data)
 		card.queue_free()
 	var drawn := GameManager.end_player_turn(discarded, cards_per_draw)
 	_spawn_cards(drawn)
 	end_turn.disabled = false
+
+
+func _on_enemy_died() -> void:
+	_battle_won = true
+	# Clearing cards mid-resolve frees CardVisuals while activations still await timers.
+	if GameManager.phase != GameManager.Phase.CHAIN_RESOLVING:
+		_finish_battle_won()
+
+
+func _finish_battle_won() -> void:
+	for card_data in clear_chain_slots():
+		deck.add_to_discard_pile(card_data)
+	if LevelManager.current_level.rewards:
+		reward_screen.show_choices(LevelManager.current_level.rewards.cards)
+	else:
+		LevelManager.next_level.emit()
 
 
 func _trigger_chain_sequentially() -> void:
@@ -123,14 +178,6 @@ func clear_chain_slots() -> Array[CardData]:
 	return cards
 
 
-func _on_deck_count_changed(count: int) -> void:
-	deck_card_label.text = str(count)
-
-
-func _on_discard_count_changed(count: int) -> void:
-	discard_pile_label.text = str(count)
-
-
 func _on_phase_changed(phase: GameManager.Phase) -> void:
 	print("Phase changed: ", GameManager.Phase.keys()[phase])
 	if phase != GameManager.Phase.PLAN:
@@ -141,3 +188,43 @@ func _on_card_activated(slot: Slot, card: CardVisual) -> void:
 	slot.make_slot_jiggle()
 	print("Activating card: ", slot.color)
 	await card.activate()
+
+func run_tutorial():
+	speech_bubble_pressed = false
+	tutorial.visible = true
+	#for key in Databank.tutorial_dialogue.keys():
+	text_tutorial.text = Databank.tutorial_dialogue[step]
+	#print(text_tutorial.text)
+
+func _process(_delta: float) -> void:
+	match step:
+		0, 3, 4, 5, 7, 8:
+			if speech_bubble_pressed == true:
+				step += 1
+				run_tutorial()
+		1: 
+			for i in range(0, 5):
+				if chain.get_child(i).get_child(0).get_child_count() != 0:
+					step += 1
+					run_tutorial()
+		2:
+			var slots_filled = 0
+			for i in range(0, 5):
+				if chain.get_child(i).get_child(0).get_child_count() != 0:
+					slots_filled += 1
+			if slots_filled == chain.get_child_count():
+				step += 1
+				run_tutorial()
+		6:
+			if end_turn_button_pressed == true:
+				step += 1
+				run_tutorial()
+		9:
+			is_tutorial = false
+			step = 0
+	
+	if is_tutorial == false:
+		tutorial.visible = false
+
+func _on_speech_bubble_pressed() -> void:
+	speech_bubble_pressed = true

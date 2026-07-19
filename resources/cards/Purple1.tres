@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://dlux45kkxncst" path="res://script_resources/cards/card_effect.gd" id="1_sm6ht"]
 [ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="2_1a5li"]
 [ext_resource type="Resource" uid="uid://c0buga2qea6jn" path="res://resources/card-effects/P1.1.tres" id="2_4s6ug"]
-[ext_resource type="Resource" uid="uid://cjy4oknmlr8wm" path="res://resources/card-effects/P1.2.tres" id="3_g3c5j"]
 
 [resource]
 script = ExtResource("2_1a5li")
@@ -13,5 +12,5 @@ display_name = "Criss Cross"
 description = "Deals 5 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img] for every Cassette before it, both to you and the enemy."
 art = ExtResource("1_g3c5j")
 card_color = 2
-effects = Array[ExtResource("1_sm6ht")]([ExtResource("2_4s6ug"), ExtResource("3_g3c5j")])
+effects = Array[ExtResource("1_sm6ht")]([ExtResource("2_4s6ug")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

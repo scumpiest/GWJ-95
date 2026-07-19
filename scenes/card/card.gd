@@ -16,6 +16,7 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 
 var owner_slot: Slot
 var shop_card: bool = false
+var reward_card: bool = false
 var cost_label: Label
 var tween: Tween
 var img_metadata_regex: RegEx
@@ -37,6 +38,7 @@ func _ready() -> void:
 	_apply_display_mode(false)
 	casette.mouse_entered.connect(_on_casette_mouse_entered)
 	casette.mouse_exited.connect(_on_casette_mouse_exited)
+	casette.gui_input.connect(_on_casette_gui_input)
 	_description_label.meta_hover_started.connect(_on_description_meta_hover_started)
 	_description_label.meta_hover_ended.connect(_on_description_meta_hover_ended)
 
@@ -48,10 +50,10 @@ func set_shop_card(is_shop_card: bool):
 		cost_label.visible = true
 
 
-func _gui_input(event):
-	if shop_card and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-			clicked_card.emit(self)
-			set_casette_highlighted(true)
+func _on_casette_gui_input(event: InputEvent) -> void:
+	if (shop_card or reward_card) and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		clicked_card.emit(self)
+		set_casette_highlighted(true)
 
 func _bind_card_data() -> void:
 	if card_data == null:
@@ -102,7 +104,7 @@ func _apply_display_mode(in_chain: bool) -> void:
 
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
-	if(shop_card):
+	if shop_card or reward_card:
 		return
 	var preview := duplicate() as CardVisual
 	preview.modulate.a = 0.75
@@ -128,10 +130,14 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 
 
 func activate() -> void:
+	if not is_inside_tree():
+		return
 	if owner_slot != null:
 		owner_slot.set_activation_highlighted(true)
 	set_activation_highlighted(true)
 	await get_tree().create_timer(ACTIVATION_DURATION).timeout
+	if not is_inside_tree():
+		return
 	set_activation_highlighted(false)
 	if owner_slot != null:
 		owner_slot.set_activation_highlighted(false)

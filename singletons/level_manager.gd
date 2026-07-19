@@ -13,7 +13,9 @@ func _ready() -> void:
 	next_level.connect(_next_level)
 
 func _next_level() -> void:
-	print('called wooo')
+	# Default reward for next level
+	if current_level and current_level.type == Level.LevelType.GAME:
+		CurrencyManager.add_money(20)
 	if !current_level:
 		current_level = levels[0]
 	else:
@@ -22,7 +24,7 @@ func _next_level() -> void:
 		if current_level_index != -1 and new_level_index < (levels.size() + 1):
 			current_level = levels[new_level_index]
 
-func _get_current_enemy() -> Unit:
+func get_current_enemy() -> Unit:
 	var enemy_data := current_level.enemy_data
 	var unit := Unit.new()
 	unit.id = enemy_data.id

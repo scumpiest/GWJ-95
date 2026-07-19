@@ -9,8 +9,8 @@
 [resource]
 script = ExtResource("2_5420x")
 id = &"R4"
-display_name = "Kick and Slide"
-description = "Deal 3 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. If [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] is next, gives you [img width=16 height=16]res://assets/sprites/icons/block.png[/img] equal to [img width=16 height=16]res://assets/sprites/icons/damage.png[/img] dealt by [Red cassette]."
+display_name = "Kick 'n Slide"
+description = "Deal 3 [img width=16 height=16]res://assets/sprites/icons/damage.png[/img]. If [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img] is next, gives you [img width=16 height=16]res://assets/sprites/icons/block.png[/img] equal to [img width=16 height=16]res://assets/sprites/icons/damage.png[/img] dealt by [img width=16 height=16]res://assets/sprites/icons/redcassette.png[/img]."
 art = ExtResource("1_dcej4")
 effects = Array[ExtResource("1_ih4qp")]([ExtResource("2_eia5o"), ExtResource("3_dcej4")])
 metadata/_custom_type_script = "uid://c2wkbyfqqevnx"

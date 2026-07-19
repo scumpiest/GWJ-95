@@ -19,7 +19,7 @@ var statuses: Dictionary[String, int] = {
     "vulnerable": 0, "weakness": 0, "protection": 0, "strength": 0
     }
 
-func add_health_percentage(health_percentage: int):
+func add_health_percentage(health_percentage: float):
     var health_to_add = (float(max_health) / 100) * health_percentage
     if (health_to_add + health) < max_health:
         health += health_to_add

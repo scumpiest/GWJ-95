@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardDB" format=3 uid="uid://bf612wxxi7v5b"]
+
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="1_g2rkr"]
+[ext_resource type="Resource" uid="uid://batsj87cryt0m" path="res://resources/cards/Green2.tres" id="2_g2rkr"]
+[ext_resource type="Resource" uid="uid://sn02svbvypvs" path="res://resources/cards/Purple4.tres" id="3_yak5v"]
+[ext_resource type="Script" uid="uid://dfx0hkg2gat16" path="res://script_resources/deck_db.gd" id="4_xy4eu"]
+
+[resource]
+script = ExtResource("4_xy4eu")
+cards = Array[ExtResource("1_g2rkr")]([ExtResource("2_g2rkr"), ExtResource("3_yak5v")])
+metadata/_custom_type_script = "uid://ek37w3byemty"

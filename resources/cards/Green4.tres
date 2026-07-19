@@ -9,7 +9,7 @@
 script = ExtResource("4_ts0oj")
 id = &"B4"
 display_name = "Pepper Seed"
-description = "Increase your [img width=16 height=16]res://assets/sprites/icons/block.png[/img] by 50%.Does not activate if placed next to [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] or last in the chain."
+description = "Increases your [img width=16 height=16]res://assets/sprites/icons/block.png[/img] by 50%. Does not activate if placed next to [img width=16 height=16]res://assets/sprites/icons/greencassette.png[/img] or last in the chain."
 art = ExtResource("1_k52ll")
 card_color = 1
 cost = 20

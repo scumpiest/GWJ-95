@@ -93,7 +93,7 @@ func clear_card() -> CardVisual:
 
 
 func set_card(card: CardVisual) -> void:
-	if card == null:
+	if card == null or not is_instance_valid(card):
 		return
 
 	var existing := get_card()
@@ -104,7 +104,12 @@ func set_card(card: CardVisual) -> void:
 		_anchor.remove_child(existing)
 		existing.set_owner_slot(null)
 
-	card.reparent(_anchor)
+	if card.get_parent() != _anchor:
+		if card.get_parent() != null:
+			card.reparent(_anchor, false)
+		else:
+			_anchor.add_child(card)
+
 	card.set_owner_slot(self)
 	color = card.card_data.card_color
 	card_changed.emit(card)
@@ -123,16 +128,28 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 		return
 
 	var displaced := get_card()
+	_apply_drop.call_deferred(card, displaced, from_slot, from_container)
+	set_highlighted(true)
+
+
+func _apply_drop(
+	card: CardVisual,
+	displaced: CardVisual,
+	from_slot: Slot,
+	from_container: Node,
+) -> void:
 	set_card(card)
 
 	if from_slot:
 		if displaced:
 			from_slot.set_card(displaced)
-	elif displaced and from_container:
-		from_container.add_child(displaced)
+	elif displaced and from_container and is_instance_valid(from_container):
+		if displaced.get_parent() != from_container:
+			if displaced.get_parent() != null:
+				displaced.reparent(from_container, false)
+			else:
+				from_container.add_child(displaced)
 		displaced.set_owner_slot(null)
-
-	set_highlighted(true)
 
 
 func set_highlighted(active: bool) -> void:
@@ -151,7 +168,7 @@ func set_activation_highlighted(active: bool) -> void:
 		return
 	add_theme_stylebox_override("panel", _activation_panel_style if active else _base_panel_style)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	if  Input.is_action_just_pressed("tweens_in"):
 		make_slot_jiggle()

@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://dqhivoovq4phj"]
+
+[ext_resource type="Script" uid="uid://0aqx6tm05xw3" path="res://scenes/stage/reward_screen.gd" id="1_kdt0k"]
+[ext_resource type="PackedScene" uid="uid://tn41fl850ub5" path="res://scenes/card/card.tscn" id="2_rtp6k"]
+[ext_resource type="Script" uid="uid://c2wkbyfqqevnx" path="res://script_resources/cards/card_data.gd" id="3_dqbyl"]
+[ext_resource type="Resource" uid="uid://bt0w588peu2j7" path="res://resources/cards/Red3.tres" id="4_kvf8a"]
+[ext_resource type="Resource" uid="uid://cpjo7uksxa8uo" path="res://resources/cards/Green3.tres" id="5_fr36x"]
+[ext_resource type="PackedScene" uid="uid://bvy8ua03rmgwl" path="res://scenes/balance/balance.tscn" id="6_fr36x"]
+[ext_resource type="Texture2D" uid="uid://cl4v6wdwirxba" path="res://assets/sprites/ui/line.png" id="7_kvf8a"]
+[ext_resource type="Texture2D" uid="uid://csk11iftatfrr" path="res://assets/sprites/ui/icon_char.png" id="8_fr36x"]
+[ext_resource type="Texture2D" uid="uid://bioic34jqtq3a" path="res://assets/sprites/ui/icon_mark.png" id="9_fr36x"]
+
+[node name="RewardScreen" type="Control" unique_id=118914271]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kdt0k")
+card_scene = ExtResource("2_rtp6k")
+reward_options = Array[ExtResource("3_dqbyl")]([ExtResource("4_kvf8a"), ExtResource("5_fr36x")])
+
+[node name="BlackScreen" type="ColorRect" parent="." unique_id=1635118704]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.68)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=953897043]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer" unique_id=1553013073]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Balance" parent="MarginContainer/Content" unique_id=1899342113 instance=ExtResource("6_fr36x")]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/Content" unique_id=1940130546]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "Choose a card"
+horizontal_alignment = 1
+
+[node name="CardChoices" type="HBoxContainer" parent="MarginContainer/Content" unique_id=1120595354]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Line" type="Sprite2D" parent="." unique_id=481523379]
+position = Vector2(592, 580)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_kvf8a")
+
+[node name="IconChar" type="Sprite2D" parent="." unique_id=12006691]
+position = Vector2(376, 504)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_fr36x")
+
+[node name="IconMark" type="Sprite2D" parent="." unique_id=221288735]
+visible = false
+position = Vector2(376, 591)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_fr36x")

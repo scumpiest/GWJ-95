@@ -22,6 +22,9 @@ func run_pre_effects(context: BattleContext) -> void:
 
 func run_active_effects(context: BattleContext, slots: Array[Slot], on_activate: Callable) -> void:
 	for i in context.chain_slot_states.size():
+		if context.enemy.health <= 0:
+			return
+
 		var slot_state: ChainSlotState = context.chain_slot_states[i]
 		if not slot_state.is_active() or slot_state.skip_activation:
 			continue
@@ -32,6 +35,9 @@ func run_active_effects(context: BattleContext, slots: Array[Slot], on_activate:
 			continue
 
 		for activation in slot_state.activation_count:
+			if context.enemy.health <= 0:
+				return
+
 			if on_activate.is_valid():
 				await on_activate.call(slot, card)
 

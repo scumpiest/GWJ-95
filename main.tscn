@@ -3,15 +3,126 @@
 [ext_resource type="PackedScene" uid="uid://tn41fl850ub5" path="res://scenes/card/card.tscn" id="1_card_visual"]
 [ext_resource type="Script" uid="uid://be4wr1kwj333s" path="res://main.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://k0msilr74cgg" path="res://scenes/board/slot.tscn" id="2_slot"]
-[ext_resource type="Texture2D" uid="uid://baj1drtjlgf8v" path="res://icon.svg" id="3_deck_tex"]
 [ext_resource type="Resource" uid="uid://lli1fjyggvmk" path="res://resources/starter_deck.tres" id="4_deck"]
+[ext_resource type="Texture2D" uid="uid://cp7je3bdn2qf5" path="res://assets/sprites/ui/sign1.png" id="4_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bvy8ua03rmgwl" path="res://scenes/balance/balance.tscn" id="5_efxa6"]
+[ext_resource type="Texture2D" uid="uid://ddgbicyis01ps" path="res://assets/sprites/ui/sign2.png" id="5_vivmo"]
 [ext_resource type="PackedScene" uid="uid://cx6g6j2lx7aow" path="res://scenes/character/player.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://bdovnwwna2dje" path="res://animated_sprite_2d.gd" id="6_vivmo"]
+[ext_resource type="Texture2D" uid="uid://c7d7flmyj4ale" path="res://assets/sprites/ui/arrow_1.png" id="7_2cqfq"]
 [ext_resource type="AudioStream" uid="uid://bik66s0yv6dts" path="res://assets/sounds/Rythm Gamejam 2.mp3" id="7_272bh"]
+[ext_resource type="Script" uid="uid://bh8dyfx5ckq4h" path="res://animation_player.gd" id="8_074og"]
+[ext_resource type="Texture2D" uid="uid://d166ydy4yjh5d" path="res://assets/sprites/ui/arrow_2.png" id="8_82xsv"]
 [ext_resource type="Script" uid="uid://bt6vcyblqjfcc" path="res://script_resources/hand.gd" id="8_dg77c"]
 [ext_resource type="PackedScene" uid="uid://cbjhhlo1by5tx" path="res://scenes/shop/shop.tscn" id="8_kek77"]
+[ext_resource type="Script" uid="uid://c23y5t0qwphab" path="res://arrow.gd" id="9_getpj"]
 [ext_resource type="PackedScene" uid="uid://c7stag3sc3n31" path="res://scenes/stage/stage.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" path="res://scenes/ui/icon_tooltip.tscn" id="11_icon_tooltip"]
+[ext_resource type="PackedScene" uid="uid://dqhivoovq4phj" path="res://scenes/stage/reward_screen.tscn" id="12_reward"]
+[ext_resource type="Texture2D" uid="uid://bg6gdtan8g6fv" path="res://assets/sprites/ui/icon_discard_pile.png" id="15_getpj"]
+[ext_resource type="Texture2D" uid="uid://cysf181gpkhee" path="res://assets/sprites/ui/icon_draw_pile.png" id="17_ryguw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_chyd6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_vivmo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w48qg")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kgoo1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_2cqfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_82xsv")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_chyd6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgoo1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h1tde"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_skiwf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_msp22"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e3exj"]
+
+[sub_resource type="Animation" id="Animation_cegan"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/CanvasLayer/RichTextLabel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/CanvasLayer/RichTextLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(734, 54)]
+}
+
+[sub_resource type="Animation" id="Animation_82xsv"]
+resource_name = "text"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/CanvasLayer/RichTextLabel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.499, 0.5, 0.999, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.03490658503988659, 0.03490658503988659, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/CanvasLayer/RichTextLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.499, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(734, 54), Vector2(734, 54), Vector2(734, 50), Vector2(734, 50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_getpj"]
+_data = {
+&"RESET": SubResource("Animation_cegan"),
+&"text": SubResource("Animation_82xsv")
+}
 
 [node name="Main" type="Control" unique_id=558398176]
 layout_mode = 3
@@ -23,6 +134,7 @@ grow_vertical = 2
 script = ExtResource("1_main")
 deck = ExtResource("4_deck")
 card_scene = ExtResource("1_card_visual")
+is_tutorial = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=335792737]
 layout_mode = 1
@@ -36,7 +148,59 @@ grow_vertical = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
+
+[node name="CanvasLayer" type="CanvasLayer" parent="MarginContainer" unique_id=721030733]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/CanvasLayer" unique_id=116648833]
+position = Vector2(917, 144)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_chyd6")
+frame = 1
+frame_progress = 0.5344142
+script = ExtResource("6_vivmo")
+
+[node name="Arrow" type="AnimatedSprite2D" parent="MarginContainer/CanvasLayer" unique_id=784977631]
+visible = false
+position = Vector2(304, 210)
+rotation = 5.657731
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_kgoo1")
+script = ExtResource("9_getpj")
+
+[node name="TimerAnimSprite" type="Timer" parent="MarginContainer/CanvasLayer" unique_id=363797640]
+wait_time = 0.3
+
+[node name="TimerAnimPlayer" type="Timer" parent="MarginContainer/CanvasLayer" unique_id=199974]
+wait_time = 0.5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CanvasLayer" unique_id=32164973]
+offset_left = 734.0
+offset_top = 54.0
+offset_right = 1006.0
+offset_bottom = 144.99994
+offset_transform_rotation = -2.5900686
+theme_override_colors/default_color = Color(0.08235294, 0.03529412, 0.101960786, 1)
+text = "hello"
+scroll_active = false
+
+[node name="BubbleButton" type="Button" parent="MarginContainer/CanvasLayer" unique_id=1339568607]
+z_index = 20
+offset_left = 708.0
+offset_top = 30.000002
+offset_right = 836.93274
+offset_bottom = 114.63425
+scale = Vector2(2.5283442, 1.7372693)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_chyd6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kgoo1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h1tde")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_skiwf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_msp22")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e3exj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/CanvasLayer" unique_id=637478653]
+root_node = NodePath("../../..")
+libraries/ = SubResource("AnimationLibrary_getpj")
+script = ExtResource("8_074og")
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer" unique_id=788442826]
 layout_mode = 2
@@ -78,7 +242,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Container" type="PanelContainer" parent="MarginContainer/VBox" unique_id=2066776690]
-custom_minimum_size = Vector2(0, 260)
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 
 [node name="Player" parent="MarginContainer/VBox/Container" unique_id=1761150887 instance=ExtResource("6_7mycd")]
@@ -90,71 +254,54 @@ scale = Vector2(0.5, 0.5)
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HandLabel" type="Label" parent="MarginContainer/VBox" unique_id=2092549864]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Hand"
+[node name="DiscardMarker" type="Marker2D" parent="MarginContainer/VBox" unique_id=1300470750]
+position = Vector2(932, 544.5)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1946937927]
-propagate_maximum_size = false
-layout_mode = 2
+[node name="DiscardPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=428355634]
+position = Vector2(931, 550)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("15_getpj")
 
-[node name="Hand" type="HBoxContainer" parent="MarginContainer/VBox/HBoxContainer" unique_id=1180998]
+[node name="DrawMarker" type="Marker2D" parent="MarginContainer/VBox" unique_id=642930984]
+position = Vector2(58, 546.5)
+
+[node name="DrawPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=846734872]
+position = Vector2(60, 550)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("17_ryguw")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBox" unique_id=182627700]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 150
+
+[node name="EndTurnButton" type="Button" parent="MarginContainer/VBox/MarginContainer" unique_id=1296551166]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(702.62, 180)
-custom_maximum_size = Vector2(702, -1)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 12
-script = ExtResource("8_dg77c")
-max_width_set = 702
-
-[node name="Deck" type="TextureButton" parent="MarginContainer/VBox/HBoxContainer" unique_id=1847293650]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 112)
-layout_mode = 2
-size_flags_horizontal = 0
-texture_normal = ExtResource("3_deck_tex")
-stretch_mode = 5
-
-[node name="Data" type="PanelContainer" parent="MarginContainer/VBox/HBoxContainer" unique_id=1719025368]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBox/HBoxContainer/Data" unique_id=1307539143]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="DeckCard" type="Label" parent="MarginContainer/VBox/HBoxContainer/Data/VBoxContainer" unique_id=1776460501]
-layout_mode = 2
-text = "Card in Deck:"
-horizontal_alignment = 1
-
-[node name="DeckCardLabel" type="Label" parent="MarginContainer/VBox/HBoxContainer/Data/VBoxContainer" unique_id=623307187]
-unique_name_in_owner = true
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-
-[node name="DiscardCard" type="Label" parent="MarginContainer/VBox/HBoxContainer/Data/VBoxContainer" unique_id=2114502966]
-layout_mode = 2
-text = "Card discarded:"
-horizontal_alignment = 1
-
-[node name="DiscardPileLabel" type="Label" parent="MarginContainer/VBox/HBoxContainer/Data/VBoxContainer" unique_id=1456915633]
-unique_name_in_owner = true
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-
-[node name="EndTurnButton" type="Button" parent="MarginContainer/VBox/HBoxContainer" unique_id=1296551166]
-unique_name_in_owner = true
+z_index = 20
 layout_mode = 2
 size_flags_horizontal = 8
 text = "END TURN"
 
-[node name="Shop" parent="." unique_id=827335244 node_paths=PackedStringArray("player_hand") instance=ExtResource("8_kek77")]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBox/MarginContainer" unique_id=1946937927]
+propagate_maximum_size = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Hand" type="HBoxContainer" parent="MarginContainer/VBox/MarginContainer/HBoxContainer" unique_id=1180998]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
+custom_maximum_size = Vector2(702, 180)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+alignment = 1
+script = ExtResource("8_dg77c")
+max_width_set = 702
+
+[node name="Shop" parent="." unique_id=827335244 instance=ExtResource("8_kek77")]
+visible = true
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -165,7 +312,6 @@ offset_right = 1128.0
 offset_bottom = 645.5
 grow_horizontal = 1
 grow_vertical = 1
-player_hand = NodePath("../MarginContainer/VBox/HBoxContainer/Hand")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=279445689]
 stream = ExtResource("7_272bh")
@@ -180,6 +326,13 @@ scale = Vector2(0.56, 0.56)
 [node name="TooltipLayer" type="CanvasLayer" parent="." unique_id=744251079]
 layer = 100
 
+[node name="RewardScreen" parent="TooltipLayer" unique_id=118914271 instance=ExtResource("12_reward")]
+unique_name_in_owner = true
+visible = false
+
 [node name="IconTooltip" parent="TooltipLayer" unique_id=305762781 instance=ExtResource("11_icon_tooltip")]
 
 [connection signal="focus_entered" from="." to="Shop" method="_on_main_focus_entered"]
+[connection signal="timeout" from="MarginContainer/CanvasLayer/TimerAnimSprite" to="MarginContainer/CanvasLayer/AnimatedSprite2D" method="_on_timer_anim_sprite_timeout"]
+[connection signal="timeout" from="MarginContainer/CanvasLayer/TimerAnimPlayer" to="MarginContainer/CanvasLayer/AnimationPlayer" method="_on_timer_anim_player_timeout"]
+[connection signal="pressed" from="MarginContainer/CanvasLayer/BubbleButton" to="." method="_on_speech_bubble_pressed"]
