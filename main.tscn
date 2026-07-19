@@ -255,7 +255,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="DiscardMarker" type="Marker2D" parent="MarginContainer/VBox" unique_id=1300470750]
-position = Vector2(893, 520.5)
+position = Vector2(932, 544.5)
 
 [node name="DiscardPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=428355634]
 position = Vector2(931, 550)
@@ -263,7 +263,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("15_getpj")
 
 [node name="DrawMarker" type="Marker2D" parent="MarginContainer/VBox" unique_id=642930984]
-position = Vector2(893, 520.5)
+position = Vector2(58, 546.5)
 
 [node name="DrawPile" type="Sprite2D" parent="MarginContainer/VBox" unique_id=846734872]
 position = Vector2(60, 550)
