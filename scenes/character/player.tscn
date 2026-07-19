@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cx6g6j2lx7aow"]
 
-[ext_resource type="Script" path="res://scenes/character/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://tfsbmn2bbyt5" path="res://scenes/character/player.gd" id="1_player"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://8qyj3rrayo57" path="res://assets/sprites/characters/main_character/char_data_res.tres" id="1_swkfo"]
 [ext_resource type="Texture2D" uid="uid://cj8t1k6itmjba" path="res://assets/sprites/ui/icon_heart.png" id="4_heart"]
 [ext_resource type="Script" path="res://scenes/ui/status_icon_row.gd" id="5_status_row"]

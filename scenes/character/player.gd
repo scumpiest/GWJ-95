@@ -29,6 +29,10 @@ func _health_decreased(health: int, old_health: int):
 	if old_health > health:
 		LevelManager.send_task_event(BattleTask.EventType.DAMAGE_TAKEN, old_health - health)
 
+func _update_health_bar(health: int, _old_health: int) -> void:
+	_health_bar.max_value = unit.max_health
+	_health_bar.value = health
+
 func _handle_block_changed(block: int):
 	if block > _last_block:
 		AudioManager.play_player_shield_activate()

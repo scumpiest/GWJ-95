@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Level" format=3 uid="uid://b08yo7g8wqlme"]
 
-[ext_resource type="Resource" uid="uid://cg5ilwxy2fpl" path="res://resources/enemies/E1.tres" id="1_3f1m3"]
+[ext_resource type="Resource" uid="uid://7wbo2uvptoq3" path="res://resources/enemies/E3.tres" id="1_3f1m3"]
 [ext_resource type="PackedScene" uid="uid://b2k5n8m3p7q4r" path="res://scenes/character/enemy1.tscn" id="2_eggh0"]
 [ext_resource type="Resource" uid="uid://bf612wxxi7v5b" path="res://resources/rewards/reward3.tres" id="3_ko8un"]
 [ext_resource type="Script" uid="uid://dyvq2g50fm40e" path="res://script_resources/level.gd" id="3_pv8cl"]

@@ -83,6 +83,7 @@ func set_intent(move: EnemyMove) -> void:
 		var vulnerable_label := str(move.apply_vulnerable) if move.apply_vulnerable > 1 else ""
 		_add_intent_entry(ICON_VULNERABILITY, vulnerable_label)
 
+
 func play_idle_pose() -> void:
 	_sprite.get_animation_state().set_animation("idle", true, 0)
 
