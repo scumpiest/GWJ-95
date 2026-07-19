@@ -244,13 +244,21 @@ text = "Hand"
 propagate_maximum_size = false
 layout_mode = 2
 
-[node name="Hand" type="HBoxContainer" parent="MarginContainer/VBox/HBoxContainer" unique_id=1180998]
+[node name="HandArea" type="CenterContainer" parent="MarginContainer/VBox/HBoxContainer" unique_id=1180997]
+custom_minimum_size = Vector2(702, 180)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Hand" type="HBoxContainer" parent="MarginContainer/VBox/HBoxContainer/HandArea" unique_id=1180998]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(702.62, 180)
-custom_maximum_size = Vector2(702, -1)
+custom_minimum_size = Vector2(0, 180)
+custom_maximum_size = Vector2(702, 180)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 12
+alignment = 1
 script = ExtResource("8_dg77c")
 max_width_set = 702
 
@@ -312,7 +320,7 @@ offset_right = 1128.0
 offset_bottom = 645.5
 grow_horizontal = 1
 grow_vertical = 1
-player_hand = NodePath("../MarginContainer/VBox/HBoxContainer/Hand")
+player_hand = NodePath("../MarginContainer/VBox/HBoxContainer/HandArea/Hand")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=279445689]
 stream = ExtResource("7_272bh")
