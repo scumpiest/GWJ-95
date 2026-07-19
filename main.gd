@@ -29,11 +29,13 @@ var step = 0
 var scene_animation_duration: float = 0.4
 var current_enemy: Node2D
 var _battle_won: bool = false
+var _battle_lost: bool = false
 
 func _ready() -> void:
 	GameManager.phase_changed.connect(_on_phase_changed)
 	GameManager.deck_count_changed.connect(_on_deck_count_changed)
 	GameManager.discard_count_changed.connect(_on_discard_count_changed)
+	player.unit.died.connect(_on_player_died)
 	_on_deck_count_changed(deck.cards.size())
 	_on_discard_count_changed(deck.discard_pile.size())
 
@@ -96,6 +98,7 @@ func next_level() -> void:
 	enemy_scene.unit.died.connect(_on_enemy_died)
 	current_enemy = enemy_scene
 	_battle_won = false
+	_battle_lost = false
 
 	_return_previous_cards_to_deck()
 
@@ -137,6 +140,8 @@ func _return_previous_cards_to_deck() -> void:
 func _on_end_turn_button_pressed() -> void:
 	AudioManager.play_ui_click()
 	end_turn.disabled = true
+	if _battle_lost:
+		return
 	if not GameManager.begin_chain_resolve():
 		end_turn.disabled = false
 		return
@@ -147,6 +152,8 @@ func _on_end_turn_button_pressed() -> void:
 		_finish_battle_won()
 		end_turn.disabled = false
 		return
+	if _battle_lost:
+		return
 
 	var discarded := clear_chain_slots()
 	#discard cards leftover in hand
@@ -156,6 +163,8 @@ func _on_end_turn_button_pressed() -> void:
 	if not discarded.is_empty():
 		AudioManager.play_card_discard()
 	var drawn := GameManager.end_player_turn(discarded, cards_per_draw)
+	if _battle_lost:
+		return
 	_spawn_cards(drawn)
 	end_turn.disabled = false
 
@@ -171,7 +180,17 @@ func _on_enemy_died() -> void:
 		_finish_battle_won()
 
 
+func _on_player_died() -> void:
+	if _battle_lost or _battle_won:
+		return
+	_battle_lost = true
+	end_turn.disabled = true
+	AudioManager.stop_music()
+	AudioManager.play_lose_song()
+
+
 func _finish_battle_won() -> void:
+	AudioManager.play_win_song()
 	LevelManager.send_task_event(BattleTask.EventType.TURN_END, null)
 	LevelManager.send_task_event(BattleTask.EventType.BATTLE_END, null)
 	var won_chain_cards := clear_chain_slots()

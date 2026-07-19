@@ -1,7 +1,7 @@
 class_name StatusIconRow
 extends HBoxContainer
 
-const STATUS_ICON_SIZE := Vector2(48, 48)
+const STATUS_ICON_SIZE := Vector2(56, 56)
 
 const ICON_BLOCK := preload("res://assets/sprites/icons/block.png")
 const ICON_VULNERABLE := preload("res://assets/sprites/icons/vulnerability.png")
@@ -111,7 +111,7 @@ func _add_entry(texture: Texture2D, value_text: String, tooltip_key: String) -> 
 		label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		label.offset_right = 2.0
 		label.offset_bottom = 1.0
-		label.add_theme_font_size_override("font_size", 20)
+		label.add_theme_font_size_override("font_size", 22)
 		label.add_theme_color_override("font_color", Color.WHITE)
 		label.add_theme_color_override("font_outline_color", Color.BLACK)
 		label.add_theme_constant_override("outline_size", 5)

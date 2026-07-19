@@ -29,6 +29,9 @@ const MUSIC_SILENT_VOLUME_DB := -80.0
 @export var sfx_task_succeed: AudioStream = preload("res://assets/sfx/Task Succeed SFX.ogg")
 @export var sfx_task_completed: AudioStream = preload("res://assets/sfx/Task Completed SFX.ogg")
 @export var sfx_enemy_dies: AudioStream = preload("res://assets/sfx/Enemy Dies SFX.ogg")
+@export var sfx_enemy_ground_hit: AudioStream = preload("res://assets/sfx/Enemy Ground Hit SFX.ogg")
+@export var sfx_win_song: AudioStream = preload("res://assets/sfx/Game Card Win Song.ogg")
+@export var sfx_lose_song: AudioStream = preload("res://assets/sfx/Game Card Lose Song.ogg")
 
 # ─────── Music Variables ────────────────────────────────────────
 @export var music_menu: AudioStream = preload("res://assets/musics/Game Card Main Menu.ogg")
@@ -172,6 +175,18 @@ func play_task_completed() -> void:
 
 func play_enemy_dies() -> void:
 	play_sfx(sfx_enemy_dies)
+
+
+func play_enemy_ground_hit() -> void:
+	play_sfx(sfx_enemy_ground_hit)
+
+
+func play_win_song() -> void:
+	play_sfx(sfx_win_song)
+
+
+func play_lose_song() -> void:
+	play_sfx(sfx_lose_song)
 
 
 # ─────── Music ────────────────────────────────────────
