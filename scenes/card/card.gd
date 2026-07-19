@@ -130,10 +130,14 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 
 
 func activate() -> void:
+	if not is_inside_tree():
+		return
 	if owner_slot != null:
 		owner_slot.set_activation_highlighted(true)
 	set_activation_highlighted(true)
 	await get_tree().create_timer(ACTIVATION_DURATION).timeout
+	if not is_inside_tree():
+		return
 	set_activation_highlighted(false)
 	if owner_slot != null:
 		owner_slot.set_activation_highlighted(false)

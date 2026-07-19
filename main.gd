@@ -25,6 +25,7 @@ class_name Main
 var step = 0
 var scene_animation_duration: float = 0.4
 var current_enemy: Node2D
+var _battle_won: bool = false
 
 func _ready() -> void:
 	GameManager.phase_changed.connect(_on_phase_changed)
@@ -71,15 +72,9 @@ func next_level() -> void:
 
 	enemy_scene.unit = LevelManager.get_current_enemy()
 	enemy_container.add_child(enemy_scene)
-	enemy_scene.unit.died.connect(func():
-		for card_data in clear_chain_slots():
-			deck.add_to_discard_pile(card_data)
-		if LevelManager.current_level.rewards:
-			reward_screen.show_choices(LevelManager.current_level.rewards.cards)
-		else:
-			LevelManager.next_level.emit()
-		)
+	enemy_scene.unit.died.connect(_on_enemy_died)
 	current_enemy = enemy_scene
+	_battle_won = false
 
 	_return_previous_cards_to_deck()
 
@@ -123,6 +118,11 @@ func _on_end_turn_button_pressed() -> void:
 		return
 
 	await _trigger_chain_sequentially()
+	if _battle_won:
+		_finish_battle_won()
+		end_turn.disabled = false
+		return
+
 	var discarded := clear_chain_slots()
 	#discard cards leftover in hand
 	for card in hand.get_children():
@@ -131,6 +131,22 @@ func _on_end_turn_button_pressed() -> void:
 	var drawn := GameManager.end_player_turn(discarded, cards_per_draw)
 	_spawn_cards(drawn)
 	end_turn.disabled = false
+
+
+func _on_enemy_died() -> void:
+	_battle_won = true
+	# Clearing cards mid-resolve frees CardVisuals while activations still await timers.
+	if GameManager.phase != GameManager.Phase.CHAIN_RESOLVING:
+		_finish_battle_won()
+
+
+func _finish_battle_won() -> void:
+	for card_data in clear_chain_slots():
+		deck.add_to_discard_pile(card_data)
+	if LevelManager.current_level.rewards:
+		reward_screen.show_choices(LevelManager.current_level.rewards.cards)
+	else:
+		LevelManager.next_level.emit()
 
 
 func _trigger_chain_sequentially() -> void:
