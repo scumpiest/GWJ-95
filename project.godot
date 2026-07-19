@@ -25,6 +25,7 @@ LevelManager="*uid://c2dguuqv3s670"
 GameManager="*uid://0elpsgyklpmo"
 CurrencyManager="*uid://b6ifv43jruvq"
 Databank="*uid://chwb0vhsliuu8"
+AudioManager="*res://singletons/audio_manager.gd"
 
 [display]
 

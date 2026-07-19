@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://lfnuj0uala1"
+path="res://.godot/imported/Card Trigger SFX.ogg-b95c970c1a48e7f399a74853f96953d6.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Card Trigger SFX.ogg"
+dest_files=["res://.godot/imported/Card Trigger SFX.ogg-b95c970c1a48e7f399a74853f96953d6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

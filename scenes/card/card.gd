@@ -13,49 +13,76 @@ const ACTIVATION_HIGHLIGHT := Color(1.45, 1.35, 1.0)
 @onready var _description_label: RichTextLabel = $Paper/MarginContainer3/DescriptionLabel
 @onready var _sticker: TextureRect = $Casette/Sticker
 @onready var _name_label: Label = $Casette/MarginContainer2/CardName
-@onready var discard_marker: Marker2D = $MarginContainer/VBox/DiscardMarker
-@onready var draw_marker: Marker2D = $MarginContainer/VBox/DrawMarker
+@onready var discard_marker: Marker2D = %DiscardMarker
+@onready var draw_marker: Marker2D = %DrawMarker
 
 var owner_slot: Slot
 var shop_card: bool = false
 var reward_card: bool = false
 var cost_label: Label
-var tween: Tween
 var img_metadata_regex: RegEx
 var start_x: int
 
+#tweens
+var tween: Tween
+var scale_x_range: float = 1.5 #range?
+var scale_x_duration: float = 0.2 #seconds?
+var scale_y_range: float = 1.5 #range?
+var scale_y_duration: float = 0.2 #seconds?
+var rotation_degrees_1: float = 5.0 #degrees
+var rotation_degrees_2: float = 1.0 #degrees
+var rotation_duration: float = 0.2 #seconds?
+var discard_delay: float = 0.3 #seconds
+var draw_delay: float = 0.3 #seconds
+var position_discard: Vector2 = Vector2(956, 547) 
+var position_duration: float = 1 #seconds
+var start_position_draw: Vector2 = Vector2(82, 547)
+
+#TODO: calculate the position plsss
+var end_position_draw: Vector2 = Vector2(555, 547) #this needs to be calculated individually idk how
+
 signal clicked_card(CardVisual)
+
 
 func _ready() -> void:
 	# Pivot point is for the animation so it's centered
-	self.pivot_offset = self.get_rect().size/2
+	self.pivot_offset = self.get_rect().size / 2
 	cost_label = get_node("CostLabel")
 	if shop_card:
 		cost_label.text = str(card_data.cost) + "$"
+		cost_label.visible = true
 	else:
-		set_shop_card(false)
+		cost_label.visible = false
 
 	add_to_group("cards")
 	_bind_card_data()
 	_apply_display_mode(false)
 	casette.mouse_entered.connect(_on_casette_mouse_entered)
 	casette.mouse_exited.connect(_on_casette_mouse_exited)
-	casette.gui_input.connect(_on_casette_gui_input)
 	_description_label.meta_hover_started.connect(_on_description_meta_hover_started)
 	_description_label.meta_hover_ended.connect(_on_description_meta_hover_ended)
 
+
 func set_shop_card(is_shop_card: bool):
 	shop_card = is_shop_card
-	if !is_shop_card:
-		cost_label.visible = false
-	else:
-		cost_label.visible = true
+	if cost_label == null:
+		return
+	cost_label.visible = is_shop_card
 
 
-func _on_casette_gui_input(event: InputEvent) -> void:
-	if (shop_card or reward_card) and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+func _is_selectable() -> bool:
+	return shop_card or reward_card
+
+
+func _gui_input(event):
+	if (
+		_is_selectable() and event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed()
+	):
+		AudioManager.play_card_click()
 		clicked_card.emit(self)
 		set_casette_highlighted(true)
+
 
 func _bind_card_data() -> void:
 	if card_data == null:
@@ -106,8 +133,9 @@ func _apply_display_mode(in_chain: bool) -> void:
 
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
-	if shop_card or reward_card:
+	if _is_selectable():
 		return
+	AudioManager.play_card_click()
 	var preview := duplicate() as CardVisual
 	preview.modulate.a = 0.75
 	preview.set_owner_slot(owner_slot)
@@ -132,19 +160,14 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 
 
 func activate() -> void:
-	if not is_inside_tree():
-		return
+	AudioManager.play_card_trigger()
 	if owner_slot != null:
 		owner_slot.set_activation_highlighted(true)
 	set_activation_highlighted(true)
-	# Might already be deleted, as clear can be called before this runs
-	if get_tree():
-		await get_tree().create_timer(ACTIVATION_DURATION).timeout
-		if not is_inside_tree():
-			return
-		set_activation_highlighted(false)
-		if owner_slot != null:
-			owner_slot.set_activation_highlighted(false)
+	await get_tree().create_timer(ACTIVATION_DURATION).timeout
+	set_activation_highlighted(false)
+	if owner_slot != null:
+		owner_slot.set_activation_highlighted(false)
 
 
 func _notification(what: int) -> void:
@@ -172,6 +195,7 @@ func set_activation_highlighted(active: bool) -> void:
 
 
 func _on_casette_mouse_entered() -> void:
+	AudioManager.play_card_hover()
 	if owner_slot != null:
 		paper.visible = true
 	if tween:
@@ -203,5 +227,44 @@ func _on_casette_mouse_exited() -> void:
 		
 
 func discard_animation():
-	print("discard card")
+	if tween and tween.is_running():
+		tween.kill()
+		
+		
+	tween = create_tween()
 	
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(self, "scale:x", scale_x_range, scale_x_duration)
+	tween.parallel().tween_property(self, "scale:y", scale_y_range, scale_y_duration)
+	tween.parallel().tween_property(self, "rotation_degrees", rotation_degrees_1 * rotation_degrees_2 * [-1,0, 1.0].pick_random(), rotation_duration)
+	
+	tween.set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(self, "scale:x", 0.25, scale_x_duration).set_delay(discard_delay)
+	tween.parallel().tween_property(self, "scale:y", 0.25, scale_y_duration).set_delay(discard_delay)
+	tween.parallel().tween_property(self, "global_position",  position_discard, position_duration).set_delay(discard_delay)
+
+
+func draw_animation():
+	self.set_global_position(start_position_draw)
+	
+	if tween and tween.is_running():
+		tween.kill()
+		
+		
+	tween = create_tween()
+	
+	tween.set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(self, "scale:x", 0.25, 0.01)
+	tween.parallel().tween_property(self, "scale:y", 0.25, 0.01)
+	
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(self, "scale:x", 1, scale_x_duration)
+	tween.parallel().tween_property(self, "scale:y", 1, scale_y_duration)
+	tween.parallel().tween_property(self, "global_position", end_position_draw, position_duration)
+
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(self, "scale:x", scale_x_range, scale_x_duration).set_delay(draw_delay)
+	tween.parallel().tween_property(self, "scale:y", scale_y_range, scale_y_duration).set_delay(draw_delay)
+	tween.parallel().tween_property(self, "rotation_degrees", rotation_degrees_1 * rotation_degrees_2 * [-1,0, 1.0].pick_random(), rotation_duration).set_delay(draw_delay)

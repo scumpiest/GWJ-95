@@ -18,6 +18,8 @@ func resolve(
 	# Get the unit to apply the status to based on the target
 	var unit: Unit = context.enemy if target == Target.ENEMY else context.player
 	var key : String = get_status_key(status_type)
+	if target == Target.PLAYER and key in ["strength", "protection"]:
+		AudioManager.play_player_status_boost()
 	for i in stacks:
 		unit.apply_status(key)
 

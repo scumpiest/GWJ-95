@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ysxhlidx0kep"
+path="res://.godot/imported/Player Status Boost SFX.ogg-d668dcf7d4fddfb83dde4f5ca56e216f.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Player Status Boost SFX.ogg"
+dest_files=["res://.godot/imported/Player Status Boost SFX.ogg-d668dcf7d4fddfb83dde4f5ca56e216f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

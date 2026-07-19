@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://de4ipm3ii4l8v"
+path="res://.godot/imported/Game Card Gameplay.ogg-e09b75b77b6b797185f1ebda5ac725ad.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/musics/Game Card Gameplay.ogg"
+dest_files=["res://.godot/imported/Game Card Gameplay.ogg-e09b75b77b6b797185f1ebda5ac725ad.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

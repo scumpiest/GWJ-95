@@ -18,6 +18,8 @@ class_name Main
 @onready var tutorial: CanvasLayer = $MarginContainer/CanvasLayer
 @onready var bubble_button: Button = $MarginContainer/CanvasLayer/BubbleButton
 @onready var text_tutorial: RichTextLabel = $MarginContainer/CanvasLayer/RichTextLabel
+@onready var draw_pile_count: Label = %DrawPileCount
+@onready var discard_pile_count: Label = %DiscardPileCount
 @onready var speech_bubble_pressed: bool = false
 @onready var end_turn_button_pressed: bool = false
 
@@ -29,6 +31,10 @@ var _battle_won: bool = false
 
 func _ready() -> void:
 	GameManager.phase_changed.connect(_on_phase_changed)
+	GameManager.deck_count_changed.connect(_on_deck_count_changed)
+	GameManager.discard_count_changed.connect(_on_discard_count_changed)
+	_on_deck_count_changed(deck.cards.size())
+	_on_discard_count_changed(deck.discard_pile.size())
 
 	shop_container.visibility_changed.connect(func():
 		var tween := create_tween()
@@ -41,9 +47,19 @@ func _ready() -> void:
 	#deck_button.pressed.connect(_on_deck_pressed)
 
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
+	end_turn.mouse_entered.connect(AudioManager.play_ui_hover)
+	bubble_button.mouse_entered.connect(AudioManager.play_ui_hover)
 	reward_screen.card_chosen.connect(_chosen_card)
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
+
+
+func _on_deck_count_changed(count: int) -> void:
+	draw_pile_count.text = str(count)
+
+
+func _on_discard_count_changed(count: int) -> void:
+	discard_pile_count.text = str(count)
 
 
 func _chosen_card(card_data: CardData) -> void:
@@ -95,6 +111,9 @@ func next_level() -> void:
 
 # TODO: add animation to spawn cards
 func _spawn_cards(cards: Array[CardData]) -> void:
+	if cards.is_empty():
+		return
+	AudioManager.play_card_draw()
 	for card_data in cards:
 		var card_visual := card_scene.instantiate() as CardVisual
 		card_visual.card_data = card_data
@@ -113,6 +132,7 @@ func _return_previous_cards_to_deck() -> void:
 
 
 func _on_end_turn_button_pressed() -> void:
+	AudioManager.play_ui_click()
 	end_turn.disabled = true
 	if not GameManager.begin_chain_resolve():
 		end_turn.disabled = false
@@ -130,6 +150,8 @@ func _on_end_turn_button_pressed() -> void:
 	for card in hand.get_children():
 		discarded.append(card.card_data)
 		card.queue_free()
+	if not discarded.is_empty():
+		AudioManager.play_card_discard()
 	var drawn := GameManager.end_player_turn(discarded, cards_per_draw)
 	_spawn_cards(drawn)
 	end_turn.disabled = false
@@ -139,6 +161,7 @@ func _on_enemy_damage_taken(health: int, old_health: int):
 		LevelManager.send_task_event(BattleTask.EventType.DEAL_DAMAGE, old_health - health)
 
 func _on_enemy_died() -> void:
+	AudioManager.play_enemy_dies()
 	_battle_won = true
 	# Clearing cards mid-resolve frees CardVisuals while activations still await timers.
 	if GameManager.phase != GameManager.Phase.CHAIN_RESOLVING:
@@ -148,8 +171,10 @@ func _on_enemy_died() -> void:
 func _finish_battle_won() -> void:
 	LevelManager.send_task_event(BattleTask.EventType.TURN_END, null)
 	LevelManager.send_task_event(BattleTask.EventType.BATTLE_END, null)
-	for card_data in clear_chain_slots():
-		deck.add_to_discard_pile(card_data)
+	var won_chain_cards := clear_chain_slots()
+	if not won_chain_cards.is_empty():
+		AudioManager.play_card_discard()
+		GameManager.discard_cards(won_chain_cards)
 	if LevelManager.current_level.rewards:
 		reward_screen.show_choices(LevelManager.current_level.rewards.cards)
 	else:
@@ -234,4 +259,5 @@ func _process(_delta: float) -> void:
 		tutorial.visible = false
 
 func _on_speech_bubble_pressed() -> void:
+	AudioManager.play_ui_click()
 	speech_bubble_pressed = true

@@ -2,6 +2,7 @@ extends Node
 
 @onready var player: Player = %Player
 @onready var buy_health_button: Button = %BuyHealthButton
+@onready var leave_button: Button = %LeaveButton
 @export var card_scene: PackedScene
 @export var card_container: HFlowContainer
 @export var shop_cards: CardDB
@@ -16,6 +17,8 @@ func _ready() -> void:
 	_draw_cards()
 	animation_state = shop_backdrop.get_animation_state()
 	animation_state.set_animation("store_normal", true, 0)
+	buy_health_button.mouse_entered.connect(AudioManager.play_ui_hover)
+	leave_button.mouse_entered.connect(AudioManager.play_ui_hover)
 
 func _draw_cards() -> void:
 	for card in shop_cards.cards:
@@ -49,15 +52,18 @@ func get_shop_cards() -> Array[CardVisual]:
 	return card_container.get_children() as Array[CardVisual]
 
 func _on_leave_button_pressed() -> void:
+	AudioManager.play_ui_click()
 	LevelManager.next_level.emit()
 
 func _buy_and_handle_animation(handle_buy: Callable, price: int, handle_reject = null):
 
 	if CurrencyManager.subtract_money(price):
+		AudioManager.play_shop_buy_item()
 		animation_state.set_animation("store_purchase", false, 0)
 		animation_state.add_animation("store_normal", 1, true, 0)
 		handle_buy.call()
 	else:
+		AudioManager.play_shop_no_money()
 		animation_state.set_animation("store_no_money", false, 0)
 		animation_state.add_animation("store_normal", 1, true, 0)
 		if handle_reject:
@@ -65,6 +71,7 @@ func _buy_and_handle_animation(handle_buy: Callable, price: int, handle_reject =
 
 
 func _on_buy_health_button_pressed() -> void:
+	AudioManager.play_ui_click()
 	_buy_and_handle_animation(
 		func():
 			buy_health_button.disabled = true

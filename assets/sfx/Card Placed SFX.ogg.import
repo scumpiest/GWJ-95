@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dkkfc8bncmcfn"
+path="res://.godot/imported/Card Placed SFX.ogg-533b930c8d993b2a7dd5d0790f078f5c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Card Placed SFX.ogg"
+dest_files=["res://.godot/imported/Card Placed SFX.ogg-533b930c8d993b2a7dd5d0790f078f5c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
