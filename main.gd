@@ -189,7 +189,7 @@ func run_tutorial():
 
 func _process(delta: float) -> void:
 	match step:
-		0, 3, 4, 6, 7, 8:
+		0, 3, 4, 5, 7, 8:
 			if speech_bubble_pressed == true:
 				step += 1
 				run_tutorial()
@@ -206,7 +206,7 @@ func _process(delta: float) -> void:
 			if slots_filled == chain.get_child_count():
 				step += 1
 				run_tutorial()
-		5:
+		6:
 			if end_turn_button_pressed == true:
 				step += 1
 				run_tutorial()

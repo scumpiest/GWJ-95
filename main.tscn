@@ -54,6 +54,7 @@ grow_vertical = 2
 script = ExtResource("1_main")
 deck = ExtResource("4_deck")
 card_scene = ExtResource("1_card_visual")
+is_tutorial = true
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=335792737]
 layout_mode = 1
