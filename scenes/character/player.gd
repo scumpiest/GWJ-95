@@ -13,7 +13,16 @@ var _pose_index: int = 0
 
 func _ready() -> void:
 	_init_unit()
+	unit.block_changed.connect(_handle_block_changed)
+	unit.health_changed.connect(_health_decreased)
 	_sprite.get_animation_state().set_animation("idle", true, 0)
+
+func _health_decreased(health: int, old_health: int):
+	if old_health > health:
+		LevelManager.send_task_event(BattleTask.EventType.DAMAGE_TAKEN, old_health - health)
+
+func _handle_block_changed(block: int):
+	LevelManager.send_task_event(BattleTask.EventType.BLOCK_GAINED, block)
 
 
 func _init_unit() -> void:

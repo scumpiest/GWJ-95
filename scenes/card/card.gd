@@ -137,12 +137,14 @@ func activate() -> void:
 	if owner_slot != null:
 		owner_slot.set_activation_highlighted(true)
 	set_activation_highlighted(true)
-	await get_tree().create_timer(ACTIVATION_DURATION).timeout
-	if not is_inside_tree():
-		return
-	set_activation_highlighted(false)
-	if owner_slot != null:
-		owner_slot.set_activation_highlighted(false)
+	# Might already be deleted, as clear can be called before this runs
+	if get_tree():
+		await get_tree().create_timer(ACTIVATION_DURATION).timeout
+		if not is_inside_tree():
+			return
+		set_activation_highlighted(false)
+		if owner_slot != null:
+			owner_slot.set_activation_highlighted(false)
 
 
 func _notification(what: int) -> void:
