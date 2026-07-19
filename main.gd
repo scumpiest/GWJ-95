@@ -7,13 +7,9 @@ class_name Main
 @export var card_scene: PackedScene
 @export var is_tutorial: bool = false
 
-@onready var deck_button: TextureButton = %Deck
-@onready var shop_button: Button = %Shop
 @onready var hand: HBoxContainer = %Hand
 @onready var chain: HBoxContainer = %Chain
 @onready var end_turn: Button = %EndTurnButton
-@onready var discard_pile_label: Label = %DiscardPileLabel
-@onready var deck_card_label: Label = %DeckCardLabel
 @onready var player: Player = %Player
 @onready var shop_container: MarginContainer = self.get_node("Shop");
 @onready var main_container: MarginContainer = self.get_node("MarginContainer");
