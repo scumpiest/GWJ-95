@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dey3df0ckwxwd"
+path="res://.godot/imported/Victory.atlas-f94d7f727c4616b1b945017b82feaa3f.spatlas"
+
+[deps]
+
+source_file="res://assets/sprites/BattleResult/Victory.atlas"
+dest_files=["res://.godot/imported/Victory.atlas-f94d7f727c4616b1b945017b82feaa3f.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
