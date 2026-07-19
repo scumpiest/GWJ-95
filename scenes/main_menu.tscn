@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://b20rt6xe5ieij"]
+
+[ext_resource type="Script" uid="uid://c5gm0ot2qvkhd" path="res://scenes/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bpb3sflytnp0y" path="res://assets/sprites/Menu/menu_spine_skeleton_data_resource.tres" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://bnegp1eeenxwd" path="res://assets/ui/button.png" id="3_bqqt6"]
+[ext_resource type="Script" uid="uid://bxe40l15o6tt3" path="res://scenes/texture_button_3.gd" id="4_wu84c"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_chyd6"]
+texture = ExtResource("3_bqqt6")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kgoo1"]
+texture = ExtResource("3_bqqt6")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+modulate_color = Color(0.9490196, 0.34901962, 0.3647059, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h1tde"]
+texture = ExtResource("3_bqqt6")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+modulate_color = Color(0.9870456, 0.64737153, 0.6328745, 1)
+
+[node name="MainMenu" type="Node2D" unique_id=1536362932]
+script = ExtResource("1_ekxnf")
+
+[node name="SpineSprite" type="SpineSprite" parent="." unique_id=406796991]
+skeleton_data_res = ExtResource("1_l6cm7")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.6, 0.6)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1244068466]
+offset_right = 1152.0
+offset_bottom = 640.0
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 350
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=509541474]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1833481452]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_chyd6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kgoo1")
+theme_override_styles/hover = SubResource("StyleBoxTexture_h1tde")
+text = "PLAY"
+
+[node name="TextureButton3" type="Button" parent="MarginContainer/VBoxContainer" unique_id=297403080]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxTexture_chyd6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kgoo1")
+theme_override_styles/hover = SubResource("StyleBoxTexture_h1tde")
+text = "PRESS THIS"
+script = ExtResource("4_wu84c")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/TextureButton3" to="MarginContainer/VBoxContainer/TextureButton3" method="_on_pressed"]

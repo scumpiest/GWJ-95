@@ -1,0 +1,13 @@
+[gd_resource type="SpineSkeletonDataResource" format=3 uid="uid://bpb3sflytnp0y"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bougvdbv7ai5o" path="res://assets/sprites/Menu/Menu.atlas" id="1_iivvh"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bflsyxq051rwq" path="res://assets/sprites/Menu/Menu.skel" id="2_aq36x"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_iivvh"]
+from = "animation"
+to = "animation"
+
+[resource]
+atlas_res = ExtResource("1_iivvh")
+skeleton_file_res = ExtResource("2_aq36x")
+animation_mixes = [SubResource("SpineAnimationMix_iivvh")]
