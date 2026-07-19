@@ -31,11 +31,8 @@ var rotation_degrees_1: float = 5.0 #degrees
 var rotation_degrees_2: float = 1.0 #degrees
 var rotation_duration: float = 0.2 #seconds?
 var discard_delay: float = 0.3 #seconds
-var draw_delay: float = 0.3 #seconds
 var position_discard: Vector2 = Vector2(956, 547)
 var position_duration: float = 0.45 #seconds
-var start_position_draw: Vector2 = Vector2(82, 547)
-var settle_duration: float = 0.15 #seconds
 
 signal clicked_card(CardVisual)
 signal animation_finished
@@ -265,49 +262,4 @@ func discard_animation() -> void:
 
 	await tween.finished
 	tween = null
-	animation_finished.emit()
-
-
-func draw_animation(target_global: Vector2 = Vector2.INF) -> void:
-	var start_pos := _get_marker_position("DrawMarker", start_position_draw)
-	var end_pos := global_position if not target_global.is_finite() else target_global
-
-	_kill_tween()
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	top_level = true
-	global_position = start_pos
-	scale = Vector2(0.25, 0.25)
-	rotation_degrees = 0.0
-	modulate.a = 1.0
-	z_index = 200
-
-	tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_QUINT)
-	tween.tween_property(self, "scale:x", 1.0, scale_x_duration)
-	tween.parallel().tween_property(self, "scale:y", 1.0, scale_y_duration)
-	tween.parallel().tween_property(self, "global_position", end_pos, position_duration)
-
-	tween.set_trans(Tween.TRANS_SPRING)
-	tween.tween_property(self, "scale:x", scale_x_range, scale_x_duration).set_delay(draw_delay)
-	tween.parallel().tween_property(self, "scale:y", scale_y_range, scale_y_duration).set_delay(draw_delay)
-	tween.parallel().tween_property(self, "rotation_degrees", _random_tilt(), rotation_duration).set_delay(draw_delay)
-
-	tween.set_ease(Tween.EASE_IN)
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self, "scale", Vector2.ONE, settle_duration)
-	tween.parallel().tween_property(self, "rotation_degrees", 0.0, settle_duration)
-
-	await tween.finished
-	tween = null
-
-	var hand_node := get_tree().root.find_child("Hand", true, false) as Control
-	if hand_node != null:
-		reparent(hand_node, true)
-
-	top_level = false
-	scale = Vector2.ONE
-	rotation_degrees = 0.0
-	z_index = 10
-	mouse_filter = Control.MOUSE_FILTER_STOP
 	animation_finished.emit()
