@@ -24,7 +24,7 @@ func _next_level() -> void:
 		if current_level_index != -1 and new_level_index < (levels.size() + 1):
 			current_level = levels[new_level_index]
 
-func _get_current_enemy() -> Unit:
+func get_current_enemy() -> Unit:
 	var enemy_data := current_level.enemy_data
 	var unit := Unit.new()
 	unit.id = enemy_data.id

@@ -168,7 +168,7 @@ func set_activation_highlighted(active: bool) -> void:
 		return
 	add_theme_stylebox_override("panel", _activation_panel_style if active else _base_panel_style)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	if  Input.is_action_just_pressed("tweens_in"):
 		make_slot_jiggle()

@@ -69,7 +69,7 @@ func next_level() -> void:
 	enemy_scene.position = Vector2(910, 314)
 	enemy_scene.scale = Vector2(0.5,0.5)
 
-	enemy_scene.unit = LevelManager._get_current_enemy()
+	enemy_scene.unit = LevelManager.get_current_enemy()
 	enemy_container.add_child(enemy_scene)
 	enemy_scene.unit.died.connect(func():
 		clear_chain_slots()
@@ -168,7 +168,7 @@ func run_tutorial():
 	text_tutorial.text = Databank.tutorial_dialogue[step]
 	#print(text_tutorial.text)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	match step:
 		0, 3, 4, 5, 7, 8:
 			if speech_bubble_pressed == true:
