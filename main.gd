@@ -30,8 +30,6 @@ var current_enemy: Node2D
 var scene_animation_duration: float = .4
 
 func _ready() -> void:
-	GameManager.deck_count_changed.connect(_on_deck_count_changed)
-	GameManager.discard_count_changed.connect(_on_discard_count_changed)
 	GameManager.phase_changed.connect(_on_phase_changed)
 
 	shop_container.visibility_changed.connect(func():
@@ -42,7 +40,7 @@ func _ready() -> void:
 			tween.tween_property(main_container, "modulate:a", 0.0, scene_animation_duration)
 		main_container.visible = !shop_container.visible
 		)
-	deck_button.pressed.connect(_on_deck_pressed)
+	#deck_button.pressed.connect(_on_deck_pressed)
 
 	end_turn.pressed.connect(_on_end_turn_button_pressed)
 	reward_screen.card_chosen.connect(_chosen_card)
@@ -122,6 +120,7 @@ func _on_end_turn_button_pressed() -> void:
 
 	await _trigger_chain_sequentially()
 	var discarded := clear_chain_slots()
+	#discard cards leftover in hand
 	for card in hand.get_children():
 		discarded.append(card.card_data)
 		card.queue_free()
@@ -159,14 +158,6 @@ func clear_chain_slots() -> Array[CardData]:
 	return cards
 
 
-func _on_deck_count_changed(count: int) -> void:
-	deck_card_label.text = str(count)
-
-
-func _on_discard_count_changed(count: int) -> void:
-	discard_pile_label.text = str(count)
-
-
 func _on_phase_changed(phase: GameManager.Phase) -> void:
 	print("Phase changed: ", GameManager.Phase.keys()[phase])
 	if phase != GameManager.Phase.PLAN:
@@ -183,9 +174,7 @@ func run_tutorial():
 	tutorial.visible = true
 	#for key in Databank.tutorial_dialogue.keys():
 	text_tutorial.text = Databank.tutorial_dialogue[step]
-	print(text_tutorial.text)
-			
-		#await $".".next_speechbubble
+	#print(text_tutorial.text)
 
 func _process(delta: float) -> void:
 	match step:

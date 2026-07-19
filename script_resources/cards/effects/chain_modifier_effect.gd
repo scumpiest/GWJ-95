@@ -17,7 +17,7 @@ func resolve(
 	context: BattleContext,
 	slot: ChainSlotState,
 ) -> void:
-	if context.coun_adjacent_same_color(slot.slot_index, require_adjacent_color) <= 0:
+	if context.count_adjacent_same_color(slot.slot_index, require_adjacent_color) <= 0:
 		slot.skip_activation = true
 		return
 
