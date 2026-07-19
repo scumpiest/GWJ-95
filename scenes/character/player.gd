@@ -47,6 +47,7 @@ func _on_died() -> void:
 func _handle_block_changed(block: int):
 	if block > _last_block:
 		AudioManager.play_player_shield_activate()
+		TriggerVfx.spawn(self, TriggerVfx.animation_for_status("protection"))
 	_last_block = block
 	LevelManager.send_task_event(BattleTask.EventType.BLOCK_GAINED, block)
 

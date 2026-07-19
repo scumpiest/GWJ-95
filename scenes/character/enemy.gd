@@ -23,12 +23,14 @@ var enemy_data: EnemyResource
 # these are collected from all descendants rather than a fixed node path.
 var _sprites: Array[SpineSprite] = []
 var _pose_index: int = 0
+var _last_block: int = 0
 
 
 func _ready() -> void:
 	_sprites = _collect_spine_sprites(self)
 	unit.health_changed.connect(_on_health_changed)
 	unit.status_changed.connect(_on_status_changed)
+	unit.block_changed.connect(_on_block_changed)
 	unit.died.connect(_on_died)
 	_ensure_intent_row()
 	_ensure_status_row()
@@ -152,6 +154,12 @@ func _on_health_changed(health: int, old_health: int) -> void:
 
 func _on_status_changed(status: String, _stacks: int) -> void:
 	TriggerVfx.spawn(self, TriggerVfx.animation_for_status(status))
+
+
+func _on_block_changed(block: int) -> void:
+	if block > _last_block:
+		TriggerVfx.spawn(self, TriggerVfx.animation_for_status("protection"))
+	_last_block = block
 
 
 func _update_health_bar() -> void:

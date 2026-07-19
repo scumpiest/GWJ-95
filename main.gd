@@ -15,6 +15,7 @@ class_name Main
 @onready var main_container: MarginContainer = self.get_node("MarginContainer");
 @onready var enemy_container: Control = %EnemyContainer
 @onready var reward_screen: RewardScreen = %RewardScreen
+@onready var battle_result_screen: BattleResultScreen = %BattleResultScreen
 @onready var tutorial: CanvasLayer = $MarginContainer/CanvasLayer
 @onready var bubble_button: Button = $MarginContainer/CanvasLayer/BubbleButton
 @onready var text_tutorial: RichTextLabel = $MarginContainer/CanvasLayer/RichTextLabel
@@ -67,6 +68,7 @@ func _ready() -> void:
 	bubble_button.mouse_entered.connect(AudioManager.play_ui_hover)
 	reward_screen.card_chosen.connect(_chosen_card)
 	reward_screen.visibility_changed.connect(_on_reward_visibility_changed)
+	battle_result_screen.continue_pressed.connect(_on_battle_result_continue)
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
 	
@@ -218,6 +220,7 @@ func _on_player_died() -> void:
 	end_turn.disabled = true
 	AudioManager.stop_music()
 	AudioManager.play_lose_song()
+	battle_result_screen.show_defeat()
 
 
 func _finish_battle_won() -> void:
@@ -229,10 +232,20 @@ func _finish_battle_won() -> void:
 	var won_chain_cards := await _discard_card_visuals(_clear_chain_slot_visuals())
 	if not won_chain_cards.is_empty():
 		GameManager.discard_cards(won_chain_cards)
+	# The win screen only appears once the boss is dead; every other enemy
+	# just continues the run via the reward screen / next level as usual.
+	if LevelManager.current_level.type == Level.LevelType.BOSS:
+		battle_result_screen.show_victory()
+		return
 	if LevelManager.current_level.rewards:
 		reward_screen.show_choices(LevelManager.current_level.rewards.cards)
 	else:
 		LevelManager.next_level.emit()
+
+
+func _on_battle_result_continue() -> void:
+	LevelManager.reset()
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 
 func _trigger_chain_sequentially() -> void:

@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c7stag3sc3n31" path="res://scenes/stage/stage.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" path="res://scenes/ui/icon_tooltip.tscn" id="11_icon_tooltip"]
 [ext_resource type="PackedScene" uid="uid://dqhivoovq4phj" path="res://scenes/stage/reward_screen.tscn" id="12_reward"]
+[ext_resource type="PackedScene" path="res://scenes/ui/battle_result_screen.tscn" id="13_battle_result"]
 [ext_resource type="Texture2D" uid="uid://bg6gdtan8g6fv" path="res://assets/sprites/ui/icon_discard_pile.png" id="15_getpj"]
 [ext_resource type="Texture2D" uid="uid://cysf181gpkhee" path="res://assets/sprites/ui/icon_draw_pile.png" id="17_ryguw"]
 [ext_resource type="Texture2D" uid="uid://bnegp1eeenxwd" path="res://assets/ui/button.png" id="18_endturn_btn"]
@@ -425,6 +426,10 @@ unique_name_in_owner = true
 visible = false
 
 [node name="IconTooltip" parent="TooltipLayer" unique_id=305762781 instance=ExtResource("11_icon_tooltip")]
+
+[node name="BattleResultScreen" parent="TooltipLayer" instance=ExtResource("13_battle_result")]
+unique_name_in_owner = true
+visible = false
 
 [connection signal="focus_entered" from="." to="Shop" method="_on_main_focus_entered"]
 [connection signal="timeout" from="MarginContainer/CanvasLayer/TimerAnimSprite" to="MarginContainer/CanvasLayer/AnimatedSprite2D" method="_on_timer_anim_sprite_timeout"]

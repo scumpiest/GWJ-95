@@ -17,6 +17,12 @@ func _ready() -> void:
 	levels = levels_resource.levels
 	next_level.connect(_next_level)
 
+
+# Called when returning to the main menu (after a win or a loss) so the next
+# run starts back at the first level instead of indexing past LBOSS.
+func reset() -> void:
+	current_level = null
+
 func send_task_event(event, data = null):
 	if current_level and current_level.task:
 		var current_task_state = current_level.task.on_event(event, data)

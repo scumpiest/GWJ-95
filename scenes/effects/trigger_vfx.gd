@@ -10,7 +10,12 @@ const DEFEAT := "defeat"
 
 
 func _ready() -> void:
-	_sprite.animation_ended.connect(_on_animation_ended)
+	# `animation_completed` fires once a non-looping animation finishes playing.
+	# `animation_ended` only fires when the track entry is disposed (e.g.
+	# replaced by another animation), which never happens here since nothing
+	# else is queued on the track, so the last frame would otherwise be held
+	# on screen forever instead of the node freeing itself.
+	_sprite.animation_completed.connect(_on_animation_ended)
 
 
 func play(animation_name: String) -> void:
