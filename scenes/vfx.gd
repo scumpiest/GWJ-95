@@ -1,11 +1,7 @@
 extends Node2D
 
 
-# Called when the node enters the scene tree for the first time.
+@onready var _sprite: SpineSprite = $SpineSprite
+
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	_sprite.get_animation_state().set_animation("buff", true, 0)

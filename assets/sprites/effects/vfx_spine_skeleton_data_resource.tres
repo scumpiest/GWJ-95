@@ -3,6 +3,39 @@
 [ext_resource type="SpineAtlasResource" uid="uid://b7cr4qun2blpc" path="res://assets/sprites/effects/VFX.atlas" id="1_tfmvd"]
 [ext_resource type="SpineSkeletonFileResource" uid="uid://b8pls1gwttq0h" path="res://assets/sprites/effects/vfx_skeleton.skel" id="2_o1mtr"]
 
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_tfmvd"]
+from = "buff"
+to = "buff"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_o1mtr"]
+from = "cassette_activation_green"
+to = "buff"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_bc6vp"]
+from = "cassette_activation_purple"
+to = "buff"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_0pcl3"]
+from = "cassette_activation_red"
+to = "buff"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_akwx2"]
+from = "cassette_activation_white"
+to = "buff"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_iknpc"]
+from = "debuff"
+to = "buff"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_brgld"]
+from = "defeat"
+to = "buff"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ju0pu"]
+from = "hit"
+to = "buff"
+
 [resource]
 atlas_res = ExtResource("1_tfmvd")
 skeleton_file_res = ExtResource("2_o1mtr")
+animation_mixes = [SubResource("SpineAnimationMix_tfmvd"), SubResource("SpineAnimationMix_o1mtr"), SubResource("SpineAnimationMix_bc6vp"), SubResource("SpineAnimationMix_0pcl3"), SubResource("SpineAnimationMix_akwx2"), SubResource("SpineAnimationMix_iknpc"), SubResource("SpineAnimationMix_brgld"), SubResource("SpineAnimationMix_ju0pu")]

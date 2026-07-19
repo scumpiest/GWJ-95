@@ -31,7 +31,7 @@ var rotation_degrees_1: float = 5.0 #degrees
 var rotation_degrees_2: float = 1.0 #degrees
 var rotation_duration: float = 0.2 #seconds?
 var discard_delay: float = 0.3 #seconds
-var position_discard: Vector2 = Vector2(956, 547)
+var position_discard: Vector2 = Vector2(956, 564)
 var position_duration: float = 0.45 #seconds
 
 signal clicked_card(CardVisual)
