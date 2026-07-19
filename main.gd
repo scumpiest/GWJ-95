@@ -35,6 +35,8 @@ class_name Main
 
 var step = 0
 var scene_animation_duration: float = 0.4
+var draw_stagger_delay: float = 0.08
+var discard_stagger_delay: float = 0.05
 var current_enemy: Node2D
 var _battle_won: bool = false
 var _battle_lost: bool = false
@@ -136,15 +138,30 @@ func next_level() -> void:
 	_spawn_cards(GameManager.draw_cards(initial_hand_size))
 
 
-# TODO: add animation to spawn cards
 func _spawn_cards(cards: Array[CardData]) -> void:
 	if cards.is_empty():
 		return
-	AudioManager.play_card_draw()
+
+	var card_visuals: Array[CardVisual] = []
 	for card_data in cards:
 		var card_visual := card_scene.instantiate() as CardVisual
 		card_visual.card_data = card_data
+		card_visual.modulate.a = 0.0
 		hand.add_child(card_visual)
+		card_visuals.append(card_visual)
+
+	# Let the HBoxContainer sort the newly added cards so each one knows its
+	# resting position in hand before it animates towards it.
+	await get_tree().process_frame
+
+	AudioManager.play_card_draw()
+	for card_visual in card_visuals:
+		card_visual.draw_animation()
+		await get_tree().create_timer(draw_stagger_delay).timeout
+
+	for card_visual in card_visuals:
+		if is_instance_valid(card_visual):
+			await card_visual.animation_finished
 
 
 func _return_previous_cards_to_deck() -> void:
@@ -160,6 +177,7 @@ func _return_previous_cards_to_deck() -> void:
 
 func _on_end_turn_button_pressed() -> void:
 	AudioManager.play_ui_click()
+	end_turn_button_pressed = true
 	end_turn.disabled = true
 	if _battle_lost:
 		return
@@ -170,19 +188,19 @@ func _on_end_turn_button_pressed() -> void:
 	LevelManager.send_task_event(BattleTask.EventType.TURN_START, get_tree().get_nodes_in_group("card_slots"))
 	await _trigger_chain_sequentially()
 	if _battle_won:
-		_finish_battle_won()
+		await _finish_battle_won()
 		end_turn.disabled = false
 		return
 	if _battle_lost:
 		return
 
-	var discarded := clear_chain_slots()
-	#discard cards leftover in hand
+	# The chain has fully finished triggering at this point, so it's safe to
+	# play the discard animation for the chain cards and the leftover hand.
+	var discard_visuals := _clear_chain_slot_visuals()
 	for card in hand.get_children():
-		discarded.append(card.card_data)
-		card.queue_free()
-	if not discarded.is_empty():
-		AudioManager.play_card_discard()
+		discard_visuals.append(card as CardVisual)
+	var discarded := await _discard_card_visuals(discard_visuals)
+
 	var drawn := GameManager.end_player_turn(discarded, cards_per_draw)
 	if _battle_lost:
 		return
@@ -214,9 +232,10 @@ func _finish_battle_won() -> void:
 	AudioManager.play_win_song()
 	LevelManager.send_task_event(BattleTask.EventType.TURN_END, null)
 	LevelManager.send_task_event(BattleTask.EventType.BATTLE_END, null)
-	var won_chain_cards := clear_chain_slots()
+	# The battle is only ever won once the chain has finished (or been cut
+	# short by the enemy dying mid-chain), so it's safe to discard here.
+	var won_chain_cards := await _discard_card_visuals(_clear_chain_slot_visuals())
 	if not won_chain_cards.is_empty():
-		AudioManager.play_card_discard()
 		GameManager.discard_cards(won_chain_cards)
 	if LevelManager.current_level.rewards:
 		reward_screen.show_choices(LevelManager.current_level.rewards.cards)
@@ -253,6 +272,44 @@ func clear_chain_slots() -> Array[CardData]:
 	return cards
 
 
+# Like clear_chain_slots(), but leaves the CardVisuals alive (and their slots
+# untouched) so they can still be discard-animated before being freed.
+func _clear_chain_slot_visuals() -> Array[CardVisual]:
+	var visuals: Array[CardVisual] = []
+	for slot_node in chain.get_children():
+		var slot := slot_node as Slot
+		slot.set_highlighted(false)
+		var card := slot.get_card()
+		if card == null:
+			continue
+		visuals.append(card)
+	return visuals
+
+
+func _discard_card_visuals(card_visuals: Array[CardVisual]) -> Array[CardData]:
+	var discarded: Array[CardData] = []
+	if card_visuals.is_empty():
+		return discarded
+
+	for card_visual in card_visuals:
+		discarded.append(card_visual.card_data)
+
+	AudioManager.play_card_discard()
+	for card_visual in card_visuals:
+		card_visual.discard_animation()
+		await get_tree().create_timer(discard_stagger_delay).timeout
+
+	for card_visual in card_visuals:
+		if is_instance_valid(card_visual):
+			await card_visual.animation_finished
+
+	for card_visual in card_visuals:
+		if is_instance_valid(card_visual):
+			card_visual.queue_free()
+
+	return discarded
+
+
 func _on_phase_changed(phase: GameManager.Phase) -> void:
 	print("Phase changed: ", GameManager.Phase.keys()[phase])
 	if phase != GameManager.Phase.PLAN:
@@ -266,6 +323,7 @@ func _on_card_activated(slot: Slot, card: CardVisual) -> void:
 
 func run_tutorial():
 	speech_bubble_pressed = false
+	end_turn_button_pressed = false
 	tutorial.visible = true
 	#for key in Databank.tutorial_dialogue.keys():
 	text_tutorial.text = Databank.tutorial_dialogue[step]
