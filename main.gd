@@ -22,6 +22,7 @@ class_name Main
 @onready var discard_pile_count: Label = %DiscardPileCount
 @onready var speech_bubble_pressed: bool = false
 @onready var end_turn_button_pressed: bool = false
+@onready var timer_arrow: Timer = $MarginContainer/CanvasLayer/TimerArrow
 
 
 var step = 0
@@ -52,6 +53,8 @@ func _ready() -> void:
 	reward_screen.card_chosen.connect(_chosen_card)
 	LevelManager.next_level.connect(next_level)
 	LevelManager.next_level.emit()
+	
+	timer_arrow.start()
 
 
 func _on_deck_count_changed(count: int) -> void:
@@ -255,9 +258,24 @@ func _process(_delta: float) -> void:
 			is_tutorial = false
 			step = 0
 	
+		
+	
 	if is_tutorial == false:
 		tutorial.visible = false
 
 func _on_speech_bubble_pressed() -> void:
 	AudioManager.play_ui_click()
 	speech_bubble_pressed = true
+
+
+
+func _on_timer_arrow_timeout() -> void:
+	timer_arrow.start()
+	if step == 1:
+		main_container.get_child(0).get_child(1).fill_1_slot()
+	if step == 3:
+		main_container.get_child(0).get_child(1).switch_cards()
+	if step == 6:
+		main_container.get_child(0).get_child(1).highlight_end_turn()
+	if step == 7:
+		main_container.get_child(0).get_child(1).set_visible(false)
